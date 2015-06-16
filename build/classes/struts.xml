@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<constant name="struts.custom.i18n.resources" value="recursos.textos" />
+	
+	<include file="struts-seguridad.xml"/>
+	<include file="struts-usuario.xml"/>
+	<include file="struts-roles.xml"/>
+	<include file="struts-personal.xml"/>
+	<include file="struts-historias.xml"/>
+	<include file="struts-consultorios.xml"/>
+	<include file="struts-consultas.xml"/>
+	<include file="struts-citas.xml"/>
+
+	<package name="demo" extends="struts-default">
+	
+				<result-types>
+					<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+				</result-types>
+
+						
+				<!-- para mapear errores  -->
+				<!--  <global-results>		
+					<result name="null">/WEB-INF/paginas/error/nulo.jsp</result>
+					<result name="noDisponible">/WEB-INF/paginas/error/noDisponible.jsp</result>
+				</global-results>
+				
+				<global-exception-mappings>		
+					<exception-mapping result="null" 
+									   exception="java.lang.NullPointerException">
+					</exception-mapping>
+						
+					<exception-mapping result="noDisponible" 
+									   exception="java.lang.Exception">
+					</exception-mapping>
+				</global-exception-mappings>-->
+				<!-- Fin de mapeo de errores -->
+		
+				<action name="inicio" >
+					<result>/WEB-INF/paginas/login.jsp</result>
+				</action> 
+	</package>
+</struts>

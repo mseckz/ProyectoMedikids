@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration
+2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="d_plantilla" template="/WEB-INF/paginas/plantillas/plantilla.jsp">
+		<put-attribute name="cabecera" value="/WEB-INF/paginas/secciones/cabecera.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/paginas/secciones/menu.jsp"/>
+		<put-attribute name="contenido" value=""/>
+		<put-attribute name="pie" value="/WEB-INF/paginas/secciones/pie.jsp"/>		
+	</definition>
+	
+	<definition name="d_principal" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/principal.jsp"/>
+	</definition>
+	
+	<!-- Pantallas de informacion y cambio relacionado al usuario -->
+	<definition name="usu_config" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/usuario/configuracionUsuario.jsp"/>
+	</definition>
+	
+	<definition name="usu_perfil" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/usuario/perfilUsuario.jsp"/>
+	</definition>	
+	<!-- Fin de pantallas relacionadas a la administracion de datos del usuario -->
+	
+	<!-- Modulo de Citas -->
+	<definition name="mod_cit_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/citas/mod_citas_inicio.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Citas -->
+	
+	<!-- Modulo de Consultas -->
+	<definition name="mod_con_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultas/mod_consultas_inicio.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Consultas -->
+	
+	<!-- Modulo de Consultorios -->
+	<definition name="mod_consult_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultorios/mod_consultorios_inicio.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Consultorios -->
+	
+	<!-- Modulo de Historias -->
+	<definition name="mod_hist_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/historias/mod_historias_inicio.jsp"/>
+	</definition>
+	<definition name="mod_hist_crear" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/historias/mod_historias_crear_hc.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Historias -->
+	
+	<!-- Modulo de Personal -->
+	<definition name="mod_per_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/personal/mod_personal_inicio.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Personal -->
+	
+	<!-- Modulo de Roles -->
+	<definition name="mod_rol_inicio" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/roles/mod_roles_inicio.jsp"/>
+	</definition>
+	<!-- Fin Modulo de Roles -->
+	
+</tiles-definitions>

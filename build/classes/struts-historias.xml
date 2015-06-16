@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="struts-historias" extends="demo" namespace="/historias">
+		
+				<action name="iniciarHistorias">
+					<result type="tiles">mod_hist_inicio</result>
+				</action>
+				
+				<action name="crearHistorias">
+					<result type="tiles">mod_hist_crear</result>
+				</action>
+	</package>
+</struts>

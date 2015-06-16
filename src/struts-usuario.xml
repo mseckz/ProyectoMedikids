@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="struts-usuario" extends="demo" namespace="/usuario">
+		
+				<action name="iniciarPerfilusuario">
+					<result type="tiles">usu_perfil</result>
+				</action>
+				
+				<action name="iniciarConfiguracionUsuario">
+					<result type="tiles">usu_config</result>
+				</action>
+				
+	</package>
+</struts>
