@@ -29,7 +29,7 @@
 			<h2 class="form-signin-heading">
 				<s:text name="parrafo.login" />
 			</h2>
-			<s:textfield name="usuario.cuenta" cssClass="form-control"
+			<s:textfield name="usuario.nombreUsuario" cssClass="form-control"
 				placeholder="%{getText('label.usuario')}" />
 			<s:password name="usuario.contrasena" cssClass="form-control"
 				placeholder="%{getText('label.password')}" />

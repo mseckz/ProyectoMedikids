@@ -5,6 +5,6 @@ import model.Usuario;
 
 public interface UsuarioMapper {
 	
-	public String validar(Usuario usuario) throws Exception;
+	public Usuario validar(Usuario usuario) throws Exception;
 
 }

@@ -20,11 +20,13 @@ public class MyBatisUtil {
 	        try{
 	            Reader reader= Resources.getResourceAsReader("persistencia/mybatis/config/mybatis-config.xml");
 	            
-	            if (FACTORY == null) {
-	            	FACTORY = new SqlSessionFactoryBuilder().build(reader);
-
-	            	}
-	            //FACTORY= new SqlSessionFactoryBuilder().build(reader,"proyFinalPIT");
+	            FACTORY = new SqlSessionFactoryBuilder().build(reader);
+	            
+//	            if (FACTORY == null) {
+//	            	FACTORY = new SqlSessionFactoryBuilder().build(reader);
+//
+//	            	}
+//	            FACTORY= new SqlSessionFactoryBuilder().build(reader,"proyFinalPIT");
 	            System.out.println("Conexion establecida Con MyBatis!!");
 	            
 	            

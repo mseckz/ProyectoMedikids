@@ -17,8 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UsuarioAction extends ActionSupport implements SessionAware {
 	
-	private static final long serialVersionUID = -8703703762705180401L;
-
+	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
 	private SessionMap<String, Object> session;
@@ -38,19 +37,16 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap<String, Object>)session;
 	}
-	
-	
 
 	public String login() throws Exception{
-		
+
 		String vista="";
 		LoginService loginService= new LoginServiceDAO();
-		String fecha=loginService.isCredencialesValidas(usuario);
+
+		Usuario usu = loginService.isCredencialesValidas(usuario);
 		
-		if (fecha!=null) {
-			session.put("cuenta", getUsuario().getCuenta());
-			
-//			String[] params =new String[]{fecha};
+		if (usu!=null) {
+			session.put("cuenta",usu.getNombreUsuario());
 			vista=SUCCESS;
 		}
 		else {
@@ -58,8 +54,7 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 			vista=LOGIN;
 		}
 		
-		return vista;
-		
+		return vista;	
 	}
 	
 	public String logout() throws Exception{
@@ -69,13 +64,5 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 		return LOGIN;
 		
 	}
-
-
-
-
-
-
-	
-	
 
 }

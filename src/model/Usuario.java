@@ -3,17 +3,25 @@ package model;
 import java.io.Serializable;
 
 public class Usuario implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
-	private static final long serialVersionUID = 2388130697698086449L;
-	
-	private String cuenta;
+	private int id;
+	private String nombreUsuario;
 	private String contrasena;
+	private Rol rol;
 	
-	public String getCuenta() {
-		return cuenta;
+	public int getId() {
+		return id;
 	}
-	public void setCuenta(String cuenta) {
-		this.cuenta = cuenta;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 	public String getContrasena() {
 		return contrasena;
@@ -21,11 +29,15 @@ public class Usuario implements Serializable{
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+	public Rol getRol() {
+		return rol;
+	}
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 	@Override
 	public String toString() {
-		return "Usuario [cuenta=" + cuenta + ", contrasena=" + contrasena + "]";
+		return "Usuario [cuenta=" + nombreUsuario + ", contrasena=" + contrasena + "]";
 	}
-	
-	
-	
+
 }

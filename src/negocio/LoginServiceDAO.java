@@ -1,23 +1,17 @@
 package negocio;
 
 import model.Usuario;
-import persistencia.UsuarioDAO;
-import persistencia.UsuarioDAOMyBatis;
+import persistencia.mybatis.mapper.UsuarioMapper;
 
-public class LoginServiceDAO implements LoginService{
-
-	//UsuarioDAO usuarioDAO=new UsuarioDAOSQL();
-	UsuarioDAO usuarioDAO = new UsuarioDAOMyBatis();
+public class LoginServiceDAO extends MyBatisGenericDAO implements LoginService{
 	
-	public String isCredencialesValidas(Usuario usuario) throws Exception{
-
-		usuarioDAO.abrirConexion();
+	public Usuario isCredencialesValidas(Usuario usuario) throws Exception{
 		
-		String fecha= usuarioDAO.getUltimaFechaAcceso(usuario);
+		Usuario usu = null;
+		UsuarioMapper usuarioMapper = getSession().getMapper(UsuarioMapper.class);
+		usu = usuarioMapper.validar(usuario);
 		
-		usuarioDAO.cerrarConexion();
-	          
-		return fecha;
+		return usu;
 	}
 
 }

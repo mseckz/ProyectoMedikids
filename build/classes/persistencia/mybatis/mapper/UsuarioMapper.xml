@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="persistencia.mybatis.mapper.UsuarioMapper">
 
-  	<select id="validar" parameterType="usuario" resultType="string">
-        SELECT tu.usuario FROM tb_usuario tu WHERE usuario=#{cuenta} AND contrasena=#{contrasena}
+  	<select id="validar" parameterType="usuario" resultType="usuario">
+        SELECT id_personal,nom_usuario,contrasena,id_rol,estado FROM USUARIO WHERE nom_usuario=#{nombreUsuario} AND contrasena=#{contrasena}
     </select>
  </mapper>
