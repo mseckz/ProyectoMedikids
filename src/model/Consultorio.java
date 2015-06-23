@@ -7,6 +7,7 @@ public class Consultorio implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	private String codigo;
 	private String ubicacion;
 	private String descripcion;
 	private Especialidad especialidad;
@@ -49,6 +50,12 @@ public class Consultorio implements Serializable {
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

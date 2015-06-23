@@ -10,12 +10,13 @@ public class Personal implements Serializable {
 	private String dni;
 	private String nombres;
 	private String apellidos;
+	private String nombreCompleto;
 	private String telefono;
 	private String celular;
 	private String correo;
 	private TipoPersonal tipoPersonal;
 	private String urlCV;
-	private Integer idMedicoAsignado;
+	private String urlFoto;
 	private String fechaRegistro;
 	private boolean estado;
 	
@@ -43,6 +44,12 @@ public class Personal implements Serializable {
 	}
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -74,11 +81,11 @@ public class Personal implements Serializable {
 	public void setUrlCV(String urlCV) {
 		this.urlCV = urlCV;
 	}
-	public Integer getIdMedicoAsignado() {
-		return idMedicoAsignado;
+	public String getUrlFoto() {
+		return urlFoto;
 	}
-	public void setIdMedicoAsignado(Integer idMedicoAsignado) {
-		this.idMedicoAsignado = idMedicoAsignado;
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 	public String getFechaRegistro() {
 		return fechaRegistro;
@@ -92,4 +99,5 @@ public class Personal implements Serializable {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
 }

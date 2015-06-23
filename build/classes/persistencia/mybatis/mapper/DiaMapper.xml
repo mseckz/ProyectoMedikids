@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="persistencia.mybatis.mapper.DiaMapper">
+ 	
+ 	<resultMap type="dia" id="rmDia">
+ 		<id column="id_dia" property="id" jdbcType="INTEGER"/>
+ 		<result column="nombre_dia" property="nombre" jdbcType="VARCHAR"/>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerDias" resultMap="rmDia">
+ 		SELECT id_dia, nombre_dia FROM DIAS
+ 	</select>
+ </mapper>

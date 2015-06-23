@@ -13,6 +13,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<typeAliases>
 		<typeAlias type="model.Usuario" alias="usuario"/>
+		<typeAlias type="model.Especialidad" alias="especialidad"/>
+		<typeAlias type="model.TipoPersonal" alias="tipopersonal"/>
+		<typeAlias type="model.Consultorio" alias="consultorio"/>
+		<typeAlias type="model.Dia" alias="dia"/>
+		<typeAlias type="model.Turno" alias="turno"/>
+		<typeAlias type="model.Horario" alias="horario"/>
+		<typeAlias type="model.Personal" alias="personal"/>
+		<typeAlias type="model.Medico" alias="medico"/>
+		<typeAlias type="model.Asistente" alias="asistente"/>
 	</typeAliases>
 	
     <environments default="proyFinalPIT">
@@ -29,7 +38,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     </environments>
     
     <mappers>
-	   	<mapper resource="persistencia/mybatis/mapper/UsuarioMapper.xml"/>
+	   	<!-- <mapper resource="persistencia/mybatis/mapper/UsuarioMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/EspecialidadMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/ConsultorioMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/DiaMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/TurnoMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/HorarioMapper.xml"/>
+	   	<mapper resource="persistencia/mybatis/mapper/PersonalMapper.xml"/> -->
+	   	<package name="persistencia.mybatis.mapper"/>
 	</mappers>
 
     

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="persistencia.mybatis.mapper.PersonalMapper">
+ 
+ 	<resultMap type="medico" id="rmMedico">
+ 		<id column="id_personal" property="id"/>
+ 		<result column="cmp" property="cmp" />
+		<association property="especialidad" javaType="especialidad">
+			<id column="id_esp" property="id"/>
+			<result column="nombre_esp" property="nombre"/>
+		</association>
+ 	</resultMap>
+ 	
+ 	<resultMap type="asistente" id="rmAsistente">
+ 		<id column="id_personal" property="id"/>
+ 		<association property="medicoAsignado" javaType="medico">
+		 	<id column="id_personal" property="id"/>
+		 	<result column="cmp" property="cmp"/>
+		 </association>
+ 	</resultMap>
+ 	
+ 	<resultMap type="personal" id="rmPersonal">
+ 		<id column="id_personal" property="id"/>
+ 		<result column="dni" property="dni"/>
+ 		<result column="nombre_completo" property="nombreCompleto"/>
+ 		<result column="telefono" property="telefono"/>
+ 		<result column="celular" property="celular"/>
+ 		<result column="correo" property="correo"/>		
+ 		<result column="url_cv" property="urlCV"/>
+ 		<result column="url_foto" property="urlFoto"/>
+ 		<result column="estado" property="estado"/>
+ 		<association property="tipoPersonal" javaType="tipopersonal">
+ 			<id column="id_tipo" property="id"/>
+ 			<result column="descripcion" property="descripcion"/>
+ 		</association>
+ 		<discriminator javaType="Integer" column="id_tipo_personal">
+ 			<case value="1" resultMap="rmMedico" />
+ 			<case value="3" resultMap="rmAsistente" />
+ 		</discriminator>
+ 	</resultMap>
+ 	
+ 	<resultMap type="medico" id="rmMedicoResumen">
+ 		<id column="id_personal" property="id"/>
+ 		<association property="especialidad" javaType="especialidad">
+			<id column="id_esp" property="id"/>
+			<result column="nombre_esp" property="nombre"/>
+		</association>
+		<association property="personal" javaType="especialidad">
+			<result column="nombre_completo" property="nombreCompleto"/>
+			<result column="estado" property="estado"/>
+		</association>
+ 	</resultMap>
+ 	
+ 	
+ 	<!-- datos completos de personal por tipo -->
+ 	<select id="obtenerPersonalxTipo" parameterType="int" resultMap="rmPersonal">
+		SELECT p.id_personal,dni,nombre_completo,telefono,celular,
+		correo,id_tipo_personal,descripcion,url_cv,url_foto,
+		cmp, id_esp, id_medico_asig, p.estado 
+		FROM PERSONAL p INNER JOIN TIPO_PERSONAL tp on p.id_tipo_personal = tp.id_tipo
+		LEFT JOIN MEDICO m on m.id_personal = p.id_personal
+		LEFT JOIN ASISTENTE a on a.id_personal = p.id_personal
+		WHERE id_tipo_personal = #{idTipo} and p.estado = 1
+ 	</select>
+ 	
+ 	
+ </mapper>

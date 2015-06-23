@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="persistencia.mybatis.mapper.EspecialidadMapper">
+ 	
+ 	<resultMap type="especialidad" id="rmEspecialidad">
+ 		<id column="id_esp" property="id" jdbcType="INTEGER"/>
+ 		<result column="nombre_esp" property="nombre" jdbcType="VARCHAR"/>
+ 		<result column="estado" property="estado" jdbcType="BIT"/>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerTodos" resultMap="rmEspecialidad">
+ 		SELECT id_esp, nombre_esp, estado FROM ESPECIALIDAD where estado = 1
+ 	</select>
+ </mapper>

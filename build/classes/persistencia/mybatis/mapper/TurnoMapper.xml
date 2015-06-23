@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="persistencia.mybatis.mapper.TurnoMapper">
+ 	
+ 	<resultMap type="turno" id="rmTurno">
+ 		<id column="id_turno" property="id" jdbcType="INTEGER"/>
+ 		<result column="hora_inicio" property="horaInicio" jdbcType="TIME"/>
+ 		<result column="hora_fin" property="horaFin" jdbcType="TIME"/>
+ 		<result column="estado" property="estado" jdbcType="BIT"/>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerTurnos" resultMap="rmTurno">
+ 		SELECT id_turno,hora_inicio,hora_fin,estado FROM TURNO where estado = 1;
+ 	</select>
+ 	
+ </mapper>

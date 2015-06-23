@@ -32,6 +32,7 @@
 			</interceptor-stack>
 			
 			<interceptor-stack name="pitParamsPrepareParamsStack">
+				<interceptor-ref name="transaction"/>
 				<interceptor-ref name="paramsPrepareParamsStack"/>
 			</interceptor-stack>
 		</interceptors>
