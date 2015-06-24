@@ -8,8 +8,9 @@ public class Horario implements Serializable{
 	
 	private Integer id;
 	private Consultorio consultorio;
+	private Medico medico;
 	private Dia dia;
-	private Turno hora;
+	private Turno turno;
 	private boolean estado;
 	
 	
@@ -25,17 +26,23 @@ public class Horario implements Serializable{
 	public void setConsultorio(Consultorio consultorio) {
 		this.consultorio = consultorio;
 	}
+	public Medico getMedico() {
+		return medico;
+	}
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
 	public Dia getDia() {
 		return dia;
 	}
 	public void setDia(Dia dia) {
 		this.dia = dia;
 	}
-	public Turno getHora() {
-		return hora;
+	public Turno getTurno() {
+		return turno;
 	}
-	public void setHora(Turno hora) {
-		this.hora = hora;
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 	public boolean isEstado() {
 		return estado;

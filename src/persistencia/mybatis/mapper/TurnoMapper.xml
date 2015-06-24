@@ -8,13 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<resultMap type="turno" id="rmTurno">
  		<id column="id_turno" property="id" jdbcType="INTEGER"/>
+ 		<result column="descripcion" property="descripcion" jdbcType="VARCHAR"/>
  		<result column="hora_inicio" property="horaInicio" jdbcType="TIME"/>
  		<result column="hora_fin" property="horaFin" jdbcType="TIME"/>
  		<result column="estado" property="estado" jdbcType="BIT"/>
  	</resultMap>
  	
  	<select id="obtenerTurnos" resultMap="rmTurno">
- 		SELECT id_turno,hora_inicio,hora_fin,estado FROM TURNO where estado = 1;
+ 		SELECT id_turno,descripcion,hora_inicio,hora_fin,estado FROM TURNO where estado = 1;
  	</select>
  	
  </mapper>

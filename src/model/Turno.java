@@ -7,6 +7,7 @@ public class Turno implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	private Integer id;
+	private String descripcion;
 	private String horaInicio;
 	private String horaFin;
 	private boolean estado;
@@ -19,6 +20,12 @@ public class Turno implements Serializable {
 	}
 	public String getHoraInicio() {
 		return horaInicio;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;

@@ -1,10 +1,12 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Consultorio;
 import model.Dia;
 import model.Especialidad;
+import model.Horario;
 import model.Medico;
 import model.Turno;
 import negocio.ConsultorioService;
@@ -26,11 +28,14 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	private static final long serialVersionUID = 1L;
 	
 	private Consultorio consultorio;
+	private Horario horario;
 	private List<Consultorio> consultorios;
 	private List<Especialidad> especialidades;
+	private static List<Horario> horarios = new ArrayList<Horario>();
 	private List<Medico> medicos;
 	private List<Dia> dias;
 	private List<Turno> turnos;
+
 	
 	private ConsultorioService consultorioService = new ConsultorioServiceDAO();
 	private EspecialidadService especialidadService = new EspecialidadServiceDAO();
@@ -43,6 +48,12 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	}
 	public void setConsultorio(Consultorio consultorio) {
 		this.consultorio = consultorio;
+	}
+	public Horario getHorario() {
+		return horario;
+	}
+	public void setHorario(Horario horario) {
+		this.horario = horario;
 	}
 	public List<Consultorio> getConsultorios() {
 		return consultorios;
@@ -61,8 +72,7 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	}
 	public void setMedicos(List<Medico> medicos) {
 		this.medicos = medicos;
-	}
-	
+	}	
 	public List<Dia> getDias() {
 		return dias;
 	}
@@ -75,12 +85,34 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	public void setTurnos(List<Turno> turnos) {
 		this.turnos = turnos;
 	}
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+	public void setHorarios(List<Horario> horarios) {
+		ConsultorioAction.horarios = horarios;
+	}
 	
+	
+	public String agregarHorario(){
+		horarios.add(horario);
+		
+		for(Horario h : horarios)
+			System.out.println(h.getMedico().getId()+ " " + h.getConsultorio().getId() +
+					" " + h.getDia().getId() + " " + h.getTurno().getId());
+		return SUCCESS;
+	}
 	
 	public String editar(){
 		
 		consultorioService.registrar(consultorio);
 		consultorio = null;
+		return SUCCESS;
+	}
+	
+	public String editarHorario(){
+		System.out.println(horarios.size());
+		consultorioService.registrarHorario(horarios);
+		horarios = new ArrayList<Horario>();
 		return SUCCESS;
 	}
 	

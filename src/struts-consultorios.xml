@@ -13,5 +13,13 @@
 		<action name="editarConsultorio" class="action.ConsultorioAction" method="editar">
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
+		
+		<action name="agregarMedicoHorario" class="action.ConsultorioAction" method="agregarHorario">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
+		<action name="editarHorario" class="action.ConsultorioAction" method="editarHorario">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
 	</package>
 </struts>
