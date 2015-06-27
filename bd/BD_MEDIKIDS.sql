@@ -235,7 +235,7 @@ GO
 
 
 -- trigger crear horarios en insert consultorio
-¨/*
+/*
 CREATE TRIGGER crearhorarios ON CONSULTORIO AFTER INSERT
 AS
 declare @id int, @dia int = 1
@@ -255,6 +255,7 @@ INSERT INTO CONSULTORIO (cod_consultorio,ubicacion,descripcion,id_especialidad)
 
 select * from HORARIOS
 
+/*
 SELECT id_horario,id_consultorio,id_medico,nombre_completo,id_dia,id_turno from HORARIOS h 
 INNER JOIN PERSONAL p on h.id_medico = p.id_personal
  where id_consultorio = 1 and h.estado = 1 order by id_dia
@@ -267,3 +268,4 @@ INNER JOIN PERSONAL p on h.id_medico = p.id_personal
  SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
 		where id_consultorio = 1 and id_turno = 2
 		and id_dia = 1 and h.estado = 1
+*/
