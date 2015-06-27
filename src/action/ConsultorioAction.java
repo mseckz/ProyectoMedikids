@@ -1,6 +1,8 @@
 package action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import model.Consultorio;
@@ -35,6 +37,8 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	private List<Medico> medicos;
 	private List<Dia> dias;
 	private List<Turno> turnos;
+	
+	private String[] medicosSelected;
 
 	
 	private ConsultorioService consultorioService = new ConsultorioServiceDAO();
@@ -91,30 +95,66 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	public void setHorarios(List<Horario> horarios) {
 		ConsultorioAction.horarios = horarios;
 	}
-	
-	
-	public String agregarHorario(){
-		horarios.add(horario);
-		
-		for(Horario h : horarios)
-			System.out.println(h.getMedico().getId()+ " " + h.getConsultorio().getId() +
-					" " + h.getDia().getId() + " " + h.getTurno().getId());
-		return SUCCESS;
+	public String[] getMedicosSelected() {
+		return medicosSelected;
+	}
+	public void setMedicosSelected(String[] medicosSelected) {
+		this.medicosSelected = medicosSelected;
 	}
 	
+	
+	public String iniciar(){
+		horarios = new ArrayList<Horario>();
+		return SUCCESS;
+	}
+
 	public String editar(){
-		
 		consultorioService.registrar(consultorio);
 		consultorio = null;
 		return SUCCESS;
 	}
 	
-	public String editarHorario(){
-		System.out.println(horarios.size());
+	public String agregarHorario(){
+		
+		Horario horarioValido = consultorioService.validarHorario(horario);
+
+		if(horarioValido == null){
+			horarios.add(horario);
+		}
+		else{
+			addActionMessage("Horario ya esta agregado");
+		}
+		consultorio = consultorioService.getConsultorio(horario.getConsultorio().getId());
+		return SUCCESS;
+	}
+	
+	public String editarHorario(){	
 		consultorioService.registrarHorario(horarios);
 		horarios = new ArrayList<Horario>();
 		return SUCCESS;
 	}
+	
+	public String buscarConsultorioHorario(){
+		
+		consultorio = consultorioService.getConsultorio(consultorio.getId());
+		horarios = consultorioService.obtenerHorarios(consultorio.getId());
+		return SUCCESS;
+	}
+	
+	public String removerMedicosHorario(){
+		
+		horario = horarios.get(0);
+		Arrays.sort(medicosSelected, Collections.reverseOrder());
+		
+		for(String i : medicosSelected){
+			horarios.remove(Integer.parseInt(i));
+		}
+
+		consultorio = consultorioService.getConsultorio(horario.getConsultorio().getId());
+		
+		return SUCCESS;
+	}
+	
 	
 	@Override
 	public void prepare() throws Exception {
@@ -122,7 +162,7 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 		medicos = medicoService.obtenerMedicos();
 		dias = diaService.obtenerDias();
 		turnos = turnoService.obtenerTurnos();
-		
+		consultorios = consultorioService.obtenerConsultorios();
 	}
 
 	

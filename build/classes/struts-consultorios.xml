@@ -6,7 +6,7 @@
 
 	<package name="struts-consultorios" extends="demo" namespace="/consultorios">
 		
-		<action name="iniciarConsultorios" class="action.ConsultorioAction">
+		<action name="iniciarConsultorios" class="action.ConsultorioAction" method="iniciar">
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
 		
@@ -19,6 +19,14 @@
 		</action>
 		
 		<action name="editarHorario" class="action.ConsultorioAction" method="editarHorario">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
+		<action name="cargarConsultorio" class="action.ConsultorioAction" method="buscarConsultorioHorario">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
+		<action name="removerMedicosHorario" class="action.ConsultorioAction" method="removerMedicosHorario">
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
 	</package>

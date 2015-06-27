@@ -5,16 +5,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="persistencia.mybatis.mapper.ConsultorioMapper">
+ 
+ 	<resultMap type="consultorio" id="rmConsultorio">
+ 		<id column="id_consultorio" property="id"/>
+ 		<result column="cod_consultorio" property="codigo"/>
+ 		<result column="ubicacion" property="ubicacion" />
+ 		<result column="descripcion" property="descripcion"/>
+ 		<result column="estado" property="estado"/>
+ 		<association property="especialidad" javaType="especialidad">
+ 			<id column="id_esp" property="id"/>
+			<result column="nombre_esp" property="nombre"/>
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<resultMap type="horario" id="rmHorarios">
+ 		<id column="id_horario"/>
+ 		<association property="consultorio" javaType="consultorio">
+ 			<id column="id_consultorio" property="id"/>
+ 		</association>
+ 		<association property="medico" javaType="medico">
+ 			<id column="id_personal" property="id"/>
+ 			<result column="nombre_completo" property="nombreCompleto"/>
+ 		</association>
+ 		<association property="dia" javaType="dia">
+ 			<id column="id_dia" property="id"/>
+ 			<result column="nombre_dia" property="nombre"/>
+ 		</association>
+ 		<association property="turno" javaType="turno">
+ 			<id column="id_turno" property="id"/>
+ 			<result column="descripcion" property="descripcion"/>
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerConsultorios" resultMap="rmConsultorio">
+ 		SELECT id_consultorio,cod_consultorio,ubicacion,descripcion,c.estado,id_esp,nombre_esp
+		FROM CONSULTORIO c INNER JOIN ESPECIALIDAD e on e.id_esp = c.id_especialidad
+ 	</select>
+ 	
+ 	<select id="getConsultorio" resultMap="rmConsultorio" parameterType="int">
+ 		SELECT id_consultorio,cod_consultorio,ubicacion,descripcion,c.estado,id_esp,nombre_esp
+		FROM CONSULTORIO c INNER JOIN ESPECIALIDAD e on e.id_esp = c.id_especialidad
+		WHERE id_consultorio = #{id}
+ 	</select>
+ 	
+ 	<select id="obtenerHorarios" resultMap="rmHorarios" parameterType="int">
+ 		SELECT id_horario,id_consultorio,p.id_personal,nombre_completo,id_dia,id_turno 
+		from HORARIOS h INNER JOIN PERSONAL p on h.id_medico = p.id_personal
+		where id_consultorio = #{id} and h.estado = 1 order by id_dia
+ 	</select>
  	
  	<insert id="registrar" parameterType="Consultorio" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO CONSULTORIO (cod_consultorio,ubicacion,descripcion,id_especialidad) 
  		VALUES (#{codigo},#{ubicacion},#{descripcion},#{especialidad.id})
  	</insert>
  	
+ 	<insert id="actualizar" parameterType="Consultorio">
+ 		UPDATE CONSULTORIO SET ubicacion = #{ubicacion}, id_especialidad = #{especialidad.id},
+ 		descripcion = #{descripcion} where id_consultorio = #{id}
+ 	</insert>
+ 	
  	<insert id="registrarHorario" parameterType="horario" useGeneratedKeys="true">
+ 		
+ 		UPDATE HORARIOS SET ESTADO = 0 WHERE id_horario in 
+ 		<foreach item="h" collection="list" open="(" separator="," close=")">
+ 			#{h.consultorio.id}
+ 		</foreach>
+ 		GO
+ 	
  		INSERT INTO HORARIOS (id_consultorio,id_medico,id_dia,id_turno) VALUES
  		<foreach item="h" collection="list" open="(" separator="),(" close=")">
  			#{h.consultorio.id}, #{h.medico.id},#{h.dia.id},#{h.turno.id}
  		</foreach>
  	</insert>
+ 	
+ 	<select id="validarHorario" resultMap="rmHorarios" parameterType="horario">
+ 		SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
+		where id_consultorio = #{consultorio.id} and id_turno = #{turno.id} 
+		and id_dia = #{dia.id} and h.estado = 1
+ 	</select>
+ 
  </mapper>
