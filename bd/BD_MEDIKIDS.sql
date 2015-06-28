@@ -27,30 +27,64 @@ GO
 CREATE TABLE HISTORIA_CLINICA(
 	id_hc int identity(1,1) PRIMARY KEY,
 	cod_hc varchar(10) not null,
-	dni_paciente char(8) not null,
 	nom_paciente varchar(60) not null,
-	apellidos_paciente varchar(80) not null,
-	nombre_completo varchar(150) not null,
-	nom_apod varchar(60) not null,
-	apellidos_apod varchar(100) not null,
-	direccion varchar(150) not null,
-	telefono varchar(11),
-	fecha_nac_paciente date not null,
+	apellido_paterno_paciente varchar(80) not null,
+	apellido_materno_paciente varchar(80) not null,
+	dni_paciente char(8) not null,
 	edad int not null,
 	sexo bit not null,
+	direccion_paciente varchar(150) not null,
+	fecha_nac_paciente date not null,
+	observ varchar(200),
+	nom_padre varchar(60) not null,
+	apellido_paterno_padre varchar(80) not null,
+	apellido_materno_padre varchar(80) not null,
+	dni_padre char(8) not null,
+	telefono_padre varchar(11),
+	correo_padre varchar(100),
+	direccion_padre varchar(150) not null,
+	nom_madre varchar(60) not null,
+	apellido_paterno_madre varchar(80) not null,
+	apellido_materno_madre varchar(80) not null,
+	dni_madre char(8) not null,
+	telefono_madre varchar(11),
+	correo_madre varchar(100),
+	direccion_madre varchar(150) not null,
+	nom_apoderado varchar(60) not null,
+	apellido_paterno_apoderado varchar(80) not null,
+	apellido_materno_apoderado varchar(80) not null,
+	dni_apoderado char(8) not null,
+	telefono_apoderado varchar(11),
+	correo_apoderado varchar(100),
+	direccion_apoderado varchar(150) not null,
 	id_tipo_sangre int not null,
 	alergias varchar(200),
 	ant_hereditarios varchar(200),
-	observ varchar(200),
 	fecha_registro datetime default GETDATE(),
+	foto_paciente varchar(50),
+	foto_padre varchar(50),
+	foto_madre varchar(50),
+	foto_apoderado varchar(50),
 	estado bit default 1,
+	CONSTRAINT chk_correo1 CHECK (correo_padre like '%_@_%_.__%'),
+	CONSTRAINT chk_correo2 CHECK (correo_madre like '%_@_%_.__%'),
+	CONSTRAINT chk_correo3 CHECK (correo_apoderado like '%_@_%_.__%'),
 	CONSTRAINT fk_tipo_sangre FOREIGN KEY (id_tipo_sangre) REFERENCES TIPO_SANGRE (id_tipo)
 )
 GO
 
+CREATE SEQUENCE codigoConsultorio
+    AS int
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 9999
+    CYCLE
+    CACHE 3
+go
+
 CREATE TABLE CONSULTORIO(
 	id_consultorio int identity(1,1) PRIMARY KEY,
-	cod_consultorio varchar(10) not null,
+	cod_consultorio varchar(10) not null default RIGHT('0000'+CAST(next value for codigoConsultorio AS VARCHAR(4)),4),
 	ubicacion varchar(20) not null, -- revisar en el documento
 	descripcion varchar(50) not null,
 	id_especialidad int not null,
@@ -183,11 +217,20 @@ CREATE TABLE USUARIO(
 )
 GO
 
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('A+');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('A-');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('B+');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('B-');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('O+');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('O-');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('AB+');
+INSERT INTO TIPO_SANGRE (nombre_tipo_sangre) VALUES ('AB-')
+
 INSERT INTO ESPECIALIDAD (nombre_esp) VALUES ('Cardiologia'),('Oftalmologia')
 
 INSERT INTO TURNO (descripcion,hora_inicio,hora_fin) VALUES ('Mañana','09:00:00','13:00:00'),('Tarde','14:00:00','18:00:00')
 
-INSERT INTO DIAS (nombre_dia) VALUES ('Lunes'),('Martes'),('Miercoles'),('Jueves'),('Viernes'),('Sabado'),('Domingo')
+INSERT INTO DIAS (nombre_dia) VALUES ('Lunes'),('Martes'),('Miercoles'),('Jueves'),('Viernes'),('Sabado')
 
 INSERT INTO TIPO_PERSONAL (descripcion) VALUES ('Medico')
 INSERT INTO TIPO_PERSONAL (descripcion) VALUES ('Recepcionista')
@@ -233,39 +276,31 @@ from HORARIOS h INNER JOIN PERSONAL p on h.id_medico = p.id_personal
 where id_consultorio = 2
 GO
 
+INSERT INTO HISTORIA_CLINICA(
+cod_hc,nom_paciente,apellido_paterno_paciente,apellido_materno_paciente,dni_paciente,edad,sexo,
+direccion_paciente,fecha_nac_paciente,observ,
+nom_padre,apellido_paterno_padre,apellido_materno_padre,dni_padre,telefono_padre,correo_padre,
+direccion_padre,
+nom_madre,apellido_paterno_madre,apellido_materno_madre,dni_madre,telefono_madre,correo_madre,
+direccion_madre,
+nom_apoderado,apellido_paterno_apoderado,apellido_materno_apoderado,dni_apoderado,telefono_apoderado,
+correo_apoderado,direccion_apoderado,
+id_tipo_sangre,alergias,ant_hereditarios
+) VALUES(
+'holo4','hola4','hola4','hola',12345678,12,0,
+'','03-03-1998','1312312312313',
+'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'123123123',
+'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'123123123',
+'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'123123123',
+2,'12123','123123'
+)
+go
 
--- trigger crear horarios en insert consultorio
-/*
-CREATE TRIGGER crearhorarios ON CONSULTORIO AFTER INSERT
-AS
-declare @id int, @dia int = 1
-BEGIN
-	WHILE @dia < 8
-	BEGIN
-		select @id = id_consultorio from inserted
-		INSERT INTO HORARIOS (id_consultorio,id_medico,id_dia,id_turno) 
-		VALUES (@id, null, @dia, 1),(@id, null, @dia, 2)
-		set @dia = @dia + 1
-	END
-END
-GO
-*/
-INSERT INTO CONSULTORIO (cod_consultorio,ubicacion,descripcion,id_especialidad) 
- 		VALUES ('001','asdads','asdasd',1)
+
+INSERT INTO CONSULTORIO (ubicacion,descripcion,id_especialidad) 
+ 		VALUES ('asdads','asdasd',1),('numero2','no se',1)
 
 select * from HORARIOS
-
-/*
-SELECT id_horario,id_consultorio,id_medico,nombre_completo,id_dia,id_turno from HORARIOS h 
-INNER JOIN PERSONAL p on h.id_medico = p.id_personal
- where id_consultorio = 1 and h.estado = 1 order by id_dia
-
-
-SELECT id_horario,id_consultorio,id_medico,nombre_completo,id_dia,id_turno from HORARIOS h 
-INNER JOIN PERSONAL p on h.id_medico = p.id_personal
- where id_consultorio = 1 and h.estado = 1 order by id_dia
-
- SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
-		where id_consultorio = 1 and id_turno = 2
-		and id_dia = 1 and h.estado = 1
-*/
