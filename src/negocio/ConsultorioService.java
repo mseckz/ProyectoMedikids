@@ -10,9 +10,10 @@ public interface ConsultorioService {
 	public Consultorio getConsultorio(Integer id);
 	public void registrar(Consultorio consultorio);
 	public List<Consultorio> obtenerConsultorios() throws Exception;
+	public void actualizar(Consultorio consultorio);
 	
 	public void registrarHorario(List<Horario> listaHorarios);
 	public List<Horario> obtenerHorarios(Integer idConsultorio);
 	public Horario validarHorario(Horario horario);
-	
+	void deshabilitarHorarios(List<Horario> listaHorarios);
 }

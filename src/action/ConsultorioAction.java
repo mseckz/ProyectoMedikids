@@ -108,9 +108,19 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 		return SUCCESS;
 	}
 
-	public String editar(){
-		consultorioService.registrar(consultorio);
-		consultorio = null;
+	public String editar() throws Exception{
+		if(consultorio.getId() == null){
+			consultorioService.registrar(consultorio);
+			consultorio = null;
+			addActionMessage("Consultorio Agregado");
+		}
+		else{
+			consultorioService.actualizar(consultorio);
+			consultorio = null;
+			addActionMessage("Consultorio Actualizado");
+		}
+		consultorios = consultorioService.obtenerConsultorios();
+		
 		return SUCCESS;
 	}
 	
@@ -129,6 +139,11 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	}
 	
 	public String editarHorario(){	
+		if(horarios.isEmpty()){
+			addActionMessage("No hay horarios agregados");
+			return SUCCESS;
+		}
+		consultorioService.deshabilitarHorarios(horarios);
 		consultorioService.registrarHorario(horarios);
 		horarios = new ArrayList<Horario>();
 		return SUCCESS;
@@ -142,6 +157,10 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 	}
 	
 	public String removerMedicosHorario(){
+		
+		if(horarios.size() == 0){
+			return SUCCESS;
+		}
 		
 		horario = horarios.get(0);
 		Arrays.sort(medicosSelected, Collections.reverseOrder());

@@ -14,8 +14,9 @@
 			<s:form theme="bootstrap" action="editarConsultorio" namespace="/consultorios" cssClass="form-horizontal">
 				<div class="row">
 					<div class="col-md-5">
+						<s:hidden name="consultorio.id" />
 						<s:textfield name="consultorio.codigo" cssClass="form-control" key="consultorio.label.codigo"
-						placeholder="%{getText('consultorio.placeholder.codigo')}" />
+						placeholder="%{getText('consultorio.placeholder.codigo')}" readonly="true"/>
 						<s:textfield name="consultorio.ubicacion" cssClass="form-control" key="consultorio.label.ubicacion"
 						placeholder="%{getText('consultorio.placeholder.ubicacion')}" />
 					</div>
@@ -41,7 +42,7 @@
 			<s:form theme="bootstrap" action="agregarMedicoHorario" namespace="/consultorios" cssClass="form-horizontal">
 				<div class="row">
 					<div class="col-md-5">
-						<s:textfield cssClass="form-control" key="horario.label.codigo" value="%{consultorio.codigo}" readonly="readonly" />
+						<s:textfield cssClass="form-control" key="horario.label.codigo" value="%{consultorio.codigo}" readonly="true" />
 						<s:hidden name="horario.consultorio.id" value="%{consultorio.id}" />
 						
 						<s:select list="turnos" name="horario.turno.id"
@@ -52,7 +53,7 @@
 						<s:hidden id="nombreMedico" name="horario.medico.nombreCompleto"/>
 					</div>
 					<div class="col-md-5">
-						<s:textfield cssClass="form-control" key="horario.label.especialidad" value="%{consultorio.especialidad.nombre}" readonly="readonly"/>
+						<s:textfield cssClass="form-control" key="horario.label.especialidad" value="%{consultorio.especialidad.nombre}" readonly="true"/>
 						<s:select list="dias" name="horario.dia.id" 
 						key="horario.label.dia" listKey="id" listValue="nombre" emptyOption="true" />
 					</div>

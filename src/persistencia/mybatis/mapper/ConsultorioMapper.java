@@ -10,8 +10,11 @@ public interface ConsultorioMapper {
 	Consultorio getConsultorio(Integer id);
 	void registrar(Consultorio consultorio);
 	List<Consultorio> obtenerConsultorios();
+	void actualizar(Consultorio consultorio);
+	
 	
 	void registrarHorario(List<Horario> listaHorarios);
 	List<Horario> obtenerHorarios(Integer idConsultorio);
 	Horario validarHorario(Horario horario);
+	void deshabilitarHorarios(List<Horario> listaHorarios);
 }

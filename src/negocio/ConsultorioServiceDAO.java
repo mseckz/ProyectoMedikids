@@ -44,5 +44,18 @@ public class ConsultorioServiceDAO extends MyBatisGenericDAO implements Consulto
 		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
 		return consultorioMapper.validarHorario(horario);
 	}
+
+	@Override
+	public void actualizar(Consultorio consultorio) {
+		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
+		consultorioMapper.actualizar(consultorio);
+		
+	}
+
+	@Override
+	public void deshabilitarHorarios(List<Horario> listaHorarios) {
+		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
+		consultorioMapper.deshabilitarHorarios(listaHorarios);
+	}
 	
 }

@@ -64,19 +64,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		descripcion = #{descripcion} where id_consultorio = #{id}
  	</insert>
  	
- 	<insert id="registrarHorario" parameterType="horario" useGeneratedKeys="true">
- 		
- 		UPDATE HORARIOS SET ESTADO = 0 WHERE id_horario in 
- 		<foreach item="h" collection="list" open="(" separator="," close=")">
- 			#{h.consultorio.id}
- 		</foreach>
- 		GO
- 	
+ 	<insert id="registrarHorario" parameterType="horario" useGeneratedKeys="true">	
  		INSERT INTO HORARIOS (id_consultorio,id_medico,id_dia,id_turno) VALUES
  		<foreach item="h" collection="list" open="(" separator="),(" close=")">
  			#{h.consultorio.id}, #{h.medico.id},#{h.dia.id},#{h.turno.id}
  		</foreach>
  	</insert>
+ 	
+ 	<update id="deshabilitarHorarios" parameterType="horario">
+ 		UPDATE HORARIOS SET ESTADO = 0 WHERE id_horario in 
+ 		<foreach item="h" collection="list" open="(" separator="," close=")">
+ 			#{h.consultorio.id}
+ 		</foreach>
+ 		GO
+ 	</update>
  	
  	<select id="validarHorario" resultMap="rmHorarios" parameterType="horario">
  		SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
