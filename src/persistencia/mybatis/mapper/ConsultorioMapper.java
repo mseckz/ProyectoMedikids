@@ -3,6 +3,7 @@ package persistencia.mybatis.mapper;
 import java.util.List;
 
 import model.Consultorio;
+import model.ConsultorioFiltro;
 import model.Horario;
 
 public interface ConsultorioMapper {
@@ -11,6 +12,7 @@ public interface ConsultorioMapper {
 	void registrar(Consultorio consultorio);
 	List<Consultorio> obtenerConsultorios();
 	void actualizar(Consultorio consultorio);
+	List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
 	
 	
 	void registrarHorario(List<Horario> listaHorarios);

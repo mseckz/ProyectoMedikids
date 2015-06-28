@@ -26,7 +26,10 @@
 						<s:textarea name="consultorio.descripcion" cssClass="form-control" key="consultorio.label.descripcion"
 						placeholder="%{getText('consultorio.placeholder.descripcion')}" />
 					</div>
-					<div class="col-md-4" ><s:submit cssClass="btn btn-default col-md-offset-1" value="%{getText('consultorio.button.grabar')}" /></div>
+					<div class="col-md-4" >
+						<s:submit cssClass="btn btn-default col-md-offset-1" value="%{getText('consultorio.button.grabar')}" />
+						<a href="<s:url action="resetearForm" namespace="consultorios" />" class="btn btn-default" >Limpiar Todo</a>
+					</div>
 				</div>
 			</s:form>
 		</div>
@@ -39,6 +42,16 @@
 				  <s:text name="consultorio.horario.buscar" />
 				</button>
     		</div><br>
+    		<s:if test="%{error}">
+	    		<div class="row">
+					<div class="alert alert-warning alert-dismissible" role="alert">
+						 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						 <s:actionmessage/>
+					</div>
+	    		</div>
+    		</s:if>
+    		<div class="row">
+    		<div class="col-md-12">
 			<s:form theme="bootstrap" action="agregarMedicoHorario" namespace="/consultorios" cssClass="form-horizontal">
 				<div class="row">
 					<div class="col-md-5">
@@ -61,7 +74,7 @@
 				<div class="row">
 					<div class="col-md-8 btn-group" role="group">
 						<s:submit value="%{getText('horario.button.registrar')}"  cssClass="btn btn-primary" />
-						<a href="<s:url action="borrarTodos" namespace="/consultorios" />" class="btn btn-primary">
+						<a href="<s:url action="borrarTodos" namespace="/consultorios" />" class="btn btn-danger">
 							<s:text name="horario.button.borrartodos" />
 						</a>
 					</div>
@@ -69,8 +82,9 @@
 						<a href="<s:url action="editarHorario" namespace="/consultorios" />" class="btn btn-default btn-lg"><s:text name="horario.button.grabarhorario" /></a>
 					</div>
 				</div>
-			</s:form><hr>
-			<s:actionmessage/>
+			</s:form>
+			</div>
+			</div><hr>
 			<s:form action="removerMedicosHorario" method="POST" namespace="/consultorios">
 				<div>
 					<button type="submit" class="btn btn-primary">
@@ -212,6 +226,37 @@
 		    input.checked = !input.checked;
 		    return false;
 		}
+		
+	    $('#buscarCons').submit(function(event) {
+	        var $form = $("#buscarCons");
+	        var $target = $($form.attr('data-target'));
+	 
+	        $.ajax({
+	            type: $form.attr('method'),
+	            url: $form.attr('action'),
+	            data: $form.serialize(),
+	 			datatype : 'json',
+	            success: function(data, status) {
+	            	$('#buscarConsultorio').modal('show');
+
+	            	var lista = data.consultorios;
+	            	var url = "http://localhost:8080/proyFinal/consultorios/consultorios/cargarConsultorio.action?consultorio.id=";
+	            	
+	                for (var i = 0; i < lista.length; i++) {
+	                    tr = $('<tr/>');
+	                    tr.append("<td>" + lista[i].codigo + "</td>");
+	                    tr.append("<td>" + lista[i].ubicacion + "</td>");
+	                    tr.append("<td>" + lista[i].especialidad.nombre + "</td>");
+	                    tr.append("<td><a href="+ url +lista[i].id +">Seleccionar</a></td>");
+	                    $("#consultorios tbody").append(tr);
+	                }
+	                
+	            }
+	        });
+	 
+	        event.preventDefault();
+	    });
+
 		
 		addEventsToHTML();
 		onload();

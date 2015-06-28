@@ -10,9 +10,13 @@
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
 		
+		<action name="resetearForm" class="action.ConsultorioAction" method="reset">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
 		<action name="editarConsultorio" class="action.ConsultorioAction" method="editar">
 			<result type="tiles">mod_consult_inicio</result>
-			<result name="input">mod_consult_inicio</result>
+			<result name="input" type="tiles">mod_consult_inicio</result>
 		</action>
 		
 		<action name="agregarMedicoHorario" class="action.ConsultorioAction" method="agregarHorario">
@@ -29,6 +33,14 @@
 		
 		<action name="removerMedicosHorario" class="action.ConsultorioAction" method="removerMedicosHorario">
 			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
+		<action name="removerMedicosHorario" class="action.ConsultorioAction" method="removerMedicosHorario">
+			<result type="tiles">mod_consult_inicio</result>
+		</action>
+		
+		<action name="buscarConsultorio" class="action.ConsultorioAction" method="buscarConsultorio">
+			<result type="json" />
 		</action>
 	</package>
 </struts>

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</resultMap>
  	
  	<resultMap type="horario" id="rmHorarios">
- 		<id column="id_horario"/>
+ 		<id column="id_horario" property="id"/>
  		<association property="consultorio" javaType="consultorio">
  			<id column="id_consultorio" property="id"/>
  		</association>
@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<insert id="registrar" parameterType="Consultorio" useGeneratedKeys="true" keyProperty="id">
- 		INSERT INTO CONSULTORIO (cod_consultorio,ubicacion,descripcion,id_especialidad) 
- 		VALUES (#{codigo},#{ubicacion},#{descripcion},#{especialidad.id})
+ 		INSERT INTO CONSULTORIO (ubicacion,descripcion,id_especialidad) 
+ 		VALUES (#{ubicacion},#{descripcion},#{especialidad.id})
  	</insert>
  	
  	<insert id="actualizar" parameterType="Consultorio">
@@ -74,15 +74,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="deshabilitarHorarios" parameterType="horario">
  		UPDATE HORARIOS SET ESTADO = 0 WHERE id_horario in 
  		<foreach item="h" collection="list" open="(" separator="," close=")">
- 			#{h.consultorio.id}
+ 			#{h.id}
  		</foreach>
- 		GO
  	</update>
  	
  	<select id="validarHorario" resultMap="rmHorarios" parameterType="horario">
  		SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
 		where id_consultorio = #{consultorio.id} and id_turno = #{turno.id} 
 		and id_dia = #{dia.id} and h.estado = 1
+ 	</select>
+ 	
+ 	<select id="buscarConsultorio" resultMap="rmConsultorio" parameterType="consultorioFiltro">
+ 		SELECT id_consultorio,cod_consultorio,ubicacion,descripcion,c.estado,id_esp,nombre_esp
+		FROM CONSULTORIO c INNER JOIN ESPECIALIDAD e on e.id_esp = c.id_especialidad
+		<where>
+			<if test="codigo != null">
+				cod_consultorio like #{codigo}
+			</if>
+			<if test="especialidad.id != null">
+				AND id_esp = #{especialidad.id}
+			</if>
+		</where>
  	</select>
  
  </mapper>

@@ -5,13 +5,56 @@
 <struts>
 
 	<package name="struts-historias" extends="demo" namespace="/historias">
+
+		<action name="iniciarHistorias" class="action.HistoriaClinicaAction">
+			<result type="tiles">mod_hist_inicio</result>
+		</action>
+
+		<action name="crearHistorias" class="action.HistoriaClinicaAction">
+			<result type="tiles">mod_hist_crear</result>
+		</action>
+
+		<!-- <action name="editarHC" class="action.HistoriaClinicaAction" method="editar">
+
+			<param name="saveDirectory">D:/TestSubirdocs</param>
+
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">*/*</param>
+				<param name="maximumSize">4194304</param> 4MB
+			</interceptor-ref>
+
+			<interceptor-ref name="staticParams" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="validation" />
+			<interceptor-ref name="workflow" />
+
+			<result type="tiles">mod_hist_inicio</result>
+			<result name="input" type="tiles">mod_hist_crear</result>
+		</action> -->
 		
-				<action name="iniciarHistorias">
-					<result type="tiles">mod_hist_inicio</result>
-				</action>
-				
-				<action name="crearHistorias">
-					<result type="tiles">mod_hist_crear</result>
-				</action>
+<!-- 		<action name="editarHC" class="action.HistoriaClinicaAction" method="editar">
+			<result type="tiles">mod_hist_inicio</result>
+			<result name="input" type="tiles">mod_hist_crear</result>
+		</action> -->
+		
+		<action name="editarHC" class="action.HistoriaClinicaAction" method="editar">
+			<result type="tiles">mod_hist_inicio</result>
+			<result name="input" type="tiles">mod_hist_crear</result>
+		</action>
+
+		<action name="buscarHC" class="action.HistoriaClinicaAction"
+			method="buscar">
+			<result type="tiles">mod_hist_inicio</result>
+		</action>
+
+		<action name="desactivarHC" class="action.HistoriaClinicaAction"
+			method="desactivar">
+			<result type="tiles">mod_hist_inicio</result>
+		</action>
+
+		<action name="actualizarHC" class="action.HistoriaClinicaAction">
+			<interceptor-ref name="pitParamsPrepareParamsStack" />
+			<result type="tiles">mod_hist_crear</result>
+		</action>
 	</package>
 </struts>

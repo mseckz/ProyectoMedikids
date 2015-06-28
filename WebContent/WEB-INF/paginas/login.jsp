@@ -40,10 +40,6 @@
 	</div>
 	
 	<hr/>
-	<a href="<s:url action="iniciarPrincipal" namespace="/seguridad"/>">
-		<s:text name="Pasa_a_siguiente_pagina" />
-	</a>
-
 </body>
 </html>
 

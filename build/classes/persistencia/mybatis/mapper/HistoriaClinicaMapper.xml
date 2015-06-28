@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.HistoriaClinicaMapper">
+
+
+<!-- 	<insert id="insertar" parameterType="historiaclinica"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO HISTORIA_CLINICA(
+		cod_hc,nom_paciente,apellido_paterno_paciente,apellido_materno_paciente,dni_paciente,edad,sexo,
+		direccion_paciente,fecha_nac_paciente,observ,
+		nom_padre,apellido_paterno_padre,apellido_materno_padre,dni_padre,telefono_padre,correo_padre,
+		direccion_padre,
+		nom_madre,apellido_paterno_madre,apellido_materno_madre,dni_madre,telefono_madre,correo_madre,
+		direccion_madre,
+		nom_apoderado,apellido_paterno_apoderado,apellido_materno_apoderado,dni_apoderado,telefono_apoderado,
+		correo_apoderado,direccion_apoderado,
+		id_tipo_sangre,alergias,ant_hereditarios,
+		foto_paciente,foto_padre,foto_madre,foto_apoderado
+		) VALUES(
+		#{codigo},#{nombrePaciente},#{apellidoPaternoPaciente},#{apellidoMaternoPaciente},#{dniPaciente},
+		#{edadPaciente},#{sexoPaciente},#{direccionPaciente},#{fechaNacPaciente},#{observaciones},
+		#{nombrePadre},#{apellidoPaternoPadre},#{apellidoMaternoPadre},#{dniPadre},
+		#{telefonoPadre},#{correoPadre},#{direccionPadre},
+		#{nombreMadre},#{apellidoPaternoMadre},#{apellidoMaternoMadre},#{dniMadre},
+		#{telefonoMadre},#{correoMadre},#{direccionMadre},
+		#{nombreApoderado},#{apellidoPaternoApoderado},#{apellidoMaternoApoderado},#{dniApoderado},
+		#{telefonoApoderado},#{correoApoderado},#{direccionApoderado},
+		#{tipoSangre.id},#{alergias},#{Antecedentes},
+		#{fotoPaciente},#{fotoPadre},#{fotoMadre},#{fotoApoderado})
+	</insert> -->
+	
+	<insert id="registrar" parameterType="historiaclinica" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO HISTORIA_CLINICA(
+		cod_hc,nom_paciente,apellido_paterno_paciente,apellido_materno_paciente,dni_paciente,edad,sexo,
+		direccion_paciente,fecha_nac_paciente,observ,
+		nom_padre,apellido_paterno_padre,apellido_materno_padre,dni_padre,telefono_padre,correo_padre,
+		direccion_padre,
+		nom_madre,apellido_paterno_madre,apellido_materno_madre,dni_madre,telefono_madre,correo_madre,
+		direccion_madre,
+		nom_apoderado,apellido_paterno_apoderado,apellido_materno_apoderado,dni_apoderado,telefono_apoderado,
+		correo_apoderado,direccion_apoderado,
+		id_tipo_sangre,alergias,ant_hereditarios
+		) VALUES(
+		#{codigo},#{nombrePaciente},#{apellidoPaternoPaciente},#{apellidoMaternoPaciente},#{dniPaciente},
+		#{edadPaciente},#{sexoPaciente},#{direccionPaciente},#{fechaNacPaciente},#{observaciones},
+		#{nombrePadre},#{apellidoPaternoPadre},#{apellidoMaternoPadre},#{dniPadre},
+		#{telefonoPadre},#{correoPadre},#{direccionPadre},
+		#{nombreMadre},#{apellidoPaternoMadre},#{apellidoMaternoMadre},#{dniMadre},
+		#{telefonoMadre},#{correoMadre},#{direccionMadre},
+		#{nombreApoderado},#{apellidoPaternoApoderado},#{apellidoMaternoApoderado},#{dniApoderado},
+		#{telefonoApoderado},#{correoApoderado},#{direccionApoderado},
+		#{tipoSangre.id},#{alergias},#{Antecedentes})
+	</insert>
+
+	<update id="actualizar" parameterType="historiaclinica">
+		UPDATE HISTORIA_CLINICA
+		SET
+		nom_paciente=#{nombrePaciente},
+		apellido_paterno_paciente=#{apellidoPaternoPaciente},
+		apellido_materno_paciente=#{apellidoMaternoPaciente},
+		dni_paciente=#{dniPaciente},
+		edad=#{edadPaciente},
+		sexo=#{sexoPaciente},
+		direccion_paciente=#{direccionPaciente},
+		fecha_nac_paciente=#{fechaNacPaciente},
+		observ=#{observaciones},
+		nom_padre=#{nombrePadre},
+		apellido_paterno_padre=#{apellidoPaternoPadre},
+		apellido_materno_padre=#{apellidoMaternoPadre},
+		dni_padre=#{dniPadre},
+		telefono_padre=#{telefonoPadre},
+		correo_padre=#{correoPadre},
+		direccion_padre=#{direccionPadre},
+		nom_madre=#{nombreMadre},
+		apellido_paterno_madre=#{apellidoPaternoMadre},
+		apellido_materno_madre=#{apellidoMaternoMadre},
+		dni_madre=#{dniMadre},
+		telefono_madre=#{telefonoMadre},
+		correo_madre=#{correoMadre},
+		direccion_madre=#{direccionMadre},
+		nom_apoderado=#{nombreApoderado},
+		apellido_paterno_apoderado=#{apellidoPaternoApoderado},
+		apellido_materno_apoderado=#{apellidoMaternoApoderado},
+		dni_apoderado=#{dniApoderado},
+		telefono_apoderado=#{telefonoApoderado},
+		correo_apoderado=#{correoApoderado},
+		direccion_apoderado=#{direccionApoderado},
+		id_tipo_sangre=#{tipoSangre.id},
+		alergias=#{alergias},
+		ant_hereditarios=#{Antecedentes},
+		foto_paciente=#{fotoPaciente},
+		foto_padre=#{fotoPadre},
+		foto_madre=#{fotoMadre},
+		foto_apoderado=#{fotoApoderado},
+		WHERE id_hc=#{id}
+	</update>
+
+	<resultMap type="historiaclinica" id="rmHistoria">
+		<id column="id_hc" property="id" jdbcType="INTEGER" />
+		<result column="nom_paciente" property="nombrePaciente"
+			jdbcType="VARCHAR" />
+		<result column="apellido_paterno_paciente" property="apellidoPaternoPaciente"
+			jdbcType="VARCHAR" />
+		<result column="apellido_materno_paciente" property="apellidoMaternoPaciente"
+			jdbcType="VARCHAR" />
+		<result column="dni_paciente" property="dniPaciente" jdbcType="CHAR" />
+		<result column="edad" property="edadPaciente" jdbcType="INTEGER" />
+		<result column="estado" property="estado" jdbcType="BOOLEAN" />
+
+		<association property="tipoSangre" javaType="model.TipoSangre">
+			<result column="id_tipo_sangre" property="id" jdbcType="INTEGER" />
+			<result column="nombre_tipo_sangre" property="nombreTipoSangre"
+				jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<select id="buscar" resultMap="rmHistoria" parameterType="buscaHCFiltro">
+		select
+		hc.id_hc,hc.nom_paciente,hc.apellido_paterno_paciente,hc.apellido_materno_paciente,hc.dni_paciente,hc.edad,
+		hc.estado,
+		tp.nombre_tipo_sangre from HISTORIA_CLINICA hc inner join
+		TIPO_SANGRE tp on tp.id_tipo=hc.id_tipo_sangre
+		<where>
+			<if test="nombrePaciente!=null">
+				nom_paciente like #{nombrePaciente}
+			</if>
+			<if test="apellidoPaternoPaciente!=null">
+				AND apellido_paterno_paciente like
+				#{apellidoPaternoPaciente}
+			</if>
+			<if test="apellidoMaternoPaciente!=null">
+				AND apellido_materno_paciente like
+				#{apellidoMaternoPaciente}
+			</if>
+			<if test="dniPaciente!=null">
+				AND dni_paciente = #{dniPaciente}
+			</if>
+		</where>
+	</select>
+
+	<update id="desactivar" parameterType="historiaclinica">
+		UPDATE HISTORIA_CLINICA
+		SET
+		estado=0
+		WHERE id_hc=#{id}
+	</update>
+
+	<resultMap type="historiaclinica" id="rmHistorialMedico">
+		<id column="id_hc" property="id" jdbcType="INTEGER" />
+		<result column="nom_paciente" property="nombrePaciente"
+			jdbcType="VARCHAR" />
+		<result column="apellido_paterno_paciente" property="apellidoPaternoPaciente"
+			jdbcType="VARCHAR" />
+		<result column="apellido_materno_paciente" property="apellidoMaternoPaciente"
+			jdbcType="VARCHAR" />
+		<result column="dni_paciente" property="dniPaciente" jdbcType="CHAR" />
+		<result column="edad" property="edadPaciente" jdbcType="INTEGER" />
+		<result column="sexo" property="sexoPaciente" jdbcType="BOOLEAN" />
+		<result column="fecha_nac_paciente" property="fechaNacPaciente"
+			jdbcType="DATE" />
+		<result column="observ" property="observaciones" jdbcType="VARCHAR" />
+		<result column="alergias" property="alergias" jdbcType="VARCHAR" />
+		<result column="ant_hereditarios" property="Antecedentes"
+			jdbcType="VARCHAR" />
+
+		<association property="tipoSangre" javaType="model.TipoSangre">
+			<result column="id_tipo_sangre" property="id" jdbcType="INTEGER" />
+			<result column="nombre_tipo_sangre" property="nombreTipoSangre"
+				jdbcType="VARCHAR" />
+		</association>
+
+
+	</resultMap>
+
+	<select id="obtener" resultMap="rmHistorialMedico"
+		parameterType="INTEGER">
+		select
+		hc.cod_hc,hc.nom_paciente,hc.apellido_paterno_paciente,hc.apellido_materno_paciente,
+		hc.dni_paciente,hc.edad,hc.sexo,hc.fecha_nac_paciente,hc.observ,
+		tp.nombre_tipo_sangre,hc.alergias,hc.ant_hereditarios
+		from
+		HISTORIA_CLINICA hc inner join TIPO_SANGRE tp on
+		tp.id_tipo=hc.id_tipo_sangre
+		where id_hc=#{id}
+	</select>
+
+
+
+</mapper>

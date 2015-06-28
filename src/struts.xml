@@ -15,7 +15,7 @@
 	<include file="struts-consultas.xml" />
 	<include file="struts-citas.xml" />
 
-	<package name="demo" extends="struts-default">
+	<package name="demo" extends="struts-default, json-default">
 
 		<result-types>
 			<result-type name="tiles"

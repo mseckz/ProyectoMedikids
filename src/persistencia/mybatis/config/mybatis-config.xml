@@ -16,12 +16,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="model.Especialidad" alias="especialidad"/>
 		<typeAlias type="model.TipoPersonal" alias="tipopersonal"/>
 		<typeAlias type="model.Consultorio" alias="consultorio"/>
+		<typeAlias type="model.ConsultorioFiltro" alias="consultorioFiltro"/>
 		<typeAlias type="model.Dia" alias="dia"/>
 		<typeAlias type="model.Turno" alias="turno"/>
 		<typeAlias type="model.Horario" alias="horario"/>
 		<typeAlias type="model.Personal" alias="personal"/>
 		<typeAlias type="model.Medico" alias="medico"/>
 		<typeAlias type="model.Asistente" alias="asistente"/>
+		<typeAlias type="model.HistoriaClinica" alias="historiaclinica"/>
+		<typeAlias type="model.TipoSangre" alias="tiposangre"/>
+		<typeAlias type="model.BuscarHCFiltro" alias="buscaHCFiltro"/>
 	</typeAliases>
 	
     <environments default="proyFinalPIT">

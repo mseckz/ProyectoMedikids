@@ -4,6 +4,7 @@ import java.util.List;
 
 import persistencia.mybatis.mapper.ConsultorioMapper;
 import model.Consultorio;
+import model.ConsultorioFiltro;
 import model.Horario;
 
 public class ConsultorioServiceDAO extends MyBatisGenericDAO implements ConsultorioService {
@@ -56,6 +57,12 @@ public class ConsultorioServiceDAO extends MyBatisGenericDAO implements Consulto
 	public void deshabilitarHorarios(List<Horario> listaHorarios) {
 		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
 		consultorioMapper.deshabilitarHorarios(listaHorarios);
+	}
+
+	@Override
+	public List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro) {
+		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
+		return consultorioMapper.buscarConsultorio(filtro);
 	}
 	
 }

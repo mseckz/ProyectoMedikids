@@ -3,6 +3,7 @@ package negocio;
 import java.util.List;
 
 import model.Consultorio;
+import model.ConsultorioFiltro;
 import model.Horario;
 
 public interface ConsultorioService {
@@ -11,6 +12,7 @@ public interface ConsultorioService {
 	public void registrar(Consultorio consultorio);
 	public List<Consultorio> obtenerConsultorios() throws Exception;
 	public void actualizar(Consultorio consultorio);
+	public List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
 	
 	public void registrarHorario(List<Horario> listaHorarios);
 	public List<Horario> obtenerHorarios(Integer idConsultorio);
