@@ -40,7 +40,11 @@
 		</action>
 		
 		<action name="buscarConsultorio" class="action.ConsultorioAction" method="buscarConsultorio">
-			<result type="json" />
+			<result type="json">
+				<param name="root">
+				    consultorios
+			   </param>
+			</result>
 		</action>
 	</package>
 </struts>

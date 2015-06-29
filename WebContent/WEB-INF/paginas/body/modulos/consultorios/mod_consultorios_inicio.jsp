@@ -238,8 +238,8 @@
 	 			datatype : 'json',
 	            success: function(data, status) {
 	            	$('#buscarConsultorio').modal('show');
-
-	            	var lista = data.consultorios;
+					console.log(data);
+	            	var lista = data;
 	            	var url = "http://localhost:8080/proyFinal/consultorios/consultorios/cargarConsultorio.action?consultorio.id=";
 	            	
 	                for (var i = 0; i < lista.length; i++) {
