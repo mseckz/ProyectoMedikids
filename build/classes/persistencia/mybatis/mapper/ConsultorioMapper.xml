@@ -18,6 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</association>
  	</resultMap>
  	
+ 	<resultMap type="consultorio" id="rmConsultoriosCombo">
+ 		<id column="id_consultorio" property="id"/>
+ 		<result column="cod_consultorio" property="codigo"/>
+ 	</resultMap>
+ 	
  	<resultMap type="horario" id="rmHorarios">
  		<id column="id_horario" property="id"/>
  		<association property="consultorio" javaType="consultorio">
@@ -88,13 +93,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		SELECT id_consultorio,cod_consultorio,ubicacion,descripcion,c.estado,id_esp,nombre_esp
 		FROM CONSULTORIO c INNER JOIN ESPECIALIDAD e on e.id_esp = c.id_especialidad
 		<where>
-			<if test="codigo != null">
-				cod_consultorio like #{codigo}
+			<if test="codigo != null and especialidad.id != null and codigo != '' ">
+				cod_consultorio like #{codigo} AND id_esp = #{especialidad.id}
 			</if>
-			<if test="especialidad.id != null">
-				AND id_esp = #{especialidad.id}
+			<if test="codigo == null or codigo == '' ">
+				id_esp = #{especialidad.id}
+			</if>
+			<if test="especialidad.id == null">
+				cod_consultorio like #{codigo} 
 			</if>
 		</where>
+ 	</select>
+ 	
+ 	<select id="obtenerConsultoriosxEsp" parameterType="int" resultMap="rmConsultoriosCombo">
+ 		SELECT id_consultorio,cod_consultorio
+		FROM CONSULTORIO WHERE id_especialidad = #{idesp}
  	</select>
  
  </mapper>

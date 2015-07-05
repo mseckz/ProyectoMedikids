@@ -3,7 +3,6 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<sj:head/>
+	
     <title><s:text name="parrafo.proyecto"/></title>
 
     <!-- Bootstrap Core CSS -->
@@ -31,7 +30,7 @@
     <link href="<s:url value='/externo/css/sticky-footer.css'/>" rel="stylesheet">
     
     <script src="<s:url value='/externo/bootstrap/js/jquery-2.1.4.min.js'/>"></script>
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -72,7 +71,7 @@
 
     <!-- jQuery 
     <script src="externo/bootstrap/js/jquery.js"></script>-->
-    <script type="text/javascript" src="<%=request.getContextPath()%>/externo/bootstrap/js/jquery.js"></script>
+<%--     <script type="text/javascript" src="<%=request.getContextPath()%>/externo/bootstrap/js/jquery.js"></script> --%>
 
     <!-- Bootstrap Core JavaScript 
     <script src="externo/bootstrap/js/bootstrap.min.js"></script>-->

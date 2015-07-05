@@ -6,9 +6,20 @@
 
 	<package name="struts-citas" extends="demo" namespace="/citas">
 		
-				<action name="iniciarCitas">
-					<result type="tiles">mod_cit_inicio</result>
-				</action>
+		<action name="iniciarCitas" class="action.CitaAction">
+			<result type="tiles">mod_cit_inicio</result>
+		</action>
 				
+		<action name="inicializarCita" class="action.CitaAction">
+			<result type="tiles">mod_citas_registrar</result>
+		</action>
+		
+		<action name="cargarConsultorios" class="action.CitaAction" method="cargarConsultorios">
+			<result type="json">
+				<param name="root">
+					consultorios
+				</param>
+			</result>
+		</action>
 	</package>
 </struts>

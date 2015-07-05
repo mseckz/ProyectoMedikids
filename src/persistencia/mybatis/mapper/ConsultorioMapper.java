@@ -13,6 +13,7 @@ public interface ConsultorioMapper {
 	List<Consultorio> obtenerConsultorios();
 	void actualizar(Consultorio consultorio);
 	List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
+	List<Consultorio> obtenerConsultoriosxEsp(Integer idesp);
 	
 	
 	void registrarHorario(List<Horario> listaHorarios);

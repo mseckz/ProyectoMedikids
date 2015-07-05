@@ -230,7 +230,9 @@
 	    $('#buscarCons').submit(function(event) {
 	        var $form = $("#buscarCons");
 	        var $target = $($form.attr('data-target'));
-	 
+	 		
+	        console.log($form.serialize());
+	        
 	        $.ajax({
 	            type: $form.attr('method'),
 	            url: $form.attr('action'),

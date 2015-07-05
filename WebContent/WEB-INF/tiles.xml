@@ -30,6 +30,9 @@
 	<definition name="mod_cit_inicio" extends="d_plantilla">
 		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/citas/mod_citas_inicio.jsp"/>
 	</definition>
+	<definition name="mod_citas_registrar" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/citas/mod_citas_registrar.jsp"/>
+	</definition>
 	<!-- Fin Modulo de Citas -->
 	
 	<!-- Modulo de Consultas -->

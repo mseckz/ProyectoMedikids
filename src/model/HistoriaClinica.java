@@ -300,26 +300,8 @@ public class HistoriaClinica implements Serializable{
 	}*/
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	public String nombreCombpleto(){
+		return nombrePaciente + " " + apellidoPaternoPaciente + " " + apellidoMaternoPaciente;
+	}
 
 }

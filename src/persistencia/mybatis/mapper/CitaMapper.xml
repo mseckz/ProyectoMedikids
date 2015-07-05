@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="persistencia.mybatis.mapper.CitaMapper">
+ 	
+ 	<resultMap type="cita" id="rmCita">
+ 		<id column="id_cita" property="id"/>
+ 		<result column="codigo_cita" property="codigo"/>
+ 		<result column="tipo_reserva" property="tipoReserva"/>
+ 		<result column="fecha_atencion" property="fechaAtencion"/>
+ 		<association property="historiaClinica" javaType="historiaclinica">
+ 			<id column="id_hc" property="id"/>
+ 			<result column="nom_paciente" property="nombrePaciente"/>
+ 			<result column="apellido_paterno_paciente" property="apellidoPaternoPaciente"/>
+ 			<result column="apellido_materno_paciente" property="apellidoMaternoPaciente"/>
+ 		</association>
+ 		<association property="consultorio" javaType="consultorio">
+ 			<id column="id_consultorio" property="id"/>
+ 			<result column="cod_consultorio" property="codigo"/>		
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerCitas" resultMap="rmCita">
+		select id_cita,codigo_cita,tipo_reserva,fecha_atencion,c.id_hc,h.nom_paciente,h.apellido_paterno_paciente,
+		h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+		where estado_cita = 'RESERVA'
+ 	</select>
+ 	
+ 	<insert id="registrarCita" parameterType="cita">
+ 		INSERT INTO CITA (codigo_cita,id_hc, personal_registro,tipo_reserva,id_consultorio,fecha_atencion,hora_atencion,monto_pago)
+ 		values (#{codigo},#{historiaClinica.id},#{personalRegistro.id},#{tipoReserva},
+ 		#{consultorio.id},#{fechaAtencion}, #{horaAtencion},#{monto})
+ 	</insert>
+ </mapper>

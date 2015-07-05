@@ -26,6 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="model.HistoriaClinica" alias="historiaclinica"/>
 		<typeAlias type="model.TipoSangre" alias="tiposangre"/>
 		<typeAlias type="model.BuscarHCFiltro" alias="buscaHCFiltro"/>
+		<typeAlias type="model.Cita" alias="cita"/>
+		<typeAlias type="model.TipoReserva" alias="tipoReserva"/>
 	</typeAliases>
 	
     <environments default="proyFinalPIT">

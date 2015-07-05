@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Cita implements Serializable {
 
@@ -10,12 +11,14 @@ public class Cita implements Serializable {
 	private String codigo;
 	private HistoriaClinica historiaClinica;
 	private Personal personalRegistro;
-	private String tipoReserva;
+	private TipoReserva tipoReserva;
 	private Consultorio consultorio;
-	private String fechaRegistro;
-	private String fechaAtencion;
+	private Date fechaRegistro;
+	private Date fechaAtencion;
+	private String horaAtencion;
+	private String text;
 	private Double monto;
-	private Integer estadoCita;
+	private EstadoCitas estadoCita;
 	
 	
 	public Integer getId() {
@@ -42,10 +45,10 @@ public class Cita implements Serializable {
 	public void setPersonalRegistro(Personal personalRegistro) {
 		this.personalRegistro = personalRegistro;
 	}
-	public String getTipoReserva() {
+	public TipoReserva getTipoReserva() {
 		return tipoReserva;
 	}
-	public void setTipoReserva(String tipoReserva) {
+	public void setTipoReserva(TipoReserva tipoReserva) {
 		this.tipoReserva = tipoReserva;
 	}
 	public Consultorio getConsultorio() {
@@ -54,17 +57,23 @@ public class Cita implements Serializable {
 	public void setConsultorio(Consultorio consultorio) {
 		this.consultorio = consultorio;
 	}
-	public String getFechaRegistro() {
+	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(String fechaRegistro) {
+	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-	public String getFechaAtencion() {
+	public Date getFechaAtencion() {
 		return fechaAtencion;
 	}
-	public void setFechaAtencion(String fechaAtencion) {
+	public void setFechaAtencion(Date fechaAtencion) {
 		this.fechaAtencion = fechaAtencion;
+	}
+	public String getHoraAtencion() {
+		return horaAtencion;
+	}
+	public void setHoraAtencion(String horaAtencion) {
+		this.horaAtencion = horaAtencion;
 	}
 	public Double getMonto() {
 		return monto;
@@ -72,12 +81,17 @@ public class Cita implements Serializable {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-	public Integer getEstadoCita() {
+	public EstadoCitas getEstadoCita() {
 		return estadoCita;
 	}
-	public void setEstadoCita(Integer estadoCita) {
+	public void setEstadoCita(EstadoCitas estadoCita) {
 		this.estadoCita = estadoCita;
 	}
-	
-	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+
 }

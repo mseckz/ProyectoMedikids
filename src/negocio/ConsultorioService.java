@@ -13,6 +13,7 @@ public interface ConsultorioService {
 	public List<Consultorio> obtenerConsultorios() throws Exception;
 	public void actualizar(Consultorio consultorio);
 	public List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
+	List<Consultorio> obtenerConsultoriosxEsp(Integer idesp);
 	
 	public void registrarHorario(List<Horario> listaHorarios);
 	public List<Horario> obtenerHorarios(Integer idConsultorio);
