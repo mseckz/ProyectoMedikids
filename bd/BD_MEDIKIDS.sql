@@ -152,8 +152,9 @@ CREATE TABLE CITA(
 	id_consultorio int not null,
 	fecha_registro datetime default GETDATE(),
 	fecha_atencion datetime not null,
+	hora_atencion time not null,
 	monto_pago decimal not null,
-	estado_cita int default 1,
+	estado_cita varchar(10) not null default 'RESERVA',
 	CONSTRAINT fk_historia_clinica FOREIGN KEY (id_hc) REFERENCES HISTORIA_CLINICA (id_hc),
 	CONSTRAINT fk_personal_cita FOREIGN KEY (personal_registro) REFERENCES PERSONAL (id_personal),
 	CONSTRAINT fk_consultorio_cita FOREIGN KEY (id_consultorio) REFERENCES CONSULTORIO (id_consultorio)
@@ -188,6 +189,7 @@ CREATE TABLE HORARIOS(
 	CONSTRAINT fk_medico_horario FOREIGN KEY (id_medico) REFERENCES MEDICO (id_personal)
 )
 go
+
 
 CREATE TABLE CONSULTA(
 	id_consulta int identity(1,1) PRIMARY KEY,
@@ -300,8 +302,60 @@ id_tipo_sangre,alergias,ant_hereditarios
 )
 go
 
-
 INSERT INTO CONSULTORIO (ubicacion,descripcion,id_especialidad) 
  		VALUES ('asdads','asdasd',1),('numero2','no se',1)
+go
+
+CREATE TABLE HORAS_DIA(
+	id int identity(1,1) primary key,
+	hora time not null
+)
+
+select * from HORAS_DIA
+
+declare
+	@hora time,
+	@contador int
+Begin
+	set @contador = 1
+	set @hora = CONVERT(time,'0:00')
+	while @contador <= 24
+	begin
+		INSERT INTO HORAS_DIA (hora) values (@hora)
+		set @hora = DATEADD(HOUR, 1, @hora)
+		set @contador = @contador + 1
+	end
+end
+
+
+go
+
+
 
 select * from HORARIOS
+
+select id_cita,codigo_cita,tipo_reserva,fecha_atencion,c.id_hc,h.nom_paciente,h.apellido_paterno_paciente,
+h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+where estado_cita = 'RESERVA';
+
+select * from CITA
+select * from HORARIOS
+select * from TURNO
+
+-- horas disponibles del consultorio dependiendo fecha 
+select hora from HORAS_DIA where hora 
+not in 
+(select hora_atencion from cita c 
+ where id_consultorio = '1' and fecha_atencion = '2015/07/06'
+ and c.estado_cita = 'RESERVA')
+ and hora in
+ (select hora from HORAS_DIA inner join TURNO t on
+hora >= t.hora_inicio and hora < t.hora_fin
+where id_turno in (1,2))
+
+-- turnos de consultorio dependiendo dia de semana
+SELECT id_turno from HORARIOS 
+where id_consultorio = 1 and id_dia = 1 and estado = 1
+GO
