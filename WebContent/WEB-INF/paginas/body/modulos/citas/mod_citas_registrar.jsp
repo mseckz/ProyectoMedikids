@@ -45,15 +45,16 @@
 				headerValue="Elija consultorio" headerKey="-1"/>
 			</div>
 			<div class="form-group col-md-6">
-				<sj:datepicker id="datepicker" parentTheme="bootstrap" key="citas.registrar.fechaatencion"
+				<sj:datepicker id="fechaAtencion" parentTheme="bootstrap" key="citas.registrar.fechaatencion" name="cita.fechaAtencion"
 	                              cssClass="form-control" showOn="focus" inputAppendIcon="calendar"
-	                              displayFormat="dd/mm/yy" />
+	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" />
 			</div>
 			<div class="form-group col-md-6">
 				<s:textfield name="cita.monto" cssClass="form-control" key="citas.registrar.monto" />
 			</div>
 			<div class="form-group col-md-6">
-				<s:textfield name="cita.horaAtencion" cssClass="form-control" key="citas.registrar.horaatencion" />
+				<s:select list="horas" id="horas" name="cita.fechaAtencion" key="citas.registrar.horaatencion" cssClass="form-control"
+				headerValue="Elija hora" headerKey="-1"/>
 			</div>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-1">
@@ -65,39 +66,20 @@
 	</div>
 	
 		
+	<script src="<s:url value="/externo/js/citas.js" />"></script>
 	<script>
+	var changeTimer = false;
+
+	$("#fechaAtencion").on("keyup" ,function(){
+	        if(changeTimer !== false) clearTimeout(changeTimer);
+	        changeTimer = setTimeout(function(){
+	        	loadHorasDisponibles();
+	            changeTimer = false;
+	        },300);
+	});
 	
-	function loadConsultorios(){
-		
-		var especialidad = document.getElementById("especialidades");
-		var idEspecialidad =  especialidad.options[especialidad.selectedIndex].value;
-		
-		if(idEspecialidad == -1){
-			return;
-		}
-		
-        $("#consultorios").get(0).options.length = 0;
-        $("#consultorios").get(0).options[0] = new Option("Elija consultorio", "-1"); 
-
-        $.ajax({
-            type: "POST",
-            url: "cargarConsultorios",
-            data: "especialidad.id="+idEspecialidad,
-            dataType: "json",
-            success: function(data) {
-               console.log(data);
-            	$("#consultorios").get(0).options.length = 0;
-                $("#consultorios").get(0).options[0] = new Option("Elija consultorio", "-1"); 
-
-                $.each(data, function(index, item) {
-                    $("#consultorios").get(0).options[$("#consultorios").get(0).options.length] = new Option(item.codigo, item.id);
-                });
-            },
-            error: function(error) {
-                $("#consultorios").get(0).options.length = 0;
-
-            }
-        });
-	}
+	$.subscribe('changeTopic', function(event,data) {
+		loadHorasDisponibles();
+	});
 	</script>
 </div>

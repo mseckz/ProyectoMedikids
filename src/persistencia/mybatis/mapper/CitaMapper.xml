@@ -36,4 +36,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		values (#{codigo},#{historiaClinica.id},#{personalRegistro.id},#{tipoReserva},
  		#{consultorio.id},#{fechaAtencion}, #{horaAtencion},#{monto})
  	</insert>
+ 	
+ 	<!-- horas disponibles del consultorio dependiendo fecha y turno -->
+ 	<select id="horasDisponibles" parameterType="map" resultType="String">
+ 		SELECT hora from HORAS_DIA where hora 
+		not in 
+		(select hora_atencion from cita c 
+		 where c.id_consultorio = #{idConsultorio} and c.fecha_atencion = #{fecha}
+		 and c.estado_cita = 'RESERVA')
+		and hora in
+		(select hora from HORAS_DIA inner join TURNO t on
+		 <![CDATA[ hora >= t.hora_inicio and hora < t.hora_fin ]]>
+		 where id_turno in 
+		 (SELECT h.id_turno from HORARIOS h
+		  where id_consultorio = #{idConsultorio} and h.id_dia = DATEPART(weekday, #{fecha})-1 and h.estado = 1))
+ 	</select>
+ 	
+ 	
  </mapper>

@@ -1,7 +1,9 @@
 package action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Cita;
 import model.Consultorio;
@@ -25,6 +27,7 @@ public class CitaAction extends ActionSupport implements Preparable{
 	private List<Consultorio> consultorios = new ArrayList<Consultorio>();
 	private List<Especialidad> especialidades;
 	private Especialidad especialidad;
+	private List<String> horas = new ArrayList<String>() ;
 	
 	private CitaService servicio = new CitaServiceDAO();
 	private EspecialidadService especialidadService = new EspecialidadServiceDAO();
@@ -60,6 +63,12 @@ public class CitaAction extends ActionSupport implements Preparable{
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
 	}
+	public List<String> getHoras() {
+		return horas;
+	}
+	public void setHoras(List<String> horas) {
+		this.horas = horas;
+	}
 	
 	public String registrarCita(){
 		servicio.registrarCita(cita);
@@ -71,6 +80,13 @@ public class CitaAction extends ActionSupport implements Preparable{
 		return SUCCESS;
 	}
 	
+	public String obtenerHorasDisponibles(){
+		Map<String, Object> datos = new HashMap<String, Object>();
+		datos.put("idConsultorio", cita.getConsultorio().getId());
+		datos.put("fecha", cita.getFechaAtencion());
+		horas = servicio.horasDisponibles(datos);
+		return SUCCESS;
+	}
 	
 	@Override
 	public void prepare() throws Exception {

@@ -348,12 +348,15 @@ select * from TURNO
 select hora from HORAS_DIA where hora 
 not in 
 (select hora_atencion from cita c 
- where id_consultorio = '1' and fecha_atencion = '2015/07/06'
+ where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/06'
  and c.estado_cita = 'RESERVA')
  and hora in
  (select hora from HORAS_DIA inner join TURNO t on
 hora >= t.hora_inicio and hora < t.hora_fin
-where id_turno in (1,2))
+where id_turno in (SELECT h.id_turno from HORARIOS h
+where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/06')-1 and h.estado = 1))
+
+
 
 -- turnos de consultorio dependiendo dia de semana
 SELECT id_turno from HORARIOS 
