@@ -230,8 +230,7 @@
 	    $('#buscarCons').submit(function(event) {
 	        var $form = $("#buscarCons");
 	        var $target = $($form.attr('data-target'));
-	 		
-	        console.log($form.serialize());
+	        $("#consultorios tbody").html("");
 	        
 	        $.ajax({
 	            type: $form.attr('method'),

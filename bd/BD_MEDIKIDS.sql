@@ -331,7 +331,7 @@ end
 go
 
 
-
+select * from USUARIO
 select * from HORARIOS
 
 select id_cita,codigo_cita,tipo_reserva,fecha_atencion,c.id_hc,h.nom_paciente,h.apellido_paterno_paciente,

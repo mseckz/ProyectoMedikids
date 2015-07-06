@@ -29,5 +29,21 @@
 				</param>
 			</result>
 		</action>
+		
+		<action name="buscarHistoria" class="action.CitaAction" method="buscarPaciente">
+			<result type="json">
+				<param name="root">
+					historias
+				</param>
+			</result>
+		</action>
+		
+		<action name="cargarPaciente" class="action.CitaAction" method="cargarPaciente">
+			<result type="tiles">mod_citas_registrar</result>
+		</action>
+		
+		<action name="registrarCita" class="action.CitaAction" method="registrarCita">
+			<result type="tiles">mod_citas_registrar</result>
+		</action>
 	</package>
 </struts>

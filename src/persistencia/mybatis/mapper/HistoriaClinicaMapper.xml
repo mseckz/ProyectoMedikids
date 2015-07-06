@@ -179,7 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="obtener" resultMap="rmHistorialMedico"
 		parameterType="INTEGER">
-		select
+		select id_hc,
 		hc.cod_hc,hc.nom_paciente,hc.apellido_paterno_paciente,hc.apellido_materno_paciente,
 		hc.dni_paciente,hc.edad,hc.sexo,hc.fecha_nac_paciente,hc.observ,
 		tp.nombre_tipo_sangre,hc.alergias,hc.ant_hereditarios
