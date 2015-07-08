@@ -15,13 +15,14 @@
 					</a>
 				</div>
 			</div>
+			<s:actionmessage/>
 			<h2 class="page-header">
 				<s:text name="citas.buscar.titulo" />
 			</h2>
 			<br>
 			<div class="row">
 				<div class="col-md-12">
-					<s:form theme="bootstrap" cssClass="form-horizontal">
+					<s:form theme="bootstrap" cssClass="form-horizontal" action="buscarCita" method="POST">
 					<div class="form-group col-md-5">
 							<s:textfield name="citaFiltro.codigo" label="Codigo Cita" cssClass="form-control"/>
 						</div>
@@ -29,7 +30,7 @@
 							<s:textfield name="citaFiltro.dni" label="DNI" cssClass="form-control"/>
 						</div>
 						<div class="form-group col-md-4">
-							<s:textfield name="citaFiltro.nombres" key="citas.buscar.label.nombres" cssClass="form-control"/>
+							<s:textfield name="citaFiltro.nombre" key="citas.buscar.label.nombres" cssClass="form-control"/>
 						</div>
 						<div class="form-group col-md-4">
 							<s:submit key="citas.buscar.submit" cssClass="btn btn-default"/>
@@ -37,9 +38,11 @@
 					</s:form>
 				</div>
 			</div>
+			<hr>
+			<s:if test="!citas.isEmpty">
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-hover table-condensed">
 		      		<thead>
 		      			<tr>
 		      				<th>Codigo</th>
@@ -54,27 +57,23 @@
 		     				<tr>
 		     					<td><s:property value="codigo" /></td>
 		     					<td><s:property value="%{historiaClinica.nombreCompletoPaciente()}"/></td>
-		     					<td><s:property value="consultorio.codigo" /></td>
-		     					<td><s:property value="fechaAtencion" /></td>
-		     					<td width="22%">
-		     						<s:url action="cargarCita" id='seleccionar' namespace='citas' >
+		     					<td width="15%"><s:property value="consultorio.codigo" /></td>
+		     					<td width="20%"><s:date name="fechaAtencion" format="dd/MM/yyyy" />  &nbsp;<s:property value="horaAtencion" /></td>
+		     					<td width="15%">
+		     						<s:url action="cargarCita" id='editar' namespace='citas'  >
 			      						<s:param name='cita.id'>
 			      							<s:property value='id'/>
 			      						</s:param>
 		      						</s:url>
-		      						<s:a href='%{seleccionar}' cssClass='btn btn-primary btn-sm' >Editar</s:a>
-		      						<s:url action="cargarCita" id='seleccionar' namespace='citas' >
-			      						<s:param name='cita.id'>
-			      							<s:property value='id'/>
-			      						</s:param>
-		      						</s:url>
-		      						<s:a href='%{seleccionar}' cssClass='btn btn-success btn-sm'>Generar</s:a>
-		      						<s:url action="cargarCita" id='seleccionar' namespace='citas' >
-			      						<s:param name='cita.id'>
-			      							<s:property value='id'/>
-			      						</s:param>
-		      						</s:url>
-		      						<s:a href='%{seleccionar}' cssClass='btn btn-danger btn-sm'>Cancelar</s:a>
+		      						<s:a href='%{editar}' cssClass='btn btn-primary' title="Editar" >
+		      							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		      						</s:a>
+		      						<button class="btn btn-success" name="mostrarGenerarConsulta" title="Generar consulta" id="<s:property value="id" />">
+		      							<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+		      						</button>
+		      						<button class="btn btn-danger" name="mostrarCancelar" title="Cancelar cita" id="<s:property value="id" />">
+		      							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		      						</button>
 		     					</td>
 		     				</tr>
 		     			</s:iterator>
@@ -82,6 +81,22 @@
 		      		</table>
 		      	</div>
 			</div>
+			</s:if>
+			<s:else>
+				<s:actionmessage/>
+			</s:else>
 		</div>
 	</div>
 </div>
+
+<jsp:include page="/WEB-INF/paginas/body/modulos/citas/modalCancelarCita.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/paginas/body/modulos/citas/modalGenerarConsulta.jsp"></jsp:include>
+<script src="<s:url value="/externo/js/citas.js" />"></script>
+<script>
+
+window.onload = function(){
+	cargarDatosCancelar();
+	cargarDatosGenerarConsulta();
+}
+
+</script>

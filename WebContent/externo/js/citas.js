@@ -99,3 +99,66 @@ function buscarPaciente(){
         event.preventDefault();
     });
 }
+
+function cargarDatosCancelar(){
+	$("button[name='mostrarCancelar']").click(function(event) {
+		
+		var target = $(event.target);
+		var id = $(this).attr("id");
+
+		$.ajax({
+	        type: 'GET',
+	        url:  "cargarCitaModal",
+	        data: "cita.id="+id,
+			datatype : 'json',
+	        success: function(data, status) {
+	        	
+				console.log(data);
+	        	
+				document.getElementById("codigoCita").innerHTML = data.cita.codigo;
+				document.getElementById("fechaAtencion").innerHTML = data.cita.fechaAtencion;
+				document.getElementById("horaAtencion").innerHTML = data.cita.horaAtencion;
+				document.getElementById("nombrePaciente").innerHTML = data.historia.nombrePaciente + ' ' + 
+																	  data.historia.apellidoPaternoPaciente + ' ' + 
+																	  data.historia.apellidoMaternoPaciente;
+				document.getElementById("dniPaciente").innerHTML = data.historia.dniPaciente;
+				
+				document.getElementById("idCancelarCita").value = data.cita.id
+				
+				$('#modalCancelar').modal('show');
+	        }
+	    }); 
+	});
+}
+
+function cargarDatosGenerarConsulta(){
+	$("button[name='mostrarGenerarConsulta']").click(function(event) {
+		
+		var target = $(event.target);
+		var id = $(this).attr("id");
+
+		$.ajax({
+	        type: 'GET',
+	        url:  "cargarCitaModal",
+	        data: "cita.id="+id,
+			datatype : 'json',
+	        success: function(data, status) {
+	        	
+				console.log(data);
+	        	
+				document.getElementById("codigoCitaGC").innerHTML = data.cita.codigo;
+				document.getElementById("fechaAtencionGC").innerHTML = data.cita.fechaAtencion;
+				document.getElementById("horaAtencionGC").innerHTML = data.cita.horaAtencion;
+				document.getElementById("nombrePacienteGC").innerHTML = data.historia.nombrePaciente + ' ' + 
+																	  data.historia.apellidoPaternoPaciente + ' ' + 
+																	  data.historia.apellidoMaternoPaciente;
+				document.getElementById("dniPacienteGC").innerHTML = data.historia.dniPaciente;
+				document.getElementById("montoGC").innerHTML = "S/. " + data.cita.monto;
+				
+				document.getElementById("idGenerarConsulta").value = data.cita.id
+				
+				$('#modalGenerarConsulta').modal('show');
+	        }
+	    }); 
+	});
+}

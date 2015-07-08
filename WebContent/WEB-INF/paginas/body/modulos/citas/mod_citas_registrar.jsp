@@ -60,10 +60,13 @@
 			</div>
 			</s:if>
 		</div>
+		<s:if test="historia != null">
 		<div class="bs">
 			<h3 class="page-header">
 				<s:text name="citas.registrar.titulo" />
 			</h3>
+			<s:actionmessage/>
+			<s:hidden name="cita.id" />
 			<div class="form-group col-md-6">
 				<s:textfield class="" key="citas.registrar.codigo" name="cita.codigo" cssClass="form-control" />
 			</div>
@@ -71,13 +74,13 @@
 				<s:select list="@model.TipoReserva@values()" name="cita.tipoReserva" key="citas.registrar.tiporeserva" cssClass="form-control"/>
 			</div>
 			<div class="form-group col-md-6">
-				<s:select list="especialidades" name="especialidad.id" key="citas.registrar.especialidad" listKey="id" 
+				<s:select list="especialidades" name="cita.consultorio.especialidad.id" key="citas.registrar.especialidad" listKey="id" 
 				listValue="nombre" cssClass="form-control" id="especialidades" onchange="loadConsultorios()"
 				headerValue="Elija especialidad" headerKey="-1"/>
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="consultorios" id="consultorios" name="cita.consultorio.id" key="citas.registrar.consultorio" cssClass="form-control"
-				headerValue="Elija consultorio" headerKey="-1"/>
+				headerValue="Elija consultorio" headerKey="-1"  listKey="id" listValue="codigo"/>
 			</div>
 			<div class="form-group col-md-6">
 				<sj:datepicker id="fechaAtencion" parentTheme="bootstrap" key="citas.registrar.fechaatencion" name="cita.fechaAtencion"
@@ -88,17 +91,20 @@
 				<s:select list="horas" id="horas" name="cita.horaAtencion" key="citas.registrar.horaatencion" cssClass="form-control"
 				headerValue="Elija hora" headerKey="-1"/>
 			</div>
-						<div class="form-group col-md-6">
+			<div class="form-group col-md-6">
 				<s:textfield name="cita.monto" cssClass="form-control" key="citas.registrar.monto" />
 			</div>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-1">
 					<s:submit key="citas.registrar.submit" cssClass="btn btn-default"/>
+					<a href='<s:url action="iniciarCitas" />' class="btn btn-default">Cancelar</a>
 				</div>
 			</div>
 		</div>
-	</s:form>	
+		</s:if>
+	</s:form>
 	</div>
+	
 	<jsp:include page="/WEB-INF/paginas/body/modulos/citas/include_buscar_hc_cita.jsp"></jsp:include>
 		
 	<script src="<s:url value="/externo/js/citas.js" />"></script>

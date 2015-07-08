@@ -201,7 +201,7 @@ CREATE TABLE CONSULTA(
 	diagnostico varchar(200),
 	receta varchar(150),
 	fecha_registro datetime,
-	estado bit,
+	estado bit,  -- 0:  1: Atendida
 	CONSTRAINT fk_hc FOREIGN KEY (id_hc) REFERENCES HISTORIA_CLINICA (id_hc),
 	CONSTRAINT fk_medico FOREIGN KEY (id_medico) REFERENCES MEDICO (id_personal),
 	CONSTRAINT fk_cita_cons FOREIGN KEY (id_cita) REFERENCES CITA (id_cita)
@@ -252,8 +252,6 @@ INSERT INTO MEDICO (id_personal,cmp,id_esp) VALUES (3, '65487',2);
 INSERT INTO MEDICO (id_personal,cmp,id_esp) VALUES (4, '23145',2);
 
 INSERT INTO ASISTENTE(id_personal,id_medico_asig) VALUES (2, 1);
-
-
 
 INSERT INTO USUARIO (id_personal,nom_usuario,contrasena,id_rol) values (1, 'prueba','12345',1)
 
@@ -345,7 +343,7 @@ select * from HORARIOS
 select * from TURNO
 
 -- horas disponibles del consultorio dependiendo fecha 
-select hora from HORAS_DIA where hora 
+select CONVERT(TIME(0), hora) from HORAS_DIA where hora 
 not in 
 (select hora_atencion from cita c 
  where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/06'
@@ -362,3 +360,14 @@ where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/06')-1 and h.
 SELECT id_turno from HORARIOS 
 where id_consultorio = 1 and id_dia = 1 and estado = 1
 GO
+
+select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion, monto_pago, e.id_esp,
+c.id_hc,h.nom_paciente,h.apellido_paterno_paciente,h.apellido_materno_paciente,c.id_consultorio,cn.cod_consultorio
+from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+inner join ESPECIALIDAD e on e.id_esp = cn.id_especialidad
+where estado_cita = 'RESERVA' 
+
+
+UPDATE CITA set tipo_reserva = '',id_consultorio = 1, fecha_atencion = '', hora_atencion = '', monto_pago = ''
+where id_cita = 1

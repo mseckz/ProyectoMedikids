@@ -45,5 +45,29 @@
 		<action name="registrarCita" class="action.CitaAction" method="registrarCita">
 			<result type="tiles">mod_citas_registrar</result>
 		</action>
+		
+		<action name="buscarCita" class="action.CitaAction" method="buscarCita">
+			<result type="tiles">mod_cit_inicio</result>
+		</action>
+		
+		<action name="cargarCita" class="action.CitaAction" method="cargarDatosCita">
+			<result type="tiles">mod_citas_registrar</result>
+		</action>
+		
+		<action name="cancelarCita" class="action.CitaAction" method="cancelarCita">
+			<result type="tiles">mod_cit_inicio</result>
+		</action>
+		
+		<action name="generarConsulta" class="action.CitaAction" method="generarConsulta">
+			<result type="tiles">mod_cit_inicio</result>
+		</action>
+		
+		<action name="cargarCitaModal" class="action.CitaAction" method="cargarDatosCitaModal">
+			<result type="json">
+				<param name="root">
+					datosModal
+				</param>
+			</result>
+		</action>
 	</package>
 </struts>

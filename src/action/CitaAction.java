@@ -7,6 +7,7 @@ import java.util.Map;
 
 import model.BuscarHCFiltro;
 import model.Cita;
+import model.CitaFiltro;
 import model.Consultorio;
 import model.Especialidad;
 import model.HistoriaClinica;
@@ -41,6 +42,8 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	private HistoriaClinica historia;
 	private List<HistoriaClinica> historias;
 	private BuscarHCFiltro hcFiltro;
+	private CitaFiltro citaFiltro;
+	private Map<String, Object> datosModal = new HashMap<String, Object>();
 	
 	private CitaService servicio = new CitaServiceDAO();
 	private EspecialidadService especialidadService = new EspecialidadServiceDAO();
@@ -101,13 +104,32 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	public void setHcFiltro(BuscarHCFiltro hcFiltro) {
 		this.hcFiltro = hcFiltro;
 	}
+	public CitaFiltro getCitaFiltro() {
+		return citaFiltro;
+	}
+	public void setCitaFiltro(CitaFiltro citaFiltro) {
+		this.citaFiltro = citaFiltro;
+	}
+	public Map<String, Object> getDatosModal() {
+		return datosModal;
+	}
+	public void setDatosModal(Map<String, Object> datosModal) {
+		this.datosModal = datosModal;
+	}
 	
 	public String registrarCita(){
-		Personal p = new Personal();
-		p.setId(1);
-		cita.setPersonalRegistro(p);
-		servicio.registrarCita(cita);
-		
+		if(cita.getId() == null){
+			Personal p = new Personal();
+			p.setId(1);
+			cita.setPersonalRegistro(p);
+			servicio.registrarCita(cita);
+			cita = null;
+			addActionMessage("Cita registrada");
+		}
+		else{
+			servicio.actualizarCita(cita);
+			addActionMessage("Cita Actualizada");
+		}
 		return SUCCESS; 
 	}
 	
@@ -131,6 +153,59 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	
 	public String cargarPaciente(){
 		historia = historiaService.obtener(historia.getId());
+		return SUCCESS;
+	}
+	
+	public String buscarCita(){
+		citas = servicio.buscarCita(citaFiltro);
+		citaFiltro = null;
+		
+		if(citas.size() == 0){
+			addActionMessage("No se encontraron registros");
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String cargarDatosCita(){
+
+		cita = servicio.cargarCita(cita.getId());
+		historia = historiaService.obtener(cita.getHistoriaClinica().getId());
+		
+		// cargar consultorios
+		consultorios = consultorioService.obtenerConsultoriosxEsp(cita.getConsultorio().getEspecialidad().getId());
+		
+		//cargar horas
+		Map<String, Object> datos = new HashMap<String, Object>();
+		datos.put("idConsultorio", cita.getConsultorio().getId());
+		datos.put("fecha", cita.getFechaAtencion());
+		horas = servicio.horasDisponibles(datos);
+		
+		return SUCCESS;
+	}
+	
+	public String cargarDatosCitaModal(){
+
+		cita = servicio.cargarCita(cita.getId());
+		historia = historiaService.obtener(cita.getHistoriaClinica().getId());
+		
+		datosModal.put("cita", cita);
+		datosModal.put("historia", historia);
+		
+		return SUCCESS;
+	}
+	
+	public String cancelarCita(){
+		servicio.cancelarCita(cita.getId());
+		citas = servicio.obtenerCitas();
+		addActionMessage("Cita ha sido cancelada");
+		return SUCCESS;
+	}
+	
+	public String generarConsulta(){
+		servicio.generarConsulta(cita.getId());
+		addActionMessage("Cita ha sido generada");
+		citas = servicio.obtenerCitas();
 		return SUCCESS;
 	}
 	

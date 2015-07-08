@@ -11,6 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="codigo_cita" property="codigo"/>
  		<result column="tipo_reserva" property="tipoReserva"/>
  		<result column="fecha_atencion" property="fechaAtencion"/>
+ 		<result column="hora_atencion" property="horaAtencion"/>
+ 		<result column="monto_pago" property="monto"/>
  		<association property="historiaClinica" javaType="historiaclinica">
  			<id column="id_hc" property="id"/>
  			<result column="nom_paciente" property="nombrePaciente"/>
@@ -19,13 +21,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</association>
  		<association property="consultorio" javaType="consultorio">
  			<id column="id_consultorio" property="id"/>
- 			<result column="cod_consultorio" property="codigo"/>		
+ 			<result column="cod_consultorio" property="codigo"/>
+ 			<result column="id_especialidad" property="especialidad.id"/>		
  		</association>
  	</resultMap>
  	
  	<select id="obtenerCitas" resultMap="rmCita">
-		select id_cita,codigo_cita,tipo_reserva,fecha_atencion,c.id_hc,h.nom_paciente,h.apellido_paterno_paciente,
-		h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+		select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion,
+		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
 		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
 		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		where estado_cita = 'RESERVA'
@@ -39,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- horas disponibles del consultorio dependiendo fecha y turno -->
  	<select id="horasDisponibles" parameterType="map" resultType="String">
- 		SELECT hora from HORAS_DIA where hora 
+ 		SELECT CONVERT(TIME(0), hora) from HORAS_DIA where hora 
 		not in 
 		(select hora_atencion from cita c 
 		 where c.id_consultorio = #{idConsultorio} and c.fecha_atencion = #{fecha}
@@ -52,5 +55,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  where id_consultorio = #{idConsultorio} and h.id_dia = DATEPART(weekday, #{fecha})-1 and h.estado = 1))
  	</select>
  	
+ 	<select id="buscarCita" parameterType="citaFiltro" resultMap="rmCita">
+	 	select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion,
+		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+		where estado_cita = 'RESERVA' 
+		<if test="nombre != null">
+			and h.nom_paciente like CONCAT(#{nombre},'%')
+		</if>
+	    <if test="dni != null and dni != '' ">
+	    	AND h.dni_paciente = #{dni} 
+	    </if>
+	    <if test="codigoCita != null">
+	    	AND codigo_cita = #{codigoCita}
+	    </if>
+ 	</select>
+ 	
+ 	<select id="cargarCita" parameterType="int" resultMap="rmCita">
+ 		select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion, monto_pago, cn.id_especialidad,
+		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio  
+		inner join ESPECIALIDAD e on e.id_esp = cn.id_especialidad
+		where id_cita = #{id}
+ 	</select>
+ 	
+ 	<update id="actualizarCita" parameterType="cita">
+		UPDATE CITA set tipo_reserva = #{tipoReserva}, id_consultorio = #{consultorio.id}, fecha_atencion = #{fechaAtencion},
+		hora_atencion = #{horaAtencion}, monto_pago = #{monto}
+		where id_cita = #{id}
+ 	</update>
+ 	
+ 	<update id="cancelarCita" parameterType="int">
+ 		UPDATE CITA set estado_cita = 'CANCELADA' where id_cita = #{id}
+ 	</update>
+ 	
+ 	<update id="generarConsulta" parameterType="int">
+ 		UPDATE CITA set estado_cita = 'PAGADA' where id_cita = #{id}
+ 	</update>
  	
  </mapper>
