@@ -346,13 +346,13 @@ select * from TURNO
 select CONVERT(TIME(0), hora) from HORAS_DIA where hora 
 not in 
 (select hora_atencion from cita c 
- where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/07'
- and c.estado_cita = 'RESERVA')
+ where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/08'
+ and c.estado_cita in ('RESERVA', 'PAGADA'))
  and hora in
  (select hora from HORAS_DIA inner join TURNO t on
 hora >= t.hora_inicio and hora < t.hora_fin
 where id_turno in (SELECT h.id_turno from HORARIOS h
-where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/07')-1 and h.estado = 1))
+where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/08')-1 and h.estado = 1))
 
 
 
@@ -369,10 +369,21 @@ inner join ESPECIALIDAD e on e.id_esp = cn.id_especialidad
 where estado_cita = 'RESERVA' 
 
 
-select fecha_atencion, count(fecha_atencion), (select count(*) from HORAS_DIA inner join TURNO t on
+select fecha_atencion, count(fecha_atencion),(select count(*) from HORAS_DIA inner join TURNO t on
 hora >= t.hora_inicio and hora < t.hora_fin
 where id_turno in (SELECT h.id_turno from HORARIOS h
-where id_consultorio = 1 and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1))
-from cita where id_consultorio = 1
+where id_consultorio = 2 and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1))
+from cita where id_consultorio = 1 and estado_cita in ('RESERVA', 'PAGADA')
 group by fecha_atencion
 
+
+select fecha_atencion, count(fecha_atencion)
+from cita where id_consultorio = 2 and estado_cita in ('RESERVA', 'PAGADA')
+group by fecha_atencion
+
+
+select fecha_atencion, (select count(*) from HORAS_DIA inner join TURNO t 
+on hora >= t.hora_inicio and hora < t.hora_fin where id_turno in 
+(SELECT h.id_turno from HORARIOS h where id_consultorio = 1 
+and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1)) - count(fecha_atencion) horasDispo 
+from cita where id_consultorio = 1 and estado_cita in ('RESERVA', 'PAGADA') group by fecha_atencion 
