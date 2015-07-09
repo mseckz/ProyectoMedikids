@@ -6,8 +6,17 @@
 
 	<package name="struts-personal" extends="demo" namespace="/personal">
 		
-				<action name="iniciarPersonal">
-					<result type="tiles">mod_per_inicio</result>
-				</action>
+		<action name="iniciarPersonal" class="action.PersonalAction">
+			<result type="tiles">mod_per_inicio</result>
+		</action>
+		<action name="agregarPersonal" class="action.PersonalAction" method="agregarPersonal">   	
+			<result type="tiles">mod_per_inicio</result>
+		</action>
+		<action name="cargarPersonal" class="action.PersonalAction" method="cargarPersonal">   	
+			<result type="tiles">mod_per_inicio</result>
+		</action>
+		<action name="modificarPersonal" class="action.PersonalAction">   	
+			<result type="tiles">mod_personal_inicio</result>
+		</action>
 	</package>
 </struts>

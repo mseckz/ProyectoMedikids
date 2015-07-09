@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="struts-usuarios-roles" extends="demo" namespace="/usuarios-roles">
+
+		<action name="iniciarUsuariosRoles" class="action.UsuarioRolAction">
+			<result type="tiles">mod_usuario_rol_inicio</result>
+		</action>
+
+		<action name="crearUsuarios" class="action.UsuarioRolAction">
+			<result type="tiles">mod_usuario_rol_crear</result>
+		</action>
+
+		<action name="editarUsuarios" class="action.UsuarioRolAction"
+			method="editar">
+			<result type="tiles">mod_usuario_rol_inicio</result>
+			<result name="input" type="tiles">mod_usuario_rol_crear</result>
+		</action>
+
+		<action name="buscarUsuarios" class="action.UsuarioRolAction" method="buscar">
+			<result type="tiles">mod_usuario_rol_inicio</result>
+		</action>
+
+		<action name="desactivarUsuario" class="action.UsuarioRolAction"
+			method="desactivar">
+			<result type="tiles">mod_usuario_rol_inicio</result>
+		</action>
+		
+		<action name="buscarPersonal" class="action.UsuarioRolAction" method="buscarPersonal">
+			<result type="json" >
+				<param name="root">
+				    personalUsuarios
+				</param>						
+			</result>
+		</action>
+		
+		<action name="cargarPersonal" class="action.UsuarioRolAction" method="cargarPersonal">
+			<result type="tiles">mod_usuario_rol_crear</result>
+		</action>
+	</package>
+</struts>

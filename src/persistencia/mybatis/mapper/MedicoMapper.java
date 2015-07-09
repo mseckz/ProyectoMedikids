@@ -7,4 +7,5 @@ import model.Medico;
 public interface MedicoMapper {
 	
 	List<Medico> obtenerMedicos();
+	List<Medico> getMedicos();
 }

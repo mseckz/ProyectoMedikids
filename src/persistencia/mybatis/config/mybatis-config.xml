@@ -29,6 +29,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="model.Cita" alias="cita"/>
 		<typeAlias type="model.CitaFiltro" alias="citaFiltro"/>
 		<typeAlias type="model.TipoReserva" alias="tipoReserva"/>
+		<typeAlias type="model.BuscarUsuarioFiltro" alias="buscaUsuFiltro"/>
+		<typeAlias type="model.BuscarPersonalUsuarioFiltro" alias="buscaPerUsuFiltro"/>
+		<typeAlias type="model.CambioPassword" alias="cambioPassword"/>
+		<typeAlias type="model.Rol" alias="rol"/>
 	</typeAliases>
 	
     <environments default="proyFinalPIT">

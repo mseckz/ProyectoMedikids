@@ -63,8 +63,13 @@
 	<!-- Fin Modulo de Personal -->
 	
 	<!-- Modulo de Roles -->
-	<definition name="mod_rol_inicio" extends="d_plantilla">
-		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/roles/mod_roles_inicio.jsp"/>
+	<definition name="mod_usuario_rol_inicio" extends="d_plantilla">
+		<put-attribute name="contenido"
+			value="/WEB-INF/paginas/body/modulos/usuarios_roles/mod_usuarios_roles_inicio.jsp" />
+	</definition>
+	<definition name="mod_usuario_rol_crear" extends="d_plantilla">
+		<put-attribute name="contenido"
+			value="/WEB-INF/paginas/body/modulos/usuarios_roles/mod_usuarios_roles_crear_usuario.jsp" />
 	</definition>
 	<!-- Fin Modulo de Roles -->
 	

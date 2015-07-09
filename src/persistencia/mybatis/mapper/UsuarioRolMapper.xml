@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="persistencia.mybatis.mapper.UsuarioRolMapper">
+
+	<insert id="registrar" parameterType="usuario" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO USUARIO(
+		cod_personal,nom_usuario,contrasena,id_rol
+		) VALUES(
+		#{personal.id},#{nombreUsuario},#{contrasena},#{rol.idRol}
+		)
+	</insert>
+
+	<resultMap type="usuario" id="rmUsuario">
+		<id column="id_usuario" property="id" jdbcType="INTEGER" />
+		<result column="nom_usuario" property="nombreUsuario" jdbcType="VARCHAR" />
+		<result column="estado" property="estado" jdbcType="BOOLEAN" />
+
+		<association property="personal" javaType="personal">
+			<id column="id_personal" property="id" jdbcType="INTEGER" />
+			<result column="nombres" property="nombres" jdbcType="VARCHAR" />
+			<result column="apellidos" property="apellidos" jdbcType="VARCHAR" />
+			<result column="dni" property="dni" jdbcType="VARCHAR" />
+		</association>
+
+		<association property="rol" javaType="rol">
+			<id column="id_rol" property="idRol" jdbcType="INTEGER" />
+			<result column="descripcion" property="descripcion" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<select id="buscar" resultMap="rmUsuario" parameterType="buscaUsuFiltro">
+		select
+		u.id_usuario,u.nom_usuario,p.nombres,p.apellidos,p.dni,r.descripcion,u.estado
+		from USUARIO u
+		inner join PERSONAL p on p.id_personal=u.cod_personal
+		inner join ROL r on r.id_rol=u.id_rol
+		<where>
+			<if test="rol.getIdRol()!=100">
+				r.id_rol=#{rol.idRol}
+			</if>
+			<if test="nombreUsuario!=null">
+				AND u.nom_usuario like #{nombreUsuario}
+			</if>
+			<if test="nombres!=null">
+				AND p.nombres like
+				#{nombres}
+			</if>
+			<if test="apellidos!=null">
+				AND p.apellidos like
+				#{apellidos}
+			</if>
+			<if test="dni!=null">
+				AND p.dni = #{dni}
+			</if>
+		</where>
+	</select>
+
+	<update id="desactivar" parameterType="usuario">
+		UPDATE USUARIO
+		SET
+		estado=0
+		WHERE id_usuario=#{id}
+	</update>
+	
+	<resultMap type="usuario" id="rmUsuarioNombre">
+		<id column="id_usuario" property="id" jdbcType="INTEGER" />
+		<result column="nom_usuario" property="nombreUsuario" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="buscarUsuarioNombre" resultMap="rmUsuarioNombre" parameterType="string">
+		select
+		id_usuario,nom_usuario
+		from USUARIO 
+		where nom_usuario=#{nombreUsuario}
+	</select>
+	
+	
+
+
+
+</mapper>

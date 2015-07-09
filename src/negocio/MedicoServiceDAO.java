@@ -13,5 +13,9 @@ public class MedicoServiceDAO extends MyBatisGenericDAO implements MedicoService
 		return medicoMapper.obtenerMedicos();
 	}
 	
-	
+	@Override
+	public List<Medico> getMedicos() {
+		MedicoMapper medicoMapper = getSession().getMapper(MedicoMapper.class);
+		return medicoMapper.getMedicos();
+	}
 }

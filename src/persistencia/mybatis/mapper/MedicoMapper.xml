@@ -23,4 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		INNER JOIN PERSONAL p ON p.id_personal = m.id_personal
  		WHERE p.estado = 1
 	</select>
+	
+	<select id="getMedicos" resultMap="rmMedicos">
+		SELECT m.id_personal, p.nombre_completo from MEDICO m
+ 		INNER JOIN ESPECIALIDAD E ON m.id_esp = e.id_esp
+ 		INNER JOIN PERSONAL p ON p.id_personal = m.id_personal
+ 		WHERE p.estado = 1 and p.id_tipo_personal=1
+	</select>
 </mapper>

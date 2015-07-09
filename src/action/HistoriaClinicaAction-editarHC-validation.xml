@@ -1,0 +1,114 @@
+<!DOCTYPE validators PUBLIC
+"-//Apache Struts//XWork Validator 1.0.3//EN"
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+	 <field name="historiaclinica.nombrePaciente">
+		<field-validator  type="requiredstring">
+			<message  key="campo.requerido"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.apellidoPaternoPaciente">
+		<field-validator type="requiredstring">
+			<message key="campo.requerido"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.apellidoMaternoPaciente">
+		<field-validator  type="requiredstring">
+			<message  key="campo.requerido"/>
+		</field-validator>
+	</field>
+	
+	 <field name="historiaclinica.dniPaciente">
+		<field-validator  type="requiredstring">
+			<message  key="campo.requerido"/>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">8</param>
+			<param name="maxLength">8</param>
+			<message key="campo.longitud.maxima.dni"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.edadPaciente">
+		<field-validator  type="required">
+			<message  key="campo.requerido"/>
+		</field-validator>
+		<field-validator type="int">
+				<param name="min">1</param>
+              <param name="max">12</param>
+              <message key="campo.edad.min.max" />
+        </field-validator>
+	</field>
+		
+	<field name="historiaclinica.sexoPaciente">
+		<field-validator  type="required">
+			<message  key="campo.requerido"/>
+		</field-validator>
+	</field>  
+	
+	 <field name="historiaclinica.direccionPaciente">
+		<field-validator  type="requiredstring">
+			<message  key="campo.requerido"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.fechaNacPaciente">
+		<field-validator  type="requiredstring">
+			<message  key="campo.requerido"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.tipoSangre.id">
+		<field-validator type="int">
+              <param name="max">10</param>
+              <message key="campo.requerido" />
+          </field-validator>
+	</field>  
+	
+ 	<field name="historiaclinica.dniPadre">
+		<field-validator type="stringlength">
+			<param name="minLength">8</param>
+			<param name="maxLength">8</param>
+			<message key="campo.longitud.maxima.dni"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.correoPadre">
+		<field-validator type="email">
+      		<message key="campo.correo.valido"/>
+   		</field-validator>
+	</field>
+	
+		<field name="historiaclinica.dniMadre">
+		<field-validator type="stringlength">
+			<param name="minLength">8</param>
+			<param name="maxLength">8</param>
+			<message key="campo.longitud.maxima.dni"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.correoMadre">
+		<field-validator type="email">
+      		<message key="campo.correo.valido"/>
+   		</field-validator>
+	</field>
+	
+		<field name="historiaclinica.dniApoderado">
+		<field-validator type="stringlength">
+			<param name="minLength">8</param>
+			<param name="maxLength">8</param>
+			<message key="campo.longitud.maxima.dni"/>
+		</field-validator>
+	</field>
+	
+	<field name="historiaclinica.correoApoderado">
+		<field-validator type="email">
+      		<message key="campo.correo.valido"/>
+   		</field-validator>
+	</field> 
+	
+</validators>

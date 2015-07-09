@@ -67,5 +67,91 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id_tipo_personal = #{idTipo} and p.estado = 1
  	</select>
  	
+ 	<resultMap type="personal" id="rmDatosBasicos">
+		<id column="id_personal" property="id" jdbcType="INTEGER" />
+		<result column="nombres" property="nombres"
+			jdbcType="VARCHAR" />
+		<result column="apellidos" property="apellidos"
+			jdbcType="VARCHAR" />
+		<result column="dni" property="dni"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- buscar datos basicos del personal id, nombre, apellido y dni -->
+	<select id="buscarPersonalUsuarios" parameterType="buscaPerUsuFiltro"
+		resultMap="rmDatosBasicos">
+		select id_personal,nombres,apellidos,dni from personal
+		<where>
+			<if test="nombres != null">
+				nombres like #{nombres}
+			</if>
+			<if test="apellidos != null">
+				AND apellidos like #{apellidos}
+			</if>
+			<if test="dni != null">
+				AND dni = #{dni}
+			</if>
+		</where>
+	</select>
+	
+	<resultMap type="personal" id="rmGetPersonal">
+		<id column="id_personal" property="id" />
+		<result column="nombre_completo" property="nombreCompleto" />
+	</resultMap>
+	
+	<select id="getPersonal" resultMap="rmGetPersonal" parameterType="int">
+ 		SELECT id_personal,nombre_completo
+		FROM PERSONAL
+		WHERE id_personal = #{id}
+ 	</select>
+
+<!-- JO -->
+	<select id="obtenerPersonalId" parameterType="int" resultMap="rmPersonal">
+	SELECT p.id_personal,dni,nombre_completo,telefono,celular,
+		correo,id_tipo_personal,descripcion,url_cv,url_foto,
+		cmp, id_esp,
+		id_medico_asig, p.estado
+		FROM PERSONAL p INNER JOIN TIPO_PERSONAL tp on p.id_tipo_personal =
+		tp.id_tipo
+		LEFT JOIN MEDICO m on m.id_personal = p.id_personal
+		LEFT JOIN ASISTENTE a on a.id_personal = p.id_personal
+		WHERE p.id_personal=#{id} and p.estado = 1
+
+	</select>
+	
+	<resultMap type="tipoPersonal" id="rmTipoPersonal">
+		<id column="id_tipo" property="id"></id>
+		<result column="descripcion" property="descripcion"/>
+	</resultMap>
+	
+ 	<select id="getTipoPersonal" parameterType="int" resultMap="rmTipoPersonal">
+ 		select id_tipo, descripcion from TIPO_PERSONAL 
+ 	</select>
  	
+	<insert id="registrar" parameterType="personal" keyProperty="id" useGeneratedKeys="true">
+ 		Insert into PERSONAL(dni,nombres,apellidos,nombre_completo,telefono,celular,correo,id_tipo_personal,url_cv,url_foto) 
+		values(#{dni},#{nombres},#{apellidos},#{nombreCompleto},#{telefono},#{celular},#{correo},#{tipoPersonal.id},#{urlCV},#{urlFoto})
+ 	</insert>
+ 	
+ 	<insert id="registrarMedico" parameterType="medico" >
+ 		Insert into MEDICO (id_personal,cmp,id_esp)
+ 			values (#{id},#{cmp},#{especialidad.id})
+ 	</insert>
+ 	
+ 	<insert id="registrarAsistente" parameterType="asistente" >
+		Insert into ASISTENTE (id_personal,id_medico_asig)
+				values (#{id},#{medicoAsignado.id})
+ 	</insert>
+ 	
+ 	<update id="editar" parameterType="personal" >
+	 	Update PERSONAL 
+		set dni=#{dni}, nombres=#{nombres}, apellidos=#{apellidos},nombre_completo=#{nombre_completo}, telefono=#{telefono} ,celular=#{celular}, correo=#{correo},id_tipo_personal=#{id_tipo_personal}, url_cv=#{url_cv}, url_foto=#{url_foto},estado=#{estado}
+		where id_personal=#{id_personal}
+ 	</update>
+ 	
+ 	<update id="deshabilitarPersonal" parameterType="personal" >
+	 	Update PERSONAL 
+		set estado=#{estado}
+		where id_personal=#{id_personal}
+ 	</update>
  </mapper>
