@@ -129,6 +129,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 			Personal p = new Personal();
 			p.setId(1);
 			cita.setPersonalRegistro(p);
+			
 			servicio.registrarCita(cita);
 			cita = null;
 			addActionMessage("Cita registrada");
@@ -160,6 +161,8 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	
 	public String cargarPaciente(){
 		historia = historiaService.obtener(historia.getId());
+		cita = new Cita();
+		cita.setCodigo(this.obtenerCodigoCita());
 		return SUCCESS;
 	}
 	
@@ -222,10 +225,24 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 				
 		for(Map<String, Object> fila : horasDisponiblesxFechaxConsultorio){
 			if((int)fila.get("horasDispo") == 0){
-				fechasLlenas.add(fila.get("fecha_atencion").toString());
+				String fecha = fila.get("fecha_atencion").toString().substring(0,10);
+				fechasLlenas.add(fecha);
 			}
 		}
 		return SUCCESS;
+	}
+	
+	public String obtenerCodigoCita(){
+		String codigo = servicio.obtenerUltimoCodigo();
+		if(codigo != null){
+			int numero = Integer.parseInt(codigo.substring(3)) + 1;
+			codigo = String.format("%04d",numero);
+		}
+		else{
+			codigo = "0001";
+		}
+		
+		return codigo;
 	}
 	
 	@Override

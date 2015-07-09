@@ -187,24 +187,19 @@ function obtenerFechasCitaLlenas(){
            console.log(error);
         }
     });
-	
-	$(function() {
-		 $( "#datepicker" ).datepicker({
-			 beforeShowDay: DisableSpecificDates
-		 });
-	 });
-	
+
 }
 
 function DisableSpecificDates(date) {
-	 
+	 console.log("asd");
 	 var m = date.getMonth();
 	 var d = date.getDate();
 	 var y = date.getFullYear();
 	 
 	 // First convert the date in to the mm-dd-yyyy format 
 	 // Take note that we will increment the month count by 1 
-	 var currentdate =  d + '-' + (m + 1) + '-' + y ;
+	 var currentdate =  y + '-' + (m+1) + '-' + d;
+	 console.log(currentdate);
 	 
 	  // We will now check if the date belongs to disableddates array 
 	 for (var i = 0; i < fechasLlenas.length; i++) {

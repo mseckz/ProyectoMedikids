@@ -68,7 +68,7 @@
 			<s:actionmessage/>
 			<s:hidden name="cita.id" />
 			<div class="form-group col-md-6">
-				<s:textfield class="" key="citas.registrar.codigo" name="cita.codigo" cssClass="form-control" />
+				<s:textfield class="" key="citas.registrar.codigo" name="cita.codigo" cssClass="form-control" readonly="true" />
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="@model.TipoReserva@values()" name="cita.tipoReserva" key="citas.registrar.tiporeserva" cssClass="form-control"/>
@@ -84,7 +84,7 @@
 			</div>
 			<div class="form-group col-md-6">
 				<sj:datepicker id="fechaAtencion" parentTheme="bootstrap" key="citas.registrar.fechaatencion" name="cita.fechaAtencion"
-	                              cssClass="form-control" showOn="focus" inputAppendIcon="calendar"
+	                              cssClass="form-control" showOn="focus" inputAppendIcon="calendar" onBeforeShowDayTopics="beforeShowDay" 
 	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" minDate="0" />
 			</div>
 			<div class="form-group col-md-6">
@@ -109,20 +109,52 @@
 		
 	<script src="<s:url value="/externo/js/citas.js" />"></script>
 	<script>
-	window.onload = buscarPaciente;
-	
-	var changeTimer = false;
+	window.onload = function(){
+		buscarPaciente();
+		
+		var changeTimer = false;
+		
+		$.subscribe('beforeShowDay', function(event, data) {
+			 var date = event.originalEvent.date;
 
-	$("#fechaAtencion").on("keyup" ,function(){
-	        if(changeTimer !== false) clearTimeout(changeTimer);
-	        changeTimer = setTimeout(function(){
-	        	loadHorasDisponibles();
-	            changeTimer = false;
-	        },300);
-	});
+			 var m = date.getMonth();
+			 var d = date.getDate();
+			 var y = date.getFullYear();
+			 
+			 var currentdate =  y + '-' + ("0" + (m+1)).slice(-2) + '-' +  ("0" + d).slice(-2);
+			 console.log(currentdate);
+			 if ($.inArray(currentdate, fechasLlenas) != -1) {
+			 	event.originalEvent.returnValue = [false,"","unAvailable"];
+                
+            } else{
+            	event.originalEvent.returnValue = [true, "","Available"];
+            }	 
+		  });
+
+/* 		$("#fechaAtencion" ).datepicker({
+			 beforeShowDay: DisableSpecificDates,
+			 onSelect: function(dateText){
+				 jQuery(this).change();
+		 	 }
+		 	beforeShowDay : function(date){
+		 		console.log("asd");
+		 	 } 
+		}); */
+
+		$("#fechaAtencion").on("keyup" ,function(){
+		        if(changeTimer !== false) clearTimeout(changeTimer);
+		        changeTimer = setTimeout(function(){
+		        	loadHorasDisponibles();
+		            changeTimer = false;
+		        },300);
+		});
+		
+		$.subscribe('changeTopic', function(event,data) {
+			
+			loadHorasDisponibles();
+		});
+	}	
 	
-	$.subscribe('changeTopic', function(event,data) {
-		loadHorasDisponibles();
-	});
+	
 	</script>
 </div>

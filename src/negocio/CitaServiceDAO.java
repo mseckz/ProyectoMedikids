@@ -64,6 +64,12 @@ public class CitaServiceDAO extends MyBatisGenericDAO implements CitaService{
 		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
 		return citaMapper.numeroHorasDisponiblesXFecha(id);
 	}
+
+	@Override
+	public String obtenerUltimoCodigo() {
+		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
+		return citaMapper.obtenerUltimoCodigo();
+	}
 	
 	
 }

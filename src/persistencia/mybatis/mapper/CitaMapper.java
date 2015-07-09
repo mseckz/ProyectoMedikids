@@ -15,6 +15,7 @@ public interface CitaMapper {
 	void actualizarCita(Cita cita);
 	void cancelarCita(Integer id);
 	void generarConsulta(Integer id);
+	String obtenerUltimoCodigo();
 	
 	/**
 	 * Parametros idConsultorio, fecha
