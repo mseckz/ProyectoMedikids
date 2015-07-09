@@ -16,4 +16,6 @@ public interface CitaService {
 	void actualizarCita(Cita cita);
 	void cancelarCita(Integer id);
 	void generarConsulta(Integer id);
+	
+	List<Map<String, Object>> numeroHorasDisponiblesXFecha(Integer id); 
 }

@@ -346,13 +346,13 @@ select * from TURNO
 select CONVERT(TIME(0), hora) from HORAS_DIA where hora 
 not in 
 (select hora_atencion from cita c 
- where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/06'
+ where c.id_consultorio = 1 and c.fecha_atencion = '2015/07/07'
  and c.estado_cita = 'RESERVA')
  and hora in
  (select hora from HORAS_DIA inner join TURNO t on
 hora >= t.hora_inicio and hora < t.hora_fin
 where id_turno in (SELECT h.id_turno from HORARIOS h
-where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/06')-1 and h.estado = 1))
+where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/07')-1 and h.estado = 1))
 
 
 
@@ -369,5 +369,10 @@ inner join ESPECIALIDAD e on e.id_esp = cn.id_especialidad
 where estado_cita = 'RESERVA' 
 
 
-UPDATE CITA set tipo_reserva = '',id_consultorio = 1, fecha_atencion = '', hora_atencion = '', monto_pago = ''
-where id_cita = 1
+select fecha_atencion, count(fecha_atencion), (select count(*) from HORAS_DIA inner join TURNO t on
+hora >= t.hora_inicio and hora < t.hora_fin
+where id_turno in (SELECT h.id_turno from HORARIOS h
+where id_consultorio = 1 and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1))
+from cita where id_consultorio = 1
+group by fecha_atencion
+

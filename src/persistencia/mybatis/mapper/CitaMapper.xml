@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		not in 
 		(select hora_atencion from cita c 
 		 where c.id_consultorio = #{idConsultorio} and c.fecha_atencion = #{fecha}
-		 and c.estado_cita = 'RESERVA')
+		 and c.estado_cita in ('RESERVA', 'PAGADA'))
 		and hora in
 		(select hora from HORAS_DIA inner join TURNO t on
 		 <![CDATA[ hora >= t.hora_inicio and hora < t.hora_fin ]]>
@@ -94,5 +94,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="generarConsulta" parameterType="int">
  		UPDATE CITA set estado_cita = 'PAGADA' where id_cita = #{id}
  	</update>
+ 	
+ 	<select id="numeroHorasDisponiblesXFecha" parameterType="int" resultType="hashmap">
+ 		select fecha_atencion, (select count(*) from HORAS_DIA inner join TURNO t on
+		<![CDATA[ hora >= t.hora_inicio and hora < t.hora_fin ]]>
+		where id_turno in (SELECT h.id_turno from HORARIOS h
+		where id_consultorio = #{id} and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1)) - count(fecha_atencion) horasDispo
+		from cita where id_consultorio = 1 and estado_cita in ('RESERVA', 'PAGADA')
+		group by fecha_atencion
+ 	</select>
  	
  </mapper>

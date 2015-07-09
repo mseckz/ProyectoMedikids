@@ -22,5 +22,6 @@ public interface CitaMapper {
 	 */
 	List<String> horasDisponibles(Map<String, Object> datos);
 	
+	List<Map<String, Object>> numeroHorasDisponiblesXFecha(Integer id); 
 	
 }

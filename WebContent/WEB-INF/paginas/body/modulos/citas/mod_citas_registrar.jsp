@@ -2,7 +2,7 @@
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 
 <head>
-<sj:head/>
+<sj:head />
 </head>
 <div id="page-wrapper">
 	<div class="container-fluid">
@@ -80,12 +80,12 @@
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="consultorios" id="consultorios" name="cita.consultorio.id" key="citas.registrar.consultorio" cssClass="form-control"
-				headerValue="Elija consultorio" headerKey="-1"  listKey="id" listValue="codigo"/>
+				headerValue="Elija consultorio" headerKey="-1"  listKey="id" listValue="codigo" onchange="obtenerFechasCitaLlenas()"/>
 			</div>
 			<div class="form-group col-md-6">
 				<sj:datepicker id="fechaAtencion" parentTheme="bootstrap" key="citas.registrar.fechaatencion" name="cita.fechaAtencion"
 	                              cssClass="form-control" showOn="focus" inputAppendIcon="calendar"
-	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" />
+	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" minDate="0" />
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="horas" id="horas" name="cita.horaAtencion" key="citas.registrar.horaatencion" cssClass="form-control"

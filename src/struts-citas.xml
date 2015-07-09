@@ -38,6 +38,14 @@
 			</result>
 		</action>
 		
+		<action name="getFechasCitasLlenas" class="action.CitaAction" method="deshabilitarFechasCitasLlenas">
+			<result type="json">
+				<param name="root">
+					fechasLlenas
+				</param>
+			</result>
+		</action>
+		
 		<action name="cargarPaciente" class="action.CitaAction" method="cargarPaciente">
 			<result type="tiles">mod_citas_registrar</result>
 		</action>
@@ -69,5 +77,6 @@
 				</param>
 			</result>
 		</action>
+		
 	</package>
 </struts>

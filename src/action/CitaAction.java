@@ -44,6 +44,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	private BuscarHCFiltro hcFiltro;
 	private CitaFiltro citaFiltro;
 	private Map<String, Object> datosModal = new HashMap<String, Object>();
+	private List<String> fechasLlenas = new ArrayList<String>();
 	
 	private CitaService servicio = new CitaServiceDAO();
 	private EspecialidadService especialidadService = new EspecialidadServiceDAO();
@@ -115,6 +116,12 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	}
 	public void setDatosModal(Map<String, Object> datosModal) {
 		this.datosModal = datosModal;
+	}
+	public List<String> getFechasLlenas() {
+		return fechasLlenas;
+	}
+	public void setFechasLlenas(List<String> fechasLlenas) {
+		this.fechasLlenas = fechasLlenas;
 	}
 	
 	public String registrarCita(){
@@ -206,6 +213,18 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 		servicio.generarConsulta(cita.getId());
 		addActionMessage("Cita ha sido generada");
 		citas = servicio.obtenerCitas();
+		return SUCCESS;
+	}
+	
+	public String deshabilitarFechasCitasLlenas(){
+		List<Map<String, Object>> horasDisponiblesxFechaxConsultorio = new ArrayList<Map<String,Object>>();
+		horasDisponiblesxFechaxConsultorio = servicio.numeroHorasDisponiblesXFecha(cita.getConsultorio().getId());
+				
+		for(Map<String, Object> fila : horasDisponiblesxFechaxConsultorio){
+			if((int)fila.get("horasDispo") == 0){
+				fechasLlenas.add(fila.get("fecha_atencion").toString());
+			}
+		}
 		return SUCCESS;
 	}
 	

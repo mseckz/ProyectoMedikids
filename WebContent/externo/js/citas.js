@@ -161,4 +161,57 @@ function cargarDatosGenerarConsulta(){
 	        }
 	    }); 
 	});
+};
+
+var fechasLlenas = [];
+
+function obtenerFechasCitaLlenas(){
+
+	var consultorios = document.getElementById("consultorios");
+	var idConsultorio = consultorios.options[consultorios.selectedIndex].value;
+	
+	if(idConsultorio == -1){
+		return;
+	}
+	
+	$.ajax({
+        type: "POST",
+        url: "getFechasCitasLlenas",
+        data: "cita.consultorio.id="+idConsultorio,
+        dataType: "json",
+        success: function(data) {
+        	console.log(data);
+        	fechasLlenas = data;
+        },
+        error: function(error) {
+           console.log(error);
+        }
+    });
+	
+	$(function() {
+		 $( "#datepicker" ).datepicker({
+			 beforeShowDay: DisableSpecificDates
+		 });
+	 });
+	
+}
+
+function DisableSpecificDates(date) {
+	 
+	 var m = date.getMonth();
+	 var d = date.getDate();
+	 var y = date.getFullYear();
+	 
+	 // First convert the date in to the mm-dd-yyyy format 
+	 // Take note that we will increment the month count by 1 
+	 var currentdate =  d + '-' + (m + 1) + '-' + y ;
+	 
+	  // We will now check if the date belongs to disableddates array 
+	 for (var i = 0; i < fechasLlenas.length; i++) {
+	 
+		 // Now check if the current date is in disabled dates array. 
+		 if ($.inArray(currentdate, fechasLlenas) != -1 ) {
+			 return [false];
+		 }
+	 }	 
 }
