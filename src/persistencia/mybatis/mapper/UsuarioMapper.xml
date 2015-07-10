@@ -7,7 +7,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="persistencia.mybatis.mapper.UsuarioMapper">
 
-  	<select id="validar" parameterType="usuario" resultType="usuario">
-        SELECT id_personal,nom_usuario,contrasena,id_rol,estado FROM USUARIO WHERE nom_usuario=#{nombreUsuario} AND contrasena=#{contrasena}
-    </select>
- </mapper>
+	<resultMap type="usuario" id="rmUsuario">
+		<id column="id_usuario" property="id" jdbcType="INTEGER" />
+		<result column="nom_usuario" property="nombreUsuario" jdbcType="VARCHAR" />
+		<result column="contrasena" property="contrasena" jdbcType="VARCHAR" />
+		<result column="estado" property="estado" jdbcType="BOOLEAN" />
+		
+		<association property="personal" javaType="personal">
+			<id column="id_personal" property="id" jdbcType="INTEGER" />
+			<result column="nombre_completo" property="nombreCompleto" />
+			<result column="url_foto" property="urlFoto" />
+			<result column="nombres" property="nombres" jdbcType="VARCHAR" />
+			<result column="apellidos" property="apellidos" jdbcType="VARCHAR" />
+			<result column="telefono" property="telefono" />
+			<result column="celular" property="celular" />
+			<result column="correo" property="correo" />
+			<result column="dni" property="dni" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<select id="validar" parameterType="usuario" resultMap="rmUsuario">
+		SELECT
+		u.id_usuario,u.nom_usuario,u.contrasena,p.nombre_completo,p.url_foto,
+		p.nombres,p.apellidos,p.dni,
+		p.telefono,p.celular,p.correo,
+		u.estado
+		FROM
+		USUARIO u
+		inner join PERSONAL p on p.id_personal=u.cod_personal
+		WHERE u.nom_usuario=#{nombreUsuario}
+		AND
+		u.contrasena=#{contrasena}
+		and u.estado=1
+	</select>
+	
+	<update id="cambiarPassword" parameterType="cambioPassword">
+		UPDATE USUARIO
+			SET contrasena=#{contrasena}
+		WHERE ID_USUARIO=#{id}
+	</update>
+</mapper>

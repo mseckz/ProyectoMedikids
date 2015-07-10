@@ -4,14 +4,16 @@
 				<li class="side-user hidden-xs">
 					<div class="imagen-perfil oculto-xs">
 						<img src="<s:url value="/images/perfil_fotos/profile-pic.jpg" namespace="/"/>" class="img-circle" alt="" style="margin-right: 20px" />
-                        <div>
-                        	<p class="name-mod" style="text-align: center">John Smith</p>
+                         <div>
+                        	<p class="name-mod" style="text-align: center">
+                        	<s:property value="#session.nombre_completo"/>
+                        	</p>
                         	<p class="text-muted text-xs block" style="text-align: center">Art Director</p>
                         </div>
 					</div>
 				</li>	
                 <li class="paneles">
-                    <a	href="<s:url action="iniciarRoles" namespace="/roles"/>">
+                    <a	href="<s:url action="iniciarUsuariosRoles" namespace="/usuarios-roles"/>">
 							<s:text name="titulo.menu.rol" />
 					</a>
                 </li>

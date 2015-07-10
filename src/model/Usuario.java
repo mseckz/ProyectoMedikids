@@ -4,18 +4,28 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 466646131631896138L;
 	private int id;
+	private Personal personal;
 	private String nombreUsuario;
 	private String contrasena;
 	private Rol rol;
+	private boolean estado;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Personal getPersonal() {
+		return personal;
+	}
+	public void setPersonal(Personal personal) {
+		this.personal = personal;
 	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -35,9 +45,14 @@ public class Usuario implements Serializable{
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	@Override
-	public String toString() {
-		return "Usuario [cuenta=" + nombreUsuario + ", contrasena=" + contrasena + "]";
+
+	public boolean isEstado() {
+		return estado;
 	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+	
+
 
 }

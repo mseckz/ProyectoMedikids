@@ -125,11 +125,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	}
 	
 	public String registrarCita(){
-		if(cita.getId() == null){
-			Personal p = new Personal();
-			p.setId(1);
-			cita.setPersonalRegistro(p);
-			
+		if(cita.getId() == null){	
 			servicio.registrarCita(cita);
 			cita = null;
 			addActionMessage("Cita registrada");

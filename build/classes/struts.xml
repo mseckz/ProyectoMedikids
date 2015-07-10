@@ -14,6 +14,7 @@
 	<include file="struts-consultorios.xml" />
 	<include file="struts-consultas.xml" />
 	<include file="struts-citas.xml" />
+	<include file="struts-usuarios-roles.xml" />
 
 	<package name="demo" extends="struts-default, json-default">
 

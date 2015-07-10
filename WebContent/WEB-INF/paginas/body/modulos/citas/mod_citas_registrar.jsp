@@ -66,6 +66,7 @@
 				<s:text name="citas.registrar.titulo" />
 			</h3>
 			<s:actionmessage/>
+			<s:hidden name="cita.personalRegistro.id" value="%{#session.id_usuario}" />
 			<s:hidden name="cita.id" />
 			<div class="form-group col-md-6">
 				<s:textfield class="" key="citas.registrar.codigo" name="cita.codigo" cssClass="form-control" readonly="true" />
