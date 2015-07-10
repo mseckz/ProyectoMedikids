@@ -210,12 +210,13 @@ go
 
 
 CREATE TABLE USUARIO(
-	id_personal int primary key,
+	id_usuario int identity(1,1) PRIMARY KEY,
+	cod_personal int not null,
 	nom_usuario varchar(20),
 	contrasena varchar(20),
 	id_rol int,
 	estado bit default 1,
-	CONSTRAINT fk_personal_usuario FOREIGN KEY (id_personal) REFERENCES PERSONAL (id_personal),
+	CONSTRAINT fk_personal_usuario FOREIGN KEY (cod_personal) REFERENCES PERSONAL (id_personal),
 	CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES ROL (id_rol)
 )
 GO
@@ -253,7 +254,7 @@ INSERT INTO MEDICO (id_personal,cmp,id_esp) VALUES (4, '23145',2);
 
 INSERT INTO ASISTENTE(id_personal,id_medico_asig) VALUES (2, 1);
 
-INSERT INTO USUARIO (id_personal,nom_usuario,contrasena,id_rol) values (1, 'prueba','12345',1)
+INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 1, 'prueba', 12345, 1, 1)
 
 
 select * from personal
@@ -387,3 +388,4 @@ on hora >= t.hora_inicio and hora < t.hora_fin where id_turno in
 (SELECT h.id_turno from HORARIOS h where id_consultorio = 1 
 and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1)) - count(fecha_atencion) horasDispo 
 from cita where id_consultorio = 1 and estado_cita in ('RESERVA', 'PAGADA') group by fecha_atencion 
+
