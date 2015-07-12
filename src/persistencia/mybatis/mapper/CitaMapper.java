@@ -27,7 +27,7 @@ public interface CitaMapper {
 	
 	/**
 	 * Devuelve citas en cola de consultorio y turno
-	 * @param datosCita Mapa con parametros "idConsultorio" y "fechaActual"
+	 * @param datosCita Mapa con parametros "idConsultorio" y "idMedico"
 	 * @return
 	 */
 	List<Cita> colaCitas(Map<String, Object> datosCita);

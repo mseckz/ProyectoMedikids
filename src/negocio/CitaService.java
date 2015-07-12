@@ -19,4 +19,5 @@ public interface CitaService {
 	String obtenerUltimoCodigo();
 	
 	List<Map<String, Object>> numeroHorasDisponiblesXFecha(Integer id); 
+	List<Cita> colaCitas(Map<String, Object> datosCita);
 }

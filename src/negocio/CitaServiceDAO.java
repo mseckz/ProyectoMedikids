@@ -70,6 +70,12 @@ public class CitaServiceDAO extends MyBatisGenericDAO implements CitaService{
 		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
 		return citaMapper.obtenerUltimoCodigo();
 	}
+
+	@Override
+	public List<Cita> colaCitas(Map<String, Object> datosCita) {
+		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
+		return citaMapper.colaCitas(datosCita);
+	}
 	
 	
 }

@@ -13,5 +13,5 @@ public interface ConsultaMapper {
 	
 	HistoriaClinica verHistoria(Integer idHistoriaClinica);
 	
-	
+	Consulta detalleConsulta(Integer idConsulta);
 }

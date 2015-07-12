@@ -109,11 +109,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="colaCitas" resultMap="rmCita">
- 		SELECT id_cita,codigo_cita, hc.nom_paciente,hc.apellido_paterno_paciente,hc.apellido_materno_paciente,fecha_atencion,hora_atencion,hc.id_hc
+ 		SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
 		FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
 		inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
-		where h.id_medico = #{idMedico} and fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+		where h.id_medico = #{idMedico} and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
 		and c.id_consultorio = #{idConsultorio}
 		and c.estado_cita = 'PAGADA' 
  	</select>

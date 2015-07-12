@@ -37,4 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id_consulta,fecha_registro from CONSULTA where estado = 1 and id_hc = #{idHistoria}
  	</select>
  	
+ 	<insert id="registrarConsulta" parameterType="consulta">
+ 		INSERT INTO CONSULTA (id_hc,id_medico,id_cita,motivo_cons,sintomas,diagnostico,receta,fecha_registro) 
+ 		VALUES (#{historia},#{personalMedico.id},#{cita.id},#{motivo},#{sintomas}.#{diagnostico},#{receta},#{fechaRegistro})
+ 	</insert>
+ 	
+ 	<select id="detalleConsulta" parameterType="int" resultMap="rmConsulta">
+ 		SELECT id_consulta,id_medico,p.nombre_completo,sintomas,diagnostico,receta from CONSULTA c 
+ 		inner join PERSONAL p on c.id_medico = p.id_personal
+ 		WHERE estado = 1
+ 	</select>
  </mapper>

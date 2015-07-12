@@ -402,8 +402,8 @@ SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apell
 FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
 inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
-where h.id_medico = 1 and c.fecha_atencion = '2015/07/14' -- DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
-and c.id_consultorio = 2
+where h.id_medico = 1 and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+and c.id_consultorio = 1
 and c.estado_cita = 'PAGADA'
  
 
@@ -416,3 +416,9 @@ and id_medico = 1 and
 
 Select DISTINCT h.id_consultorio, cod_consultorio from CONSULTORIO c inner join HORARIOS h on c.id_consultorio = h.id_consultorio
 where h.id_medico = 1
+
+SELECT id_consulta,id_medico, p.nombre_completo,sintomas,diagnostico,receta from CONSULTA c 
+ 		inner join PERSONAL p on c.id_medico = p.id_personal
+		inner join MEDICO  m on m.id_personal = p.id_personal
+		inner join ESPECIALIDAD 
+ 		WHERE estado = 1
