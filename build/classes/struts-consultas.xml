@@ -6,9 +6,9 @@
 
 	<package name="struts-consultas" extends="demo" namespace="/consultas">
 		
-				<action name="iniciarConsultas">
-					<result type="tiles">mod_con_inicio</result>
-				</action>
-			
+		<action name="iniciarConsultas" class="action.ConsultaAction">
+			<result type="tiles">mod_con_inicio</result>
+		</action>
+		
 	</package>
 </struts>

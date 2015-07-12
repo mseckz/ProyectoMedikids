@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="model.BuscarPersonalUsuarioFiltro" alias="buscaPerUsuFiltro"/>
 		<typeAlias type="model.CambioPassword" alias="cambioPassword"/>
 		<typeAlias type="model.Rol" alias="rol"/>
+		<typeAlias type="model.Consulta" alias="consulta"/>
 	</typeAliases>
 	
     <environments default="proyFinalPIT">

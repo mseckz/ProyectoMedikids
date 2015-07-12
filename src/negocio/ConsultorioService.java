@@ -14,6 +14,7 @@ public interface ConsultorioService {
 	public void actualizar(Consultorio consultorio);
 	public List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
 	List<Consultorio> obtenerConsultoriosxEsp(Integer idesp);
+	List<Consultorio> obtenerConsultoriosMedico(Integer idPersonal);
 	
 	public void registrarHorario(List<Horario> listaHorarios);
 	public List<Horario> obtenerHorarios(Integer idConsultorio);

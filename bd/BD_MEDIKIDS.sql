@@ -201,7 +201,7 @@ CREATE TABLE CONSULTA(
 	diagnostico varchar(200),
 	receta varchar(150),
 	fecha_registro datetime,
-	estado bit,  -- 0:  1: Atendida
+	estado bit default 1,  -- 0:  1: Atendida
 	CONSTRAINT fk_hc FOREIGN KEY (id_hc) REFERENCES HISTORIA_CLINICA (id_hc),
 	CONSTRAINT fk_medico FOREIGN KEY (id_medico) REFERENCES MEDICO (id_personal),
 	CONSTRAINT fk_cita_cons FOREIGN KEY (id_cita) REFERENCES CITA (id_cita)
@@ -389,3 +389,26 @@ on hora >= t.hora_inicio and hora < t.hora_fin where id_turno in
 and h.id_dia = DATEPART(weekday, fecha_atencion)-1 and h.estado = 1)) - count(fecha_atencion) horasDispo 
 from cita where id_consultorio = 1 and estado_cita in ('RESERVA', 'PAGADA') group by fecha_atencion 
 
+
+-- VAlidad que no se repita horario en otro consultorio
+Select * from HORARIOS where id_medico = 1 and id_dia = 1 and id_turno = 1
+
+
+-- ----------------------------------CONSULTAS
+SELECT * FROM CITA
+
+
+SELECT DISTINCT id_cita,codigo_cita, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
+FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
+inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
+where h.id_medico = 1 and c.fecha_atencion = '2015/07/13' -- DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+and c.id_consultorio = '0001'
+and c.estado_cita = 'PAGADA'
+ 
+
+-- consultorio actual medico
+SELECT * from HORARIOS h
+inner join TURNO t on h.id_turno = t.id_turno
+where DATEPART(weekday, fecha_atencion)-1
+where id_consultorio = 1

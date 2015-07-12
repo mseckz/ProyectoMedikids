@@ -79,6 +79,7 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 			session.put("url_cv",temp_url_cv);
 			session.put("nombre_usuario",temp_nombre_user);
 			session.put("id_usuario",temp_id_usuario);
+			session.put("id_personal", usu.getPersonal().getId());
 			vista=SUCCESS;
 		}if (usu!=null &&usu.isEstado()==false) {
 			addActionError(getText(Constantes.MENSAJE_LOGIN_VALIDACION_INACTIVO));

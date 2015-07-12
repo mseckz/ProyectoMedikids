@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.id_usuario,u.nom_usuario,u.contrasena,p.nombre_completo,p.url_foto,
 		p.nombres,p.apellidos,p.dni,
 		p.telefono,p.celular,p.correo,
-		u.estado
+		u.estado, p.id_personal
 		FROM
 		USUARIO u
 		inner join PERSONAL p on p.id_personal=u.cod_personal

@@ -163,6 +163,7 @@ public class ConsultorioAction extends ActionSupport implements Preparable{
 				addActionMessage("Horario ya esta agregado");
 				return SUCCESS;
 			}
+			// TODO Validad que horario no se repita en otro consultorio
 		}
 
 		horarios.add(horario);

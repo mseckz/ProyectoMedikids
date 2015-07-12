@@ -25,4 +25,10 @@ public interface CitaMapper {
 	
 	List<Map<String, Object>> numeroHorasDisponiblesXFecha(Integer id); 
 	
+	/**
+	 * Devuelve citas en cola de consultorio y turno
+	 * @param datosCita Mapa con parametros "idConsultorio" y "fechaActual"
+	 * @return
+	 */
+	List<Cita> colaCitas(Map<String, Object> datosCita);
 }

@@ -6,8 +6,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <mapper namespace="persistencia.mybatis.mapper.ConsultaMapper">
  	
- 	<!-- <resultMap type="consulta" id="obtenerConsultas">
- 		<id/>
+ 	<resultMap type="consulta" id="rmConsulta">
+ 		<id column="id_consulta" property="id"/>
+ 		<result column="motivo_cons" property="motivo"/>
+ 		<result column="sintomas" property="sintomas"/>
+ 		<result column="diagnostico" property="diagnostico"/>
+ 		<result column="receta" property="receta"/>
+ 		<result column="fecha_registro" property="fechaRegistro"/>
+ 		<result column="estado" property="estado"/>
+ 		<association property="historia" javaType="historiaclinica">
+ 			<id column="id_hc" property="id"/>
+ 		</association>
+ 		<association property="personalMedico" javaType="medico">
+ 			<id column="id_personal" property="id"/>
+ 			<result column="nombre_completo" property="nombre_completo"/>
+ 		</association>
  	</resultMap>
-  -->
+ 	
+ 	<resultMap type="consulta" id="rmConsultas">
+ 		<id column="id_consulta" property="id"/>
+ 		<result column="fecha_registro" property="fechaRegistro"/>
+ 		<association property="personalMedico" javaType="personal">
+ 			<id column="id_personal" property="id"/>
+ 			<result column="nombre_completo" property="nombre_completo"/>
+
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<select id="obtenerConsultas" parameterType="int" resultMap="rmConsultas">
+		SELECT id_consulta,fecha_registro from CONSULTA where estado = 1 and id_hc = #{idHistoria}
+ 	</select>
+ 	
  </mapper>

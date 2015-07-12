@@ -70,5 +70,11 @@ public class ConsultorioServiceDAO extends MyBatisGenericDAO implements Consulto
 		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
 		return consultorioMapper.obtenerConsultoriosxEsp(idesp);
 	}
+
+	@Override
+	public List<Consultorio> obtenerConsultoriosMedico(Integer idPersonal) {
+		ConsultorioMapper consultorioMapper = getSession().getMapper(ConsultorioMapper.class);
+		return consultorioMapper.obtenerConsultoriosMedico(idPersonal);
+	}
 	
 }

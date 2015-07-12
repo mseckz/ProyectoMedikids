@@ -106,4 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM CONSULTORIO WHERE id_especialidad = #{idesp}
  	</select>
  
+ 	<select id="obtenerConsultoriosMedico" parameterType="int" resultMap="rmConsultoriosCombo">
+ 		Select DISTINCT h.id_consultorio, cod_consultorio from CONSULTORIO c 
+ 		inner join HORARIOS h on c.id_consultorio = h.id_consultorio
+		where h.id_medico = #{idPersonal}
+ 	</select>
  </mapper>

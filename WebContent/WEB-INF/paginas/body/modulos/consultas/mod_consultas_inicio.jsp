@@ -9,7 +9,7 @@
 	<div class="col-lg-12" id="divRegistrar">
 		<h2> Consultas </h2><hr>
 			<s:form theme="bootstrap" action="agregarPersonal" namespace="/personal" cssClass="form-horizontal" method="post" enctype="multipart/form-data">
-				<div class="row">
+				<%-- <div class="row">
 					<div class="col-md-5">
 						<s:textfield name="personal.dni" key="Dni" cssClass="form-control"  placeholder="47765562"></s:textfield>
 						<s:textfield name="personal.nombres" key="Nombres" cssClass="form-control"  placeholder="Nombres"></s:textfield>
@@ -19,7 +19,8 @@
 					<div class="col-md-4">
 						<s:submit value="Buscar Historia" cssClass="btn btn-default"></s:submit>
 					</div>
-				</div>
+				</div> --%>
+				<s:select list="consultorios" name="idConsultorio" listValue="codigo" listKey="id" />
 			</s:form>
 			<hr>
 		<table class="table table-bordered table-hover table-striped">

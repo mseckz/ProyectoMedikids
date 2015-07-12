@@ -7,9 +7,11 @@ import model.HistoriaClinica;
 
 public interface ConsultaMapper {
 	
-	List<Consulta> obtenerConsultas();
+	List<Consulta> obtenerConsultas(Integer idHistoria);
 	
 	void registrarConsulta(Consulta consulta);
 	
 	HistoriaClinica verHistoria(Integer idHistoriaClinica);
+	
+	
 }

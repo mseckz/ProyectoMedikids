@@ -11,7 +11,6 @@ import model.CitaFiltro;
 import model.Consultorio;
 import model.Especialidad;
 import model.HistoriaClinica;
-import model.Personal;
 import negocio.CitaService;
 import negocio.CitaServiceDAO;
 import negocio.ConsultorioService;

@@ -14,7 +14,7 @@ public interface ConsultorioMapper {
 	void actualizar(Consultorio consultorio);
 	List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
 	List<Consultorio> obtenerConsultoriosxEsp(Integer idesp);
-	
+	List<Consultorio> obtenerConsultoriosMedico(Integer idPersonal);
 	
 	void registrarHorario(List<Horario> listaHorarios);
 	List<Horario> obtenerHorarios(Integer idConsultorio);
