@@ -4,7 +4,7 @@
 <!-- Modal -->
 <div class="modal fade" id="include_buscar_usuario_rol" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog-mod-carlos-1">
+	<div class="modal-dialog-mod">
 		<div class="modal-content-mod">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"

@@ -6,69 +6,78 @@
 				<h1 class="page-header">Modulo de Gestión de Consultas</h1>
 			</div>
 		</div>
-	</div>
-	<h2> Consultas del dia Medico: Nombre</h2><hr>
-
-	<div class="row" >
-	<div class="col-lg-4">
+	<div class="col-lg-12" id="divRegistrar">
+		<h2> Consultas </h2><hr>
+			<s:form theme="bootstrap" action="agregarPersonal" namespace="/personal" cssClass="form-horizontal" method="post" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-md-5">
+						<s:textfield name="personal.dni" key="Dni" cssClass="form-control"  placeholder="47765562"></s:textfield>
+						<s:textfield name="personal.nombres" key="Nombres" cssClass="form-control"  placeholder="Nombres"></s:textfield>
+						<s:textfield name="personal.apellidos" key="Apellidos" cssClass="form-control"  placeholder="Apellidos"></s:textfield>
+					</div>
+					
+					<div class="col-md-4">
+						<s:submit value="Buscar Historia" cssClass="btn btn-default"></s:submit>
+					</div>
+				</div>
+			</s:form>
+			<hr>
 		<table class="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
-				<th>Consultas del Paciente</th>
-				<th>Ver Consulta</th>
+				<th>Codigo HC</th>
+				<th>Dni</th>
+				<th>Nombre</th>
+				<th>Apellidos</th>
+				<th>Ver Historia</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 			<tr>
-				<td>Specialidad: Pediatria Dia:22/05/2015</td>
-				<td><a>ver Consulta</a></td>
+				<td>HC1111</td>
+				<td>4663352</td>
+				<td>Degui</td>
+				<td>Degui Degui</td>
+				<td><a>ver HC</a></td>
 			</tr>
 		</tbody>
 		</table>
+		</div>
 	</div>
-	<div class="col-lg-1">
-		<s:submit value="Grabar Consulta" cssClass="btn btn-default"></s:submit>
-	</div>
-	<div class="col-lg-6 table-bordered">
-		<table class="table table-bordered table-hover table-striped">
 
-		<tr>
-			
-				<form action="">
-				<h3>Motivo de la Consulta</h3>
-					<textarea class="form-control" rows="2"></textarea><hr>
-					<label>Sintomas</label>
-					<textarea class="form-control" rows="3"></textarea><hr>
-					<label >Diagnostico</label>
-					<textarea class="form-control" rows="3"></textarea><hr>
-					<label>Receta Medica</label>
-					<textarea class="form-control" rows="3"></textarea><hr>
-					<label class="">Observaciones</label>
-					<textarea class="form-control" rows="3"></textarea>
-				</form>
-			
-		</tr>
-		</table>
-	</div>
-	</div>
 </div>
