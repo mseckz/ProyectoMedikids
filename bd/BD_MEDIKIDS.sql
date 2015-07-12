@@ -398,17 +398,21 @@ Select * from HORARIOS where id_medico = 1 and id_dia = 1 and id_turno = 1
 SELECT * FROM CITA
 
 
-SELECT DISTINCT id_cita,codigo_cita, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
+SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
 FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
 inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
-where h.id_medico = 1 and c.fecha_atencion = '2015/07/13' -- DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
-and c.id_consultorio = '0001'
+where h.id_medico = 1 and c.fecha_atencion = '2015/07/14' -- DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+and c.id_consultorio = 2
 and c.estado_cita = 'PAGADA'
  
 
 -- consultorio actual medico
-SELECT * from HORARIOS h
+SELECT h.id_consultorio, h.id_medico, h.id_dia from HORARIOS h
 inner join TURNO t on h.id_turno = t.id_turno
-where DATEPART(weekday, fecha_atencion)-1
-where id_consultorio = 1
+where h.id_dia = DATEPART(weekday, '2015/07/14')-1
+and id_medico = 1 and 
+
+
+Select DISTINCT h.id_consultorio, cod_consultorio from CONSULTORIO c inner join HORARIOS h on c.id_consultorio = h.id_consultorio
+where h.id_medico = 1
