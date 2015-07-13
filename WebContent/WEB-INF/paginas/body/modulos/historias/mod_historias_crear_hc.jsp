@@ -24,7 +24,7 @@
 							<%-- 	<s:hidden name="historiaclinica.id" /> --%>
 						</h2>
 						<br>
-						<div class="col-lg-5">
+						<div class="col-lg-6">
 							<s:textfield cssClass="form-control" key="label.nombre"
 								placeholder="%{getText('placeholder.nombre')}"
 								name="historiaclinica.nombrePaciente" />
@@ -42,7 +42,7 @@
 								name="historiaclinica.dniPaciente" />
 							<br>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<s:textfield cssClass="form-control" key="label.edad"
 								placeholder="%{getText('placeholder.edad')}"
 								name="historiaclinica.edadPaciente" />
@@ -62,18 +62,18 @@
 								name="historiaclinica.fechaNacPaciente" />
 							<br>
 						</div>
-						<div class="col-lg-3">
+						<%-- <div class="col-lg-3">
 							<div align="center">
 								<img align="middle" class="img-thumbnail-foto" alt="" src="#">
 							</div>
 
 							<p></p>
 							<div>
-								<%-- <s:file key="accion.buscarfoto" cssClass="btn btn-default"
-								name="fileUpload" /> --%>
+								<s:file key="accion.buscarfoto" cssClass="btn btn-default"
+								name="fileUpload" />
 								<br>
 							</div>
-						</div>
+						</div> --%>
 					</div>
 				</div>
 				<div class="col-lg-12">
