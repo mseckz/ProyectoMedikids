@@ -44,6 +44,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	private CitaFiltro citaFiltro;
 	private Map<String, Object> datosModal = new HashMap<String, Object>();
 	private List<String> fechasLlenas = new ArrayList<String>();
+	private String nombreMedico;
 	
 	private CitaService servicio = new CitaServiceDAO();
 	private EspecialidadService especialidadService = new EspecialidadServiceDAO();
@@ -122,6 +123,13 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	public void setFechasLlenas(List<String> fechasLlenas) {
 		this.fechasLlenas = fechasLlenas;
 	}
+	public String getNombreMedico() {
+		return nombreMedico;
+	}
+	public void setNombreMedico(String nombreMedico) {
+		this.nombreMedico = nombreMedico;
+	}
+	
 	
 	public String registrarCita(){
 		if(cita.getId() == null){	
@@ -238,6 +246,15 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 		}
 		
 		return codigo;
+	}
+	
+	public String obtenerNombreMedico(){
+		Map<String, Object> datosBuscarMedico = new HashMap<String, Object>();
+		datosBuscarMedico.put("idConsultorio",cita.getConsultorio().getId());
+		datosBuscarMedico.put("hora",cita.getHoraAtencion());
+		
+		nombreMedico = servicio.nombreMedico(datosBuscarMedico);
+		return SUCCESS;
 	}
 	
 	@Override

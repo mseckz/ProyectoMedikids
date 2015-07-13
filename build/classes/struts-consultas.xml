@@ -10,5 +10,34 @@
 			<result type="tiles">mod_con_inicio</result>
 		</action>
 		
+		<action name="registrarConsulta"  class="action.ConsultaAction" method="registrarConsulta">
+			<result type="tiles">mod_con_inicio</result>
+		</action>
+		
+		<action name="obtenerDetalleConsulta"  class="action.ConsultaAction" method="obtenerDetalleConsulta">
+			<result type="tiles">mod_con_agregar</result>
+		</action>
+		
+		<action name="obtenerHistoria"  class="action.ConsultaAction" method="obtenerHistoria">
+			<result type="tiles">mod_con_paciente</result>
+		</action>
+		
+		<action name="listaCitasEnCola"  class="action.ConsultaAction" method="listarCitasEnColaXConsultorio">
+			<result type="json">
+				<param name="root">
+					citasPorConsultorio
+				</param>
+			</result>
+		</action>
+		
+		<!--  verDetalleConsulta -->
+		<action name="verDetalleConsulta" class="action.ConsultaAction" method="verDetalleConsulta">
+			<result type="json">
+				<param name="root">
+					detalleConsulta
+				</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>

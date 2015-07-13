@@ -39,6 +39,12 @@
 	<definition name="mod_con_inicio" extends="d_plantilla">
 		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultas/mod_consultas_inicio.jsp"/>
 	</definition>
+	<definition name="mod_con_agregar" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultas/mod_consultas_agregar.jsp"/>
+	</definition>
+	<definition name="mod_con_paciente" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultas/mod_consultas_paciente.jsp"/>
+	</definition>
 	<!-- Fin Modulo de Consultas -->
 	
 	<!-- Modulo de Consultorios -->

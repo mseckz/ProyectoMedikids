@@ -72,7 +72,8 @@
 				<s:textfield class="" key="citas.registrar.codigo" name="cita.codigo" cssClass="form-control" readonly="true" />
 			</div>
 			<div class="form-group col-md-6">
-				<s:select list="@model.TipoReserva@values()" name="cita.tipoReserva" key="citas.registrar.tiporeserva" cssClass="form-control"/>
+				<s:select list="@model.TipoReserva@values()" name="cita.tipoReserva" key="citas.registrar.tiporeserva" cssClass="form-control"
+							headerKey="-1" headerValue="Elija tipo de Reserva" id="tipoReserva"/>
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="especialidades" name="cita.consultorio.especialidad.id" key="citas.registrar.especialidad" listKey="id" 
@@ -86,14 +87,17 @@
 			<div class="form-group col-md-6">
 				<sj:datepicker id="fechaAtencion" parentTheme="bootstrap" key="citas.registrar.fechaatencion" name="cita.fechaAtencion"
 	                              cssClass="form-control" showOn="focus" inputAppendIcon="calendar" onBeforeShowDayTopics="beforeShowDay" 
-	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" minDate="0" />
+	                              displayFormat="dd/mm/yy" onChangeTopics="changeTopic" minDate="0" disabled="true"/>
 			</div>
 			<div class="form-group col-md-6">
 				<s:select list="horas" id="horas" name="cita.horaAtencion" key="citas.registrar.horaatencion" cssClass="form-control"
-				headerValue="Elija hora" headerKey="-1"/>
+				headerValue="Elija hora" headerKey="-1" onchange="obtenerNombreMedico()"/>
 			</div>
 			<div class="form-group col-md-6">
-				<s:textfield name="cita.monto" cssClass="form-control" key="citas.registrar.monto" />
+				<s:textfield name="cita.monto" id="monto" cssClass="form-control" key="citas.registrar.monto" readonly="true"/>
+			</div>
+			<div class="form-group col-md-6">
+				<s:textfield id="nombreMedico" cssClass="form-control" label="Medico" readonly="true"/>
 			</div>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-1">
@@ -116,6 +120,7 @@
 		var changeTimer = false;
 		
 		$.subscribe('beforeShowDay', function(event, data) {
+			
 			 var date = event.originalEvent.date;
 
 			 var m = date.getMonth();
@@ -123,7 +128,7 @@
 			 var y = date.getFullYear();
 			 
 			 var currentdate =  y + '-' + ("0" + (m+1)).slice(-2) + '-' +  ("0" + d).slice(-2);
-			 console.log(currentdate);
+			 
 			 if ($.inArray(currentdate, fechasLlenas) != -1) {
 			 	event.originalEvent.returnValue = [false,"","unAvailable"];
                 
@@ -132,15 +137,6 @@
             }	 
 		  });
 
-/* 		$("#fechaAtencion" ).datepicker({
-			 beforeShowDay: DisableSpecificDates,
-			 onSelect: function(dateText){
-				 jQuery(this).change();
-		 	 }
-		 	beforeShowDay : function(date){
-		 		console.log("asd");
-		 	 } 
-		}); */
 
 		$("#fechaAtencion").on("keyup" ,function(){
 		        if(changeTimer !== false) clearTimeout(changeTimer);
@@ -153,9 +149,9 @@
 		$.subscribe('changeTopic', function(event,data) {
 			
 			loadHorasDisponibles();
-		});
-	}	
-	
+		});	
+		
+	}
 	
 	</script>
 </div>

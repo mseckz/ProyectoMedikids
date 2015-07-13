@@ -12,14 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="sintomas" property="sintomas"/>
  		<result column="diagnostico" property="diagnostico"/>
  		<result column="receta" property="receta"/>
+ 		<result column="observ" property="observaciones"/>
  		<result column="fecha_registro" property="fechaRegistro"/>
  		<result column="estado" property="estado"/>
  		<association property="historia" javaType="historiaclinica">
  			<id column="id_hc" property="id"/>
  		</association>
- 		<association property="personalMedico" javaType="medico">
+ 		<association property="personalMedico" javaType="personal">
  			<id column="id_personal" property="id"/>
- 			<result column="nombre_completo" property="nombre_completo"/>
+ 			<result column="nombre_completo" property="nombreCompleto"/>
  		</association>
  	</resultMap>
  	
@@ -38,13 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<insert id="registrarConsulta" parameterType="consulta">
- 		INSERT INTO CONSULTA (id_hc,id_medico,id_cita,motivo_cons,sintomas,diagnostico,receta,fecha_registro) 
- 		VALUES (#{historia},#{personalMedico.id},#{cita.id},#{motivo},#{sintomas}.#{diagnostico},#{receta},#{fechaRegistro})
+ 		INSERT INTO CONSULTA (id_hc,id_medico,id_cita,motivo_cons,sintomas,diagnostico,receta,observ) 
+ 		VALUES (#{historia.id},#{personalMedico.id},#{cita.id},#{motivo},#{sintomas},
+ 		#{diagnostico},#{receta},#{observaciones})
  	</insert>
  	
  	<select id="detalleConsulta" parameterType="int" resultMap="rmConsulta">
- 		SELECT id_consulta,id_medico,p.nombre_completo,sintomas,diagnostico,receta from CONSULTA c 
- 		inner join PERSONAL p on c.id_medico = p.id_personal
- 		WHERE estado = 1
+ 		SELECT id_consulta,id_medico,p.nombre_completo,motivo_cons,sintomas,diagnostico,receta,observ,c.fecha_registro
+ 		from CONSULTA c inner join PERSONAL p on c.id_medico = p.id_personal
+ 		WHERE c.estado = 1 and id_consulta = #{id}
  	</select>
  </mapper>

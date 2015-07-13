@@ -19,7 +19,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>John Smith<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><s:property value="#session.nombre_completo"/><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a	href="<s:url action="iniciarPerfilusuario" namespace="/usuario"/>">

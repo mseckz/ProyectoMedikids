@@ -7,10 +7,17 @@
  	<!-- <field name="consultorio.especialidad.id">
  	
  	</field> -->
- 	
+ 		<!-- Datos de Consultorio   -->
  	<field name="consultorio.ubicacion">
  		<field-validator type="requiredstring">
 			<message key="campo.requerido"/>		
 		</field-validator>
  	</field>
- </validators>
+ 	<field name="consultorio.especialidad.id">
+	 	<field-validator type="int">
+             <param name="min">1</param>
+             <message>Por Favor Seleccione una Especialidad</message>
+	    </field-validator>
+    </field>
+		
+</validators>

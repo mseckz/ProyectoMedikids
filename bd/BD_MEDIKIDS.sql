@@ -200,7 +200,8 @@ CREATE TABLE CONSULTA(
 	sintomas varchar(150),
 	diagnostico varchar(200),
 	receta varchar(150),
-	fecha_registro datetime,
+	observ varchar(200),
+	fecha_registro datetime default GETDATE(),
 	estado bit default 1,  -- 0:  1: Atendida
 	CONSTRAINT fk_hc FOREIGN KEY (id_hc) REFERENCES HISTORIA_CLINICA (id_hc),
 	CONSTRAINT fk_medico FOREIGN KEY (id_medico) REFERENCES MEDICO (id_personal),
@@ -256,7 +257,7 @@ INSERT INTO ASISTENTE(id_personal,id_medico_asig) VALUES (2, 1);
 
 INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 1, 'prueba', 12345, 1, 1)
 
-
+select * from HISTORIA_CLINICA
 select * from personal
 select * from ESPECIALIDAD
 select * from CONSULTORIO
@@ -289,13 +290,13 @@ nom_apoderado,apellido_paterno_apoderado,apellido_materno_apoderado,dni_apoderad
 correo_apoderado,direccion_apoderado,
 id_tipo_sangre,alergias,ant_hereditarios
 ) VALUES(
-'holo4','hola4','hola4','hola',12345678,12,0,
+'0001','Luiggi','Aguirre','Bazan',12345678,12,0,
 '','03-03-1998','1312312312313',
-'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'Juan','Perez','Chavez',12345678,123123,'ewrwer@qwe.com',
 '123123123',
-'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'Maria','De la Cruz','Pachas',12345678,123123,'ewrwer@qwe.com',
 '123123123',
-'holo1','holo1','holo1',12345678,123123,'ewrwer@qwe.com',
+'Pepe','Pepon','Pepa',12345678,123123,'ewrwer@qwe.com',
 '123123123',
 2,'12123','123123'
 )
@@ -353,7 +354,7 @@ not in
  (select hora from HORAS_DIA inner join TURNO t on
 hora >= t.hora_inicio and hora < t.hora_fin
 where id_turno in (SELECT h.id_turno from HORARIOS h
-where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/08')-1 and h.estado = 1))
+where id_consultorio = 1 and h.id_dia = DATEPART(weekday, '2015/07/13')-1 and h.estado = 1))
 
 
 
@@ -408,11 +409,11 @@ and c.estado_cita = 'PAGADA'
  
 
 -- consultorio actual medico
+/*
 SELECT h.id_consultorio, h.id_medico, h.id_dia from HORARIOS h
 inner join TURNO t on h.id_turno = t.id_turno
 where h.id_dia = DATEPART(weekday, '2015/07/14')-1
 and id_medico = 1 and 
-
 
 Select DISTINCT h.id_consultorio, cod_consultorio from CONSULTORIO c inner join HORARIOS h on c.id_consultorio = h.id_consultorio
 where h.id_medico = 1
@@ -421,4 +422,12 @@ SELECT id_consulta,id_medico, p.nombre_completo,sintomas,diagnostico,receta from
  		inner join PERSONAL p on c.id_medico = p.id_personal
 		inner join MEDICO  m on m.id_personal = p.id_personal
 		inner join ESPECIALIDAD 
- 		WHERE estado = 1
+ 		WHERE estado = 1 */
+
+select * from CONSULTA
+truncate table consulta
+
+
+select nombre_completo from HORARIOS h inner join PERSONAL p on h.id_medico = p.id_personal
+inner join TURNO t on t.id_turno = h.id_turno
+where '9:00:00' between t.hora_inicio and t.hora_fin and h.id_consultorio = 2

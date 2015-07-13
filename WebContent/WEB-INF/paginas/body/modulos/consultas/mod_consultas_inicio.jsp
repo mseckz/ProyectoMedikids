@@ -8,6 +8,7 @@
 		</div>
 	<div class="col-lg-12" id="divRegistrar">
 		<h2> Consultas </h2><hr>
+		<s:actionmessage />
 			<s:form theme="bootstrap" action="agregarPersonal" namespace="/personal" cssClass="form-horizontal" method="post" enctype="multipart/form-data">
 				<%-- <div class="row">
 					<div class="col-md-5">
@@ -20,65 +21,43 @@
 						<s:submit value="Buscar Historia" cssClass="btn btn-default"></s:submit>
 					</div>
 				</div> --%>
-				<s:select list="consultorios" name="idConsultorio" listValue="codigo" listKey="id" />
+				<div class="row">
+					<div class="col-md-5">
+						<s:select list="consultorios" name="idConsultorio" listValue="codigo" listKey="id" 
+							headerKey="-1" headerValue="Seleccione Consultorio" id="cboConsultorio"
+							onchange="loadColaCitas()"/>
+					</div>
+				</div>
 			</s:form>
 			<hr>
-		<table class="table table-bordered table-hover table-striped">
+		<table class="table table-bordered table-hover table-striped" id="tblCitas">
 		<thead>
 			<tr>
-				<th>Codigo HC</th>
-				<th>Dni</th>
-				<th>Nombre</th>
-				<th>Apellidos</th>
-				<th>Ver Historia</th>
+				<th>Codigo Cita</th>
+				<th>Fecha Atencion</th>
+				<th>Hora Atencion</th>
+				<th>Paciente</th>
+				<th>Consulta</th>
 			</tr>
 		</thead>
 		<tbody>
+		<%-- <s:iterator value="citasPorConsultorio" status="status">
 			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
+				<td><s:property value="codigo" /></td>
+				<td><s:property value="fechaAtencion" /></td>
+				<td><s:property value="horaAtencion" /></td>
+				<td><s:property value="%{historiaClinica.nombreCompletoPaciente()}" /> Degui</td>
 				<td><a>ver HC</a></td>
 			</tr>
-			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
-				<td><a>ver HC</a></td>
-			</tr>
-			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
-				<td><a>ver HC</a></td>
-			</tr>
-			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
-				<td><a>ver HC</a></td>
-			</tr>
-			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
-				<td><a>ver HC</a></td>
-			</tr>
-			<tr>
-				<td>HC1111</td>
-				<td>4663352</td>
-				<td>Degui</td>
-				<td>Degui Degui</td>
-				<td><a>ver HC</a></td>
-			</tr>
+		</s:iterator> --%>
 		</tbody>
 		</table>
+		<div id="mensaje">
 		</div>
 	</div>
+</div>
 
 </div>
+<script src="<s:url value="/externo/js/consultas.js" />"></script>
+<script>
+</script>

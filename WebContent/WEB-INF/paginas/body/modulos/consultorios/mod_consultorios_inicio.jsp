@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-md-5">
 						<s:select list="especialidades" name="consultorio.especialidad.id" 
-						key="consultorio.label.especialidad" listKey="id" listValue="nombre" emptyOption="true" />
+						key="consultorio.label.especialidad" listKey="id" listValue="nombre" headerKey="-1" headerValue="Elija especialidad" />
 						<s:textarea name="consultorio.descripcion" cssClass="form-control" key="consultorio.label.descripcion"
 						placeholder="%{getText('consultorio.placeholder.descripcion')}" />
 					</div>

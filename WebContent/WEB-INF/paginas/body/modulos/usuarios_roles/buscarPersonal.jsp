@@ -3,7 +3,7 @@
 <!-- Modal -->
 <div class="modal fade" id="buscarPersonal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel">
-	<div class="modal-dialog-mod" role="document">
+	<div class="modal-dialog-mod-carlos-1" role="document">
 		<div class="modal-content-mod">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"

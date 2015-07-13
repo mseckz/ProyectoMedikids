@@ -76,6 +76,18 @@ public class CitaServiceDAO extends MyBatisGenericDAO implements CitaService{
 		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
 		return citaMapper.colaCitas(datosCita);
 	}
+
+	@Override
+	public void citaAtendida(Integer id) {
+		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
+		citaMapper.citaAtendida(id);
+	}
+
+	@Override
+	public String nombreMedico(Map<String, Object> datosBuscarMedico) {
+		CitaMapper citaMapper = getSession().getMapper(CitaMapper.class);
+		return citaMapper.nombreMedico(datosBuscarMedico);
+	}
 	
 	
 }

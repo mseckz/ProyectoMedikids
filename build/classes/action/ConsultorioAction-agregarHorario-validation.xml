@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+ 
+ <validators>
+ 		<!-- Horario de Consultorio   -->
+ 		
+ 	<field name="horario.turno.id">
+	 	<field-validator type="int">
+             <param name="min">1</param>
+             <message>Por Favor Seleccione una Especialidad</message>
+	    </field-validator>
+ 	</field>
+ 	<field name="horario.medico.id">
+	 	<field-validator type="int">
+             <param name="min">1</param>
+             <message>Por Favor Seleccione un Medico</message>
+	    </field-validator>
+ 	</field>
+ 	<field name="horario.dia.id">
+	 	<field-validator type="int">
+             <param name="min">1</param>
+             <message>Por Favor Seleccione una Dia</message>
+	    </field-validator>
+ 	</field>		
+</validators>

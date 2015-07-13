@@ -1,5 +1,5 @@
 package model;
 
 public enum EstadoCitas {
-	RESERVA, PAGADA, CANCELADA
+	RESERVA, PAGADA, CANCELADA,ATENDIDA
 }

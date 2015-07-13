@@ -17,7 +17,9 @@ public interface CitaService {
 	void cancelarCita(Integer id);
 	void generarConsulta(Integer id);
 	String obtenerUltimoCodigo();
+	void citaAtendida(Integer id);
 	
 	List<Map<String, Object>> numeroHorasDisponiblesXFecha(Integer id); 
 	List<Cita> colaCitas(Map<String, Object> datosCita);
+	String nombreMedico(Map<String, Object> datosBuscarMedico);
 }

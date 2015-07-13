@@ -51,7 +51,8 @@
 		</action>
 		
 		<action name="registrarCita" class="action.CitaAction" method="registrarCita">
-			<result type="tiles">mod_citas_registrar</result>
+			<result name="input" type="tiles">mod_citas_registrar</result>
+			<result type="tiles">mod_cit_inicio</result>
 		</action>
 		
 		<action name="buscarCita" class="action.CitaAction" method="buscarCita">
@@ -74,6 +75,14 @@
 			<result type="json">
 				<param name="root">
 					datosModal
+				</param>
+			</result>
+		</action>
+		
+		<action name="mostrarMedico" class="action.CitaAction" method="obtenerNombreMedico">
+			<result type="json">
+				<param name="root">
+					nombreMedico
 				</param>
 			</result>
 		</action>

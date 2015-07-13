@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Consulta implements Serializable{
 
@@ -14,7 +15,8 @@ public class Consulta implements Serializable{
 	private String sintomas;
 	private String diagnostico;
 	private String receta;
-	private String fechaRegistro;
+	private Date fechaRegistro;
+	private String observaciones;
 	private boolean estado;
 	
 	
@@ -66,10 +68,10 @@ public class Consulta implements Serializable{
 	public void setReceta(String receta) {
 		this.receta = receta;
 	}
-	public String getFechaRegistro() {
+	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(String fechaRegistro) {
+	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	public boolean isEstado() {
@@ -77,6 +79,12 @@ public class Consulta implements Serializable{
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	public String getObservaciones() {
+		return observaciones;
+	}
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 	
 	

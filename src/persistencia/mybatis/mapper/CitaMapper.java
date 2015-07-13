@@ -15,6 +15,7 @@ public interface CitaMapper {
 	void actualizarCita(Cita cita);
 	void cancelarCita(Integer id);
 	void generarConsulta(Integer id);
+	void citaAtendida(Integer id);
 	String obtenerUltimoCodigo();
 	
 	/**
@@ -31,4 +32,6 @@ public interface CitaMapper {
 	 * @return
 	 */
 	List<Cita> colaCitas(Map<String, Object> datosCita);
+	
+	String nombreMedico(Map<String, Object> datosBuscarMedico);
 }

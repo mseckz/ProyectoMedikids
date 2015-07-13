@@ -1,5 +1,8 @@
 package action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,7 +107,14 @@ public class ConsultaAction extends ActionSupport implements Preparable, Session
 	
 	public String registrarConsulta(){
 		servicio.registrarConsulta(consulta);
+		citaService.citaAtendida(consulta.getCita().getId());
+		addActionMessage("Consulta agregada Correctamente");
+		
+		Integer idMedico = (Integer) session.get("id_personal");
+		consultorios = consultorioService.obtenerConsultoriosMedico(idMedico);
+		
 		consulta = null;
+		
 		return SUCCESS;
 	}
 	
@@ -118,10 +128,21 @@ public class ConsultaAction extends ActionSupport implements Preparable, Session
 		return SUCCESS;
 	}
 	
-	// obtiene HC y consultas realizadas
 	public String obtenerDetalleConsulta(){
-		historia = historiaService.obtener(cita.getHistoriaClinica().getId());
-		consultasRealizadas = servicio.obtenerConsultas(cita.getHistoriaClinica().getId());
+		consultasRealizadas = servicio.obtenerConsultas(historia.getId());
+		historia = historiaService.obtener(historia.getId());	
+		return SUCCESS;
+	}
+	
+	public String obtenerHistoria() throws ParseException{
+		cita = citaService.cargarCita(cita.getId());
+		historia = historiaService.obtener(cita.getHistoriaClinica().getId());	
+		
+		//formateando fecha para la vista
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date fecha = sdf.parse(historia.getFechaNacPaciente());
+		SimpleDateFormat formatVista = new SimpleDateFormat("dd-MM-yyyy");
+		historia.setFechaNacPaciente(formatVista.format(fecha));
 		
 		return SUCCESS;
 	}

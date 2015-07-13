@@ -14,8 +14,11 @@
 						<s:text name="citas.nuevo" />
 					</a>
 				</div>
+			</div><br>
+			<div>
+				<s:actionmessage/>
 			</div>
-			<s:actionmessage/>
+			
 			<h2 class="page-header">
 				<s:text name="citas.buscar.titulo" />
 			</h2>
@@ -23,18 +26,24 @@
 			<div class="row">
 				<div class="col-md-12">
 					<s:form theme="bootstrap" cssClass="form-horizontal" action="buscarCita" method="POST">
-					<div class="form-group col-md-5">
-							<s:textfield name="citaFiltro.codigo" label="Codigo Cita" cssClass="form-control"/>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group col-md-5">
+									<s:textfield name="citaFiltro.codigo" label="Codigo Cita" cssClass="form-control"/>
+								</div>
+								<div class="form-group col-md-3">
+									<s:textfield name="citaFiltro.dni" label="DNI" cssClass="form-control"/>
+								</div>
+								<div class="form-group col-md-4">
+									<s:textfield name="citaFiltro.nombre" key="citas.buscar.label.nombres" cssClass="form-control"/>
+								</div>
+							</div>
 						</div>
-						<div class="form-group col-md-3">
-							<s:textfield name="citaFiltro.dni" label="DNI" cssClass="form-control"/>
-						</div>
-						<div class="form-group col-md-4">
-							<s:textfield name="citaFiltro.nombre" key="citas.buscar.label.nombres" cssClass="form-control"/>
-						</div>
-						<div class="form-group col-md-4">
-							<s:submit key="citas.buscar.submit" cssClass="btn btn-default"/>
-						</div>
+						<div class="row">
+							<div class="col-md-2 col-md-offset-1">
+								<s:submit key="citas.buscar.submit" cssClass="btn btn-default"/>
+							</div>
+						</div>						
 					</s:form>
 				</div>
 			</div>
@@ -82,9 +91,6 @@
 		      	</div>
 			</div>
 			</s:if>
-			<s:else>
-				<s:actionmessage/>
-			</s:else>
 		</div>
 	</div>
 </div>

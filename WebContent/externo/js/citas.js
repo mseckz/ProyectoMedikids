@@ -7,7 +7,15 @@ function loadConsultorios(){
 	var idEspecialidad =  especialidad.options[especialidad.selectedIndex].value;
 	
 	if(idEspecialidad == -1){
+		document.getElementById("monto").value="";
 		return;
+	}
+	
+	if(idEspecialidad == 1){
+		document.getElementById("monto").value=120.0;
+	}
+	else{
+		document.getElementById("monto").value=80.0;
 	}
 		
     $("#consultorios").get(0).options.length = 0;
@@ -133,7 +141,7 @@ function cargarDatosCancelar(){
 
 function cargarDatosGenerarConsulta(){
 	$("button[name='mostrarGenerarConsulta']").click(function(event) {
-		
+		document.getElementById("fechaAtencion");
 		var target = $(event.target);
 		var id = $(this).attr("id");
 
@@ -144,7 +152,6 @@ function cargarDatosGenerarConsulta(){
 			datatype : 'json',
 	        success: function(data, status) {
 	        	
-				console.log(data);
 	        	
 				document.getElementById("codigoCitaGC").innerHTML = data.cita.codigo;
 				document.getElementById("fechaAtencionGC").innerHTML = data.cita.fechaAtencion;
@@ -166,12 +173,18 @@ function cargarDatosGenerarConsulta(){
 var fechasLlenas = [];
 
 function obtenerFechasCitaLlenas(){
-
+	var datepicker = document.getElementById("fechaAtencion");
+	datepicker.value = "";
+	
 	var consultorios = document.getElementById("consultorios");
 	var idConsultorio = consultorios.options[consultorios.selectedIndex].value;
 	
 	if(idConsultorio == -1){
+		$('#fechaAtencion').prop('disabled', true);
 		return;
+	}
+	else{
+		$('#fechaAtencion').prop('disabled', false);
 	}
 	
 	$.ajax({
@@ -190,8 +203,9 @@ function obtenerFechasCitaLlenas(){
 
 }
 
+
 function DisableSpecificDates(date) {
-	 console.log("asd");
+
 	 var m = date.getMonth();
 	 var d = date.getDate();
 	 var y = date.getFullYear();
@@ -209,4 +223,33 @@ function DisableSpecificDates(date) {
 			 return [false];
 		 }
 	 }	 
+}
+
+function obtenerNombreMedico(){
+	
+	var comboHoras = document.getElementById("horas");
+	var hora =  comboHoras.options[comboHoras.selectedIndex].value;
+	
+	var consultorio = document.getElementById("consultorios");
+	var idConsultorio =  consultorio.options[consultorio.selectedIndex].value;
+	
+	if(hora == -1 || idConsultorio == -1){
+		document.getElementById("nombreMedico").value = "";
+		return;
+	}
+	
+    $.ajax({
+        type: "POST",
+        url: "mostrarMedico",
+        data: "cita.consultorio.id="+idConsultorio + "&cita.horaAtencion=" + hora,
+        dataType: "json",
+        success: function(data) {
+        	console.log(data);
+        	document.getElementById("nombreMedico").value = data;
+        },
+        error: function(error) {
+            console.log(error);
+
+        }
+    });
 }
