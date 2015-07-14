@@ -230,6 +230,9 @@ function obtenerNombreMedico(){
 	var comboHoras = document.getElementById("horas");
 	var hora =  comboHoras.options[comboHoras.selectedIndex].value;
 	
+	var fecha = document.getElementById("fechaAtencion").value;
+	console.log(fecha);
+	
 	var consultorio = document.getElementById("consultorios");
 	var idConsultorio =  consultorio.options[consultorio.selectedIndex].value;
 	
@@ -241,7 +244,7 @@ function obtenerNombreMedico(){
     $.ajax({
         type: "POST",
         url: "mostrarMedico",
-        data: "cita.consultorio.id="+idConsultorio + "&cita.horaAtencion=" + hora,
+        data: "cita.consultorio.id="+idConsultorio + "&cita.horaAtencion=" + hora + "&cita.fechaAtencion="+fecha,
         dataType: "json",
         success: function(data) {
         	console.log(data);

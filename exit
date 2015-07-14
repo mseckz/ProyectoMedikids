@@ -1,0 +1,137 @@
+[33mcommit b78d20842167a3a0e70e30ddef42717f90c99656[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Mon Jul 13 05:59:57 2015 -0500
+
+    detalle de consulta, consulta registrar, mostrar hc consulta
+
+[33mcommit 39d06927cf279a63a25d746fd766a447887bb030[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 12 13:34:03 2015 -0500
+
+    metodos en consulta action
+
+[33mcommit 1582d68bf04181b6ba2dc042760a9bdf31cd470b[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 12 03:09:53 2015 -0500
+
+    queries consultas
+
+[33mcommit 00ca32d36a60a02fc64acdac69a7c036f7a8aff9[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 12 03:08:30 2015 -0500
+
+    action consulta, metodos listar, querys en bd
+
+[33mcommit 3c95419d4015577798d2673a662ec257307e9e5c[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sat Jul 11 21:47:30 2015 -0500
+
+    rles funcionando, inicio consultas
+
+[33mcommit 9ea12687707d42f19dfa321ddd73feee2ddb83a1[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Fri Jul 10 01:03:01 2015 -0500
+
+    bd usuario nuevo
+
+[33mcommit 9f424c5cf41ad0ad83b70009519e1c6e151114e4[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Fri Jul 10 01:01:57 2015 -0500
+
+    personal + usuarioroles + citas
+
+[33mcommit a6464f5d9cde539ddac378af4e1e1dc1fa89813b[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Thu Jul 9 17:04:50 2015 -0500
+
+    merge de personal y rolusuario
+
+[33mcommit ff7f1748d2b1c79fced6eb92c24a555858bd0f55[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Thu Jul 9 15:02:09 2015 -0500
+
+    arreglo de busquedas consultorio, fechas deshabilitadsa de datepicker citas
+
+[33mcommit 4ccd22c56ac05c885d241f0953c45b228906d4d8[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Thu Jul 9 03:37:22 2015 -0500
+
+    bd consulta get horasDispo x fecha y Consultorio
+
+[33mcommit b32b4f9ee2f16c37ab73f9fce10936e193bdc36c[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Thu Jul 9 03:35:55 2015 -0500
+
+    ajax get fechasLlenasCita, Mapper fechasLlenasCita,
+
+[33mcommit a1317379236a5f2e10b0afa753ba034e0e62e19e[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Wed Jul 8 02:50:27 2015 -0500
+
+    cancelar, generar cita; modificar cita, mostrar form registro
+
+[33mcommit a807da84a41c2ef65e7a00508504594230424e23[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Mon Jul 6 03:27:53 2015 -0500
+
+    registrar cita, buscar paciente, mostrar horas
+
+[33mcommit db3585f54b845975abcad3fe48c6480fd6592bba[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 5 13:59:12 2015 -0500
+
+    carpeta de js, ajax call de horas disponibles al seleccionar fecha y consultorio
+
+[33mcommit 1f15652ef8cfe685037344b113d099001f4a35ab[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 5 02:06:18 2015 -0500
+
+    db tabla horas_dia, consultas para validar citas
+
+[33mcommit ff4a87dde6721eac5bb885ca69488c849c6ba575[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jul 5 02:04:19 2015 -0500
+
+    citas 50%
+
+[33mcommit 0ee28424f4be8c3f06813101847f6cc981e7c03c[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jun 28 21:15:25 2015 -0500
+
+    bd again
+
+[33mcommit 07784c52c5e621a53fbb063b92a5732251b42179[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jun 28 20:37:09 2015 -0500
+
+    Cambios hc vista, seleccion de objeto a json
+
+[33mcommit a0e45971972b01fc3115106357bb0241aae23c1a[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jun 28 06:25:58 2015 -0500
+
+    bd again
+
+[33mcommit 58e49d3d44ab426bd7d72097c59bf29f493fe2a5[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sun Jun 28 06:24:51 2015 -0500
+
+    buscar con ajax  + consultorios 99%
+
+[33mcommit dd004cb0db4ecb06e6218922a84fb753e485c972[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sat Jun 27 19:48:21 2015 -0500
+
+    validation
+
+[33mcommit a6d18760ee2f9fcec4809a8ff125aee5bc3590d4[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sat Jun 27 13:44:17 2015 -0500
+
+    bd
+
+[33mcommit b8d62f8a873214955dcdddfe0df9e48800dadd59[m
+Author: Luis Almeyda <luisalmeyda901@gmail.com>
+Date:   Sat Jun 27 13:42:10 2015 -0500
+
+    listar horarios, agregar horario, remover horario, falta validar grabado de horarios

@@ -141,6 +141,8 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 			servicio.actualizarCita(cita);
 			addActionMessage("Cita Actualizada");
 		}
+		
+		citas = servicio.obtenerCitas();
 		return SUCCESS; 
 	}
 	
@@ -252,6 +254,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 		Map<String, Object> datosBuscarMedico = new HashMap<String, Object>();
 		datosBuscarMedico.put("idConsultorio",cita.getConsultorio().getId());
 		datosBuscarMedico.put("hora",cita.getHoraAtencion());
+		datosBuscarMedico.put("fecha",cita.getFechaAtencion());
 		
 		nombreMedico = servicio.nombreMedico(datosBuscarMedico);
 		return SUCCESS;

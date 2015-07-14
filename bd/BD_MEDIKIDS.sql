@@ -255,7 +255,10 @@ INSERT INTO MEDICO (id_personal,cmp,id_esp) VALUES (4, '23145',2);
 
 INSERT INTO ASISTENTE(id_personal,id_medico_asig) VALUES (2, 1);
 
-INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 1, 'prueba', 12345, 1, 1)
+INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 1, 'luis', 12345, 1, 1)
+INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 2, 'cesar', 12345, 1, 1)
+INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 2, 'carlos', 12345, 1, 1)
+INSERT INTO USUARIO (cod_personal, nom_usuario, contrasena, id_rol,estado) values ( 2, 'jo', 12345, 1, 1)
 
 select * from HISTORIA_CLINICA
 select * from personal
@@ -403,8 +406,8 @@ SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apell
 FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
 inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
-where h.id_medico = 1 and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
-and c.id_consultorio = 1
+where h.id_medico = 4 and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+and c.id_consultorio = 2
 and c.estado_cita = 'PAGADA'
  
 
@@ -424,10 +427,17 @@ SELECT id_consulta,id_medico, p.nombre_completo,sintomas,diagnostico,receta from
 		inner join ESPECIALIDAD 
  		WHERE estado = 1 */
 
-select * from CONSULTA
-truncate table consulta
+select * from CITA
 
 
 select nombre_completo from HORARIOS h inner join PERSONAL p on h.id_medico = p.id_personal
-inner join TURNO t on t.id_turno = h.id_turno
-where '9:00:00' between t.hora_inicio and t.hora_fin and h.id_consultorio = 2
+inner join TURNO t on t.id_turno = h.id_turno 
+where '9:00:00' between t.hora_inicio and t.hora_fin and h.id_consultorio = 2 and id_dia = DATEPART(weekday, '2015/07/13')-1
+
+SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
+		FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
+		inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
+		inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
+		where h.id_medico = #{idMedico} and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
+		and c.id_consultorio = #{idConsultorio}
+		and c.estado_cita = 'PAGADA' order by c.horaAtencion asc

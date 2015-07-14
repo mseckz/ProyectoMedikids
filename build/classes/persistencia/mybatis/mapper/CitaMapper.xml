@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="obtenerCitas" resultMap="rmCita">
 		select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion,
 		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
-		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+		from cita c inner join HISTORIA_CLINICA h on h.id_hc = c.id_hc
 		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		where estado_cita = 'RESERVA'
  	</select>
@@ -58,16 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="buscarCita" parameterType="citaFiltro" resultMap="rmCita">
 	 	select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion,
 		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
-		from cita c inner join HISTORIA_CLINICA h on c.id_hc = c.id_hc
+		from cita c inner join HISTORIA_CLINICA h on h.id_hc = c.id_hc
 		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		where estado_cita = 'RESERVA' 
-		<if test="nombre != null">
+		<if test="nombre != null and nombre != '' ">
 			and h.nom_paciente like CONCAT(#{nombre},'%')
 		</if>
 	    <if test="dni != null and dni != '' ">
 	    	AND h.dni_paciente = #{dni} 
 	    </if>
-	    <if test="codigoCita != null">
+	    <if test="codigoCita != null and codigoCita != '' ">
 	    	AND codigo_cita = #{codigoCita}
 	    </if>
  	</select>
@@ -113,18 +113,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="colaCitas" resultMap="rmCita">
- 		SELECT DISTINCT id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion, hora_atencion,hc.id_hc
+ 		SELECT distinct hora_atencion, id_cita,codigo_cita,cn.cod_consultorio, hc.nom_paciente,hc.apellido_paterno_paciente, hc.apellido_materno_paciente, fecha_atencion,hc.id_hc
 		FROM CITA c inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		inner join HORARIOS h on cn.id_consultorio = h.id_consultorio
 		inner join HISTORIA_CLINICA hc on hc.id_hc = c.id_hc
 		where h.id_medico = #{idMedico} and c.fecha_atencion = DATEADD(dd, DATEDIFF(dd, 0, getdate()), 0)
 		and c.id_consultorio = #{idConsultorio}
-		and c.estado_cita = 'PAGADA' 
+		and c.estado_cita = 'PAGADA' order by hora_atencion
  	</select>
  	
  	<select id="nombreMedico" parameterType="hashmap" resultType="string">
  		select nombre_completo from HORARIOS h inner join PERSONAL p on h.id_medico = p.id_personal
 		inner join TURNO t on t.id_turno = h.id_turno
 		where #{hora} between t.hora_inicio and t.hora_fin and h.id_consultorio = #{idConsultorio}
+		and id_dia = DATEPART(weekday, #{fecha})-1
  	</select>
  </mapper>

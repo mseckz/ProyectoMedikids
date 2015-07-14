@@ -29,7 +29,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group col-md-5">
-									<s:textfield name="citaFiltro.codigo" label="Codigo Cita" cssClass="form-control"/>
+									<s:textfield name="citaFiltro.codigoCita" label="Codigo Cita" cssClass="form-control"/>
 								</div>
 								<div class="form-group col-md-3">
 									<s:textfield name="citaFiltro.dni" label="DNI" cssClass="form-control"/>
