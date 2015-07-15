@@ -38,7 +38,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	private List<Especialidad> especialidades;
 	private Especialidad especialidad;
 	private List<String> horas = new ArrayList<String>();
-	private HistoriaClinica historia;
+	private static HistoriaClinica historia;
 	private List<HistoriaClinica> historias;
 	private BuscarHCFiltro hcFiltro;
 	private CitaFiltro citaFiltro;
@@ -91,7 +91,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 		return historia;
 	}
 	public void setHistoria(HistoriaClinica historia) {
-		this.historia = historia;
+		CitaAction.historia = historia;
 	}
 	public List<HistoriaClinica> getHistorias() {
 		return historias;
@@ -130,6 +130,10 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 		this.nombreMedico = nombreMedico;
 	}
 	
+	public String iniciar(){
+		historia = null;
+		return SUCCESS;
+	}
 	
 	public String registrarCita(){
 		if(cita.getId() == null){	
@@ -141,7 +145,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 			servicio.actualizarCita(cita);
 			addActionMessage("Cita Actualizada");
 		}
-		
+		historia = null;
 		citas = servicio.obtenerCitas();
 		return SUCCESS; 
 	}
@@ -264,6 +268,7 @@ public class CitaAction extends ActionSupport implements Preparable, SessionAwar
 	public void prepare() throws Exception {
 		citas = servicio.obtenerCitas();
 		especialidades = especialidadService.obtenerTodos();
+		
 	}
 	@Override
 	public void setSession(Map<String, Object> arg0) {

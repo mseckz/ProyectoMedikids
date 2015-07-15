@@ -95,8 +95,7 @@
 					<div class="form-group col-md-6">
 						<s:select list="@model.TipoReserva@values()"
 							name="cita.tipoReserva" key="citas.registrar.tiporeserva"
-							cssClass="form-control" headerKey="-1"
-							headerValue="Elija tipo de Reserva" id="tipoReserva" />
+							cssClass="form-control" id="tipoReserva" />
 					</div>
 					<div class="form-group col-md-6">
 						<s:select list="especialidades"
