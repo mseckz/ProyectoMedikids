@@ -67,6 +67,7 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 			String temp_url_foto=usu.getPersonal().getUrlFoto();
 			String temp_url_cv=usu.getPersonal().getUrlCV();
 			String temp_nombre_user=usu.getNombreUsuario();
+			String tipo_personal=usu.getPersonal().getTipoPersonal().getDescripcion();
 			Integer temp_id_usuario=+usu.getId();
 			
 			System.out.println("Nombre completo : "+temp_nombre_comp);
@@ -79,6 +80,7 @@ public class UsuarioAction extends ActionSupport implements SessionAware {
 			session.put("url_cv",temp_url_cv);
 			session.put("nombre_usuario",temp_nombre_user);
 			session.put("id_usuario",temp_id_usuario);
+			session.put("tipo_personal", tipo_personal);
 			session.put("id_personal", usu.getPersonal().getId());
 			vista=SUCCESS;
 		}if (usu!=null &&usu.isEstado()==false) {

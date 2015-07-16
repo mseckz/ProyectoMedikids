@@ -3,12 +3,12 @@
             <ul class="sidebar-nav">
 				<li class="side-user hidden-xs">
 					<div class="imagen-perfil oculto-xs">
-						<img src="<s:url value="/images/perfil_fotos/profile-pic.jpg" namespace="/"/>" class="img-circle" alt="" style="margin-right: 20px" />
+						<%-- <img src="<s:url value="/images/perfil_fotos/profile-pic.jpg" namespace="/"/>" class="img-circle" alt="" style="margin-right: 20px" /> --%>
                          <div>
                         	<p class="name-mod" style="text-align: center">
                         	<s:property value="#session.nombre_completo"/>
                         	</p>
-                        	<p class="text-muted text-xs block" style="text-align: center">Art Director</p>
+                        	<p class="text-muted text-xs block" style="text-align: center"><s:property value="#session.tipo_personal"/></p>
                         </div>
 					</div>
 				</li>	

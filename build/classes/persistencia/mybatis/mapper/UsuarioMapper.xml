@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="nom_usuario" property="nombreUsuario" jdbcType="VARCHAR" />
 		<result column="contrasena" property="contrasena" jdbcType="VARCHAR" />
 		<result column="estado" property="estado" jdbcType="BOOLEAN" />
-		
+
 		<association property="personal" javaType="personal">
 			<id column="id_personal" property="id" jdbcType="INTEGER" />
 			<result column="nombre_completo" property="nombreCompleto" />
@@ -23,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="celular" property="celular" />
 			<result column="correo" property="correo" />
 			<result column="dni" property="dni" jdbcType="VARCHAR" />
+			<association property="tipoPersonal" javaType="tipopersonal">
+				<id column="id_tipo" property="id" />
+				<result column="descripcion" property="descripcion" />
+			</association>
 		</association>
 	</resultMap>
 
@@ -31,19 +35,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.id_usuario,u.nom_usuario,u.contrasena,p.nombre_completo,p.url_foto,
 		p.nombres,p.apellidos,p.dni,
 		p.telefono,p.celular,p.correo,
-		u.estado, p.id_personal
+		u.estado,
+		p.id_personal,
+		tp.descripcion
 		FROM
 		USUARIO u
-		inner join PERSONAL p on p.id_personal=u.cod_personal
+		inner join PERSONAL p on
+		p.id_personal=u.cod_personal
+		INNER JOIN TIPO_PERSONAL tp on p.id_tipo_personal = tp.id_tipo 
 		WHERE u.nom_usuario=#{nombreUsuario}
 		AND
 		u.contrasena=#{contrasena}
 		and u.estado=1
 	</select>
-	
+
 	<update id="cambiarPassword" parameterType="cambioPassword">
 		UPDATE USUARIO
-			SET contrasena=#{contrasena}
+		SET contrasena=#{contrasena}
 		WHERE ID_USUARIO=#{id}
 	</update>
 </mapper>
