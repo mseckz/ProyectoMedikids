@@ -108,6 +108,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			jdbcType="VARCHAR" />
 		<result column="apellido_materno_paciente" property="apellidoMaternoPaciente"
 			jdbcType="VARCHAR" />
+		<result column="nom_padre" property="nombrePadre"
+			jdbcType="VARCHAR" />
+		<result column="apellido_paterno_padre" property="apellidoPaternoPadre"
+			jdbcType="VARCHAR" />
+		<result column="apellido_materno_padre" property="apellidoMaternoPadre"
+			jdbcType="VARCHAR" />
 		<result column="dni_paciente" property="dniPaciente" jdbcType="CHAR" />
 		<result column="edad" property="edadPaciente" jdbcType="INTEGER" />
 		<result column="estado" property="estado" jdbcType="BOOLEAN" />
@@ -181,6 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="INTEGER">
 		select id_hc,
 		hc.cod_hc,hc.nom_paciente,hc.apellido_paterno_paciente,hc.apellido_materno_paciente,
+		hc.nom_padre,hc.apellido_paterno_padre,hc.apellido_materno_padre,
 		hc.dni_paciente,hc.edad,hc.sexo,hc.fecha_nac_paciente,hc.observ,
 		tp.nombre_tipo_sangre,hc.alergias,hc.ant_hereditarios
 		from

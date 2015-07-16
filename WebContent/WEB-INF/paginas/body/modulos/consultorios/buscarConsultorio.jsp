@@ -34,22 +34,6 @@
       			</tr>
       		</thead>
       		<tbody>
-      		
-     			<%-- <s:iterator value="consultorios" status="status">
-     				<tr>
-     					<td><s:property value="codigo" /></td>
-     					<td><s:property value="ubicacion" /></td>
-     					<td><s:property value="especialidad.nombre" /></td>
-     					<td>
-     						<s:url action="cargarConsultorio" id='seleccionar' namespace='consultorios' >
-      						<s:param name='consultorio.id'>
-      							<s:property value='id'/>
-      						</s:param>
-      					</s:url>
-      					<s:a href='%{seleccionar}' cssClass='btn btn-primary'>Seleccionar</s:a>
-     					</td>
-     				</tr>
-     			</s:iterator> --%>
       		</tbody>
       	</table>
       </div>    

@@ -51,6 +51,12 @@
 	<definition name="mod_consult_inicio" extends="d_plantilla">
 		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultorios/mod_consultorios_inicio.jsp"/>
 	</definition>
+	<definition name="mod_consult_principal" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultorios/mod_consultorios_principal.jsp"/>
+	</definition>
+	<definition name="mod_consult_horarios" extends="d_plantilla">
+		<put-attribute name="contenido" value="/WEB-INF/paginas/body/modulos/consultorios/asignarHorarios.jsp"/>
+	</definition>
 	<!-- Fin Modulo de Consultorios -->
 	
 	<!-- Modulo de Historias -->

@@ -14,5 +14,10 @@
 					<result type="tiles">usu_config</result>
 				</action>
 				
+				<action name="cambiarPassword" class="action.UsuarioAction" method="cambiarPassword">
+					<result type="tiles">usu_config</result>
+					<result name="input" type="tiles">usu_config</result>
+					<result name="error" type="tiles">usu_config</result>
+				</action>
 	</package>
 </struts>

@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="validarHorario" resultMap="rmHorarios" parameterType="horario">
  		SELECT id_horario,id_consultorio,id_medico,id_dia,id_turno from HORARIOS h
-		where id_consultorio = #{consultorio.id} and id_turno = #{turno.id} 
+		where id_medico = #{medico.id} and id_turno = #{turno.id} 
 		and id_dia = #{dia.id} and h.estado = 1
  	</select>
  	
@@ -111,4 +111,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		inner join HORARIOS h on c.id_consultorio = h.id_consultorio
 		where h.id_medico = #{idPersonal}
  	</select>
+ 	
+ 	<select id="obtenerCodigo" resultType="string">
+ 		select top 1 cod_consultorio from CONSULTORIO order by cod_consultorio desc
+ 	</select>
+ 	
  </mapper>

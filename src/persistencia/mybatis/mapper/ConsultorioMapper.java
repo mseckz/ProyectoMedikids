@@ -15,6 +15,7 @@ public interface ConsultorioMapper {
 	List<Consultorio> buscarConsultorio(ConsultorioFiltro filtro);
 	List<Consultorio> obtenerConsultoriosxEsp(Integer idesp);
 	List<Consultorio> obtenerConsultoriosMedico(Integer idPersonal);
+	String obtenerCodigo();
 	
 	void registrarHorario(List<Horario> listaHorarios);
 	List<Horario> obtenerHorarios(Integer idConsultorio);

@@ -31,6 +31,10 @@
     
     <script src="<s:url value='/externo/bootstrap/js/jquery-2.1.4.min.js'/>"></script>
     
+    <!-- DATATABLES -->
+    <link href="<s:url value='/externo/datatable/dataTables.bootstrap.css'/>" rel="stylesheet">
+
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,8 +87,10 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
-
-</body>
+    <script src="<s:url value='/externo/datatable/jquery.dataTables.min.js'/>"></script>
+    <script src="<s:url value='/externo/datatable/dataTables.bootstrap.js'/>"></script>
+    
+</body>	
 </html>
 
 

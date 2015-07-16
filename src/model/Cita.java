@@ -93,5 +93,14 @@ public class Cita implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
-
+	
+	public String getNombreEstadoCita(){
+		if(getEstadoCita() == EstadoCitas.RESERVA){
+			return "RESERVA";
+		}
+		if(getEstadoCita() == EstadoCitas.PAGADA){
+			return "PAGADA";
+		}
+		return null;
+	}
 }

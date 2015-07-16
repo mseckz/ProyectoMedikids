@@ -51,11 +51,12 @@
 			<s:if test="!citas.isEmpty">
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table table-bordered table-hover table-condensed">
+					<table class="table table-bordered table-hover table-condensed" id="tblCitas">
 		      		<thead>
 		      			<tr>
 		      				<th>Codigo</th>
 		      				<th>Paciente</th>
+		      				<th>Padre</th>
 		      				<th>Consultorio</th>
 		      				<th>Fecha Atencion</th>
 		      				<th>Accion</th>
@@ -64,9 +65,10 @@
 		      		<tbody>
 		     			<s:iterator value="citas" status="status">
 		     				<tr>
-		     					<td><s:property value="codigo" /></td>
+		     					<td width="10%"><s:property value="codigo" /></td>
 		     					<td><s:property value="%{historiaClinica.nombreCompletoPaciente()}"/></td>
-		     					<td width="15%"><s:property value="consultorio.codigo" /></td>
+		     					<td><s:property value="%{historiaClinica.nombreCompletoPadre()}"/></td>
+		     					<td width="10%"><s:property value="consultorio.codigo" /></td>
 		     					<td width="20%"><s:date name="fechaAtencion" format="dd/MM/yyyy" />  &nbsp;<s:property value="horaAtencion" /></td>
 		     					<td width="15%">
 		     						<s:url action="cargarCita" id='editar' namespace='citas'  >
@@ -105,4 +107,9 @@ window.onload = function(){
 	cargarDatosGenerarConsulta();
 }
 
+$(document).ready( function () {
+    $('#tblCitas').DataTable(
+    	{bFilter: false, bInfo: false}		
+    );
+} );
 </script>

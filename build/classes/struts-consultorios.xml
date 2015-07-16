@@ -7,36 +7,40 @@
 	<package name="struts-consultorios" extends="demo" namespace="/consultorios">
 		
 		<action name="iniciarConsultorios" class="action.ConsultorioAction" method="iniciar">
+			<result type="tiles">mod_consult_principal</result>
+		</action>
+		
+		<action name="nuevoConsultorio" class="action.ConsultorioAction" method="nuevoConsultorio">
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
 		
-		<action name="resetearForm" class="action.ConsultorioAction" method="reset">
-			<result type="tiles">mod_consult_inicio</result>
-		</action>
+		<action name="irAHorarios" class="action.ConsultorioAction">
+			<result type="tiles">mod_consult_horarios</result>
+		</action>	
 		
 		<action name="editarConsultorio" class="action.ConsultorioAction" method="editar">
-			<result type="tiles">mod_consult_inicio</result>
+			<result type="tiles">mod_consult_principal</result>
 			<result name="input" type="tiles">mod_consult_inicio</result>
 		</action>
 		
 		<action name="agregarMedicoHorario" class="action.ConsultorioAction" method="agregarHorario">
-			<result type="tiles">mod_consult_inicio</result>
+			<result type="tiles">mod_consult_horarios</result>
 		</action>
 		
 		<action name="editarHorario" class="action.ConsultorioAction" method="editarHorario">
-			<result type="tiles">mod_consult_inicio</result>
+			<result type="tiles">mod_consult_horarios</result>
 		</action>
 		
 		<action name="cargarConsultorio" class="action.ConsultorioAction" method="buscarConsultorioHorario">
+			<result type="tiles">mod_consult_horarios</result>
+		</action>
+		
+		<action name="cargarConsultorioEditar" class="action.ConsultorioAction" method="cargarConsultorio">
 			<result type="tiles">mod_consult_inicio</result>
 		</action>
 		
 		<action name="removerMedicosHorario" class="action.ConsultorioAction" method="removerMedicosHorario">
-			<result type="tiles">mod_consult_inicio</result>
-		</action>
-		
-		<action name="removerMedicosHorario" class="action.ConsultorioAction" method="removerMedicosHorario">
-			<result type="tiles">mod_consult_inicio</result>
+			<result type="tiles">mod_consult_horarios</result>
 		</action>
 		
 		<action name="buscarConsultorio" class="action.ConsultorioAction" method="buscarConsultorio">
@@ -45,6 +49,14 @@
 				    consultorios
 			   </param>
 			</result>
+		</action>
+		
+		<action name="buscarConsultorioPrincipal" class="action.ConsultorioAction" method="buscarConsultorio">
+			<result type="tiles">mod_consult_principal</result>
+		</action>
+		
+		<action name="cancelarRegistro" class="action.ConsultorioAction">
+			<result type="tiles">mod_consult_principal</result>
 		</action>
 	</package>
 </struts>

@@ -28,7 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="obtenerCitas" resultMap="rmCita">
 		select id_cita,codigo_cita,tipo_reserva,fecha_atencion, CONVERT(TIME(0), hora_atencion) hora_atencion,
-		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, c.id_consultorio,cn.cod_consultorio
+		c.id_hc,h.nom_paciente,h.apellido_paterno_paciente, h.apellido_materno_paciente, 
+		h.nom_padre,h.apellido_paterno_padre,h.apellido_materno_padre,
+		c.id_consultorio,cn.cod_consultorio
 		from cita c inner join HISTORIA_CLINICA h on h.id_hc = c.id_hc
 		inner join CONSULTORIO cn on c.id_consultorio = cn.id_consultorio
 		where estado_cita = 'RESERVA'
